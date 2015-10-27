@@ -24,19 +24,21 @@
     };
 
     Oauth.prototype.login = function() {
-      return this.debug("login()");
+      this.debug("login()");
+      return this.coding.oauth.authorize(this.opts.clientId, this.opts.clientSecret, this.opts.port, this.opts.scope);
     };
 
     Oauth.prototype.logout = function() {
-      return this.debug("logout()");
+      this.debug("logout()");
+      return this.coding.oauth.clean;
     };
 
     return Oauth;
 
   })(BaseModel);
 
-  module.exports = function(program) {
-    return new Oauth(program);
+  module.exports = function(cmd) {
+    return new Oauth(cmd);
   };
 
 }).call(this);

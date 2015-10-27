@@ -1,5 +1,6 @@
 {CmdBase} = require './CmdBase'
 packageInfo = require "../package.json"
+config = require "../config"
 
 class Cmd extends CmdBase
   handleOptions: =>
@@ -9,7 +10,7 @@ class Cmd extends CmdBase
   		.description 'A simple command-line tool for coding.net by nodejs'
   		.version packageInfo.version
 
-module.exports = (options) ->
-	return new Cmd options
+module.exports = ->
+	return new Cmd config()
 
 module.exports.Cmd = Cmd

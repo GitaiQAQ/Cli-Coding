@@ -12,8 +12,10 @@ class Oauth extends BaseModel
 
   login:=>
     @debug "login()"
+    @coding.oauth.authorize @opts.clientId,@opts.clientSecret,@opts.port,@opts.scope
 
   logout:=>
     @debug "logout()"
+    @coding.oauth.clean
 
-module.exports = (program) -> new Oauth program
+module.exports = (cmd) -> new Oauth cmd

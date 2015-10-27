@@ -7,16 +7,13 @@ A simple command-line tool for coding.net by nodejs
 ```
 debian:~/Coding-Cli$ ./coding --help
 
-  Usage: coding [options] [command]
+  Usage: coding [options]
 
 
   Commands:
 
-    login [options]
-    logout|clear             Logout and clear local data.
-    info                     Prints out current user info
-    project [options]
-    task [options] <projec>
+    login
+    logout|clear
 
   A simple command-line tool for coding.net by nodejs
 
@@ -24,6 +21,7 @@ debian:~/Coding-Cli$ ./coding --help
 
     -h, --help     output usage information
     -V, --version  output the version number
+
 
 ```
 

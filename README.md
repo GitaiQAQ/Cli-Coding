@@ -12,10 +12,10 @@ debian:~/Coding-Cli$ ./coding --help
 
   Commands:
 
-    login [options]        
+    login [options]
     logout|clear             Logout and clear local data.
     info                     Prints out current user info
-    project [options]      
+    project [options]
     task [options] <projec>
 
   A simple command-line tool for coding.net by nodejs
@@ -26,3 +26,5 @@ debian:~/Coding-Cli$ ./coding --help
     -V, --version  output the version number
 
 ```
+
+参照 [`cli-gitlab`](https://github.com/mdsb100/cli-gitlab) 开发

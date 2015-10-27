@@ -1,0 +1,41 @@
+{
+  "name": "cli-coding",
+  "version": "0.1.0",
+  "description": "A simple command-line tool for coding.net by nodejs",
+  "main": "bin/coding",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "coffee -o test test; ./node_modules/.bin/mocha test; rm test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.coding.net/gitai/Cli-Coding.git"
+  },
+  "keywords": [
+    "cli",
+    "coding",
+    "api",
+    "git"
+  ],
+  "dependencies": {
+    "clui": "^0.3.1",
+    "debug": "^2.2.0",
+    "cli-color": "^1.1.0",
+    "commander": "^2.9.0",
+    "prompt": "^0.2.14"
+  },
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "coffee-script": "^1.10.0",
+    "lodash": "^3.10.1",
+    "mocha": "^2.3.3",
+    "proxyquire": "^1.7.3",
+    "should": "^7.1.1",
+    "sinon": "^1.17.2",
+    "sinon-chai": "^2.8.0"
+  },
+  "author": "gitai",
+  "license": "MIT"
+}

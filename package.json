@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "A simple command-line tool for coding.net by nodejs",
   "main": "bin/coding",
+  "bin": {
+    "coding": "bin/coding"
+  },
   "directories": {
     "test": "test"
   },

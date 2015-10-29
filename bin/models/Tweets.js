@@ -94,6 +94,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["device", "location", "coord", "address", "content"], [], []);
           return _this.coding.tweet.create(params, function(data) {
             return _this.showData(data);
           });
@@ -181,6 +182,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["default_like_count", "last_id"], [], []);
           return _this.coding.tweet.lastTweetList(params, function(data) {
             return _this.showData(data);
           });
@@ -226,6 +228,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["sort", "last_id", "default_like_count", "filter"], [], []);
           return _this.coding.tweet.list(params, function(data) {
             return _this.showData(data);
           });
@@ -276,6 +279,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["last_id", "user_id", "user", "type", "default_like_count"], [], []);
           return _this.coding.tweet.userPublic(params, function(data) {
             return _this.showData(data);
           });
@@ -307,6 +311,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["default_like_count"], [], []);
           return _this.coding.tweet.detail(user, tweet_id, params, function(data) {
             return _this.showData(data);
           });
@@ -343,6 +348,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["content", "afterFilter"], [], []);
           return _this.coding.tweet.comment(id, params, function(data) {
             return _this.showData(data);
           });
@@ -397,6 +403,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.tweet.comment(id, params, function(data) {
             return _this.showData(data);
           });
@@ -469,6 +476,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.tweet.likeTweetList(tweet_id, params, function(data) {
             return _this.showData(data);
           });
@@ -532,6 +540,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["sort", "last_id", "default_like_count", "filter"], [], []);
           return _this.coding.tweet.publicTweets(params, function(data) {
             return _this.showData(data);
           });

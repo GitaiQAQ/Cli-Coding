@@ -29,10 +29,11 @@ class Commits extends BaseModel
   show: (user,project,commit) =>
     @debug "Commits::show()"
 
-    @prompt.get [{"name":"diff","description":"Enter diff","type":"string","required":false},{"name":"w","description":"Enter w","type":"string","required":false},{"name":"currentApp","description":"Enter currentApp","type":"string","required":false},{"name":"ref","description":"Enter ref","type":"string","required":false}],(err,params)=>
+    @prompt.get [{"name":"userAgent","description":"Enter userAgent","type":"string","required":false},{"name":"accept","description":"Enter accept","type":"string","required":false},{"name":"diff","description":"Enter diff","type":"string","required":false},{"name":"w","description":"Enter w","type":"string","required":false},{"name":"currentApp","description":"Enter currentApp","type":"string","required":false},{"name":"ref","description":"Enter ref","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.commit.show user,project,commit,params, (data) =>
+      params = @parseParames params,["userAgent","accept"],["diff","w"],["currentApp","ref"],[]
+      @coding.commit.show user,project,commit,params,(data) =>
         @showData data
 
 

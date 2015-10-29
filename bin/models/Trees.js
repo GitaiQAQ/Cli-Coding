@@ -36,6 +36,16 @@
       this.debug("Trees::webhook()");
       return this.prompt.get([
         {
+          "name": "userAgent",
+          "description": "Enter userAgent",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "accept",
+          "description": "Enter accept",
+          "type": "string",
+          "required": false
+        }, {
           "name": "currentApp",
           "description": "Enter currentApp",
           "type": "string",
@@ -56,6 +66,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, ["userAgent", "accept"], [], ["currentApp", "ref", "path"], []);
           return _this.coding.tree.webhook(user, project, tree, params, function(data) {
             return _this.showData(data);
           });

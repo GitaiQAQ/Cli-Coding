@@ -3,6 +3,7 @@ debug = require('debug') 'coding:BaseModel'
 _ = require 'lodash'
 Table = require 'cli-table'
 prompt = require 'prompt'
+crypto = require 'crypto'
 
 class module.exports
   constructor: (@cmd) ->
@@ -44,15 +45,37 @@ class module.exports
 
     do @init if @init?
 
+  parseParames:(raw,header,query,body,formData)=>
+    params =
+      "headers":{},
+      "qs":{},
+      "form":{}
+
+    for key of raw
+      unless _.isEmpty(raw[key])
+        if _.includes ["password","confirm_password","current_password"],key
+          sha1 = crypto.createHash 'sha1'
+          sha1.update raw[key]
+          raw[key] = sha1.digest 'hex'
+
+        if _.includes header,key
+          params.headers[key]   =   raw[key]
+
+        if _.includes query,key
+          params.qs[key]        =   raw[key]
+
+        if _.includes body,key
+          params.form[key]      =   raw[key]
+    return params
+
   showData:(data)=>
-    @transport data
+    if data.code != 0
+      @transport data.msg
+    else
+      @transport data.data
 
   transport:(data)=>
-    unless data.code
-      data = data.data
-      for key of data
-        @table.push([@__("#{@constructor.name}.#{key}"),data[key]])
+    for key of data
+      @table.push([@__("#{@constructor.name}.#{key}"),data[key]])
 
-      console.log @table.toString()
-    else
-      console.log data
+    console.log @table.toString()

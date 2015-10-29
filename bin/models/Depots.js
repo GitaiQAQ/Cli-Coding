@@ -169,6 +169,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["hook_url", "token", "type_push", "type_mr_pr", "type_topic", "type_member", "type_comment", "type_document", "type_watch", "type_star", "type_task"], [], []);
           return _this.coding.depot.createWebhook(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -268,6 +269,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["hook_url", "token", "type_push", "type_mr_pr", "type_topic", "type_member", "type_comment", "type_document", "type_watch", "type_star", "type_task"], [], []);
           return _this.coding.depot.updateWebhook(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -340,6 +342,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["origin_url", "vcs_type"], [], []);
           return _this.coding.depot.importRepo(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -376,6 +379,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["origin_url", "vcs_type"], [], []);
           return _this.coding.depot.importRepo(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -432,6 +436,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "gitReadmeEnabled", "gitIgnore", "gitLicense", "importFrom", "vcsType"], [], []);
           return _this.coding.depot.initDepot(user, project, params, function(data) {
             return _this.showData(data);
           });

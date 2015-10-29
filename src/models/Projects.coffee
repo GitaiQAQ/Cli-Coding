@@ -166,7 +166,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.pinProject params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],[],[]
+      @coding.project.pinProject params,(data) =>
         @showData data
 
   ###
@@ -184,7 +185,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"ids","description":"Enter ids","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.pinProject params, (data) =>
+      params = @parseParames params,[],[],["ids"],[]
+      @coding.project.pinProject params,(data) =>
         @showData data
 
   ###
@@ -202,7 +204,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"ids","description":"Enter ids","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.pinProject params, (data) =>
+      params = @parseParames params,[],[],["ids"],[]
+      @coding.project.pinProject params,(data) =>
         @showData data
 
   ###
@@ -220,7 +223,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"id","description":"Enter id","type":"string","required":false},{"name":"name","description":"Enter name","type":"string","required":false},{"name":"description","description":"Enter description","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.update params, (data) =>
+      params = @parseParames params,[],["id","name","description"],[],[]
+      @coding.project.update params,(data) =>
         @showData data
 
   ###
@@ -252,7 +256,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.publicProjects params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],[],[]
+      @coding.project.publicProjects params,(data) =>
         @showData data
 
   ###
@@ -286,7 +291,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"name","description":"Enter name","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.deleteProject user,project,params, (data) =>
+      params = @parseParames params,[],["name"],[],[]
+      @coding.project.deleteProject user,project,params,(data) =>
         @showData data
 
   ###
@@ -439,7 +445,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"string","required":false},{"name":"sort","description":"Enter sort","type":"string","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.projectList params, (data) =>
+      params = @parseParames params,[],["type","sort","page","pageSize"],[],[]
+      @coding.project.projectList params,(data) =>
         @showData data
 
   ###
@@ -457,7 +464,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"string","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.privateProjects params, (data) =>
+      params = @parseParames params,[],["type","page","pageSize"],[],[]
+      @coding.project.privateProjects params,(data) =>
         @showData data
 
   ###
@@ -475,7 +483,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"string","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.privateProjects params, (data) =>
+      params = @parseParames params,[],["type","page","pageSize"],[],[]
+      @coding.project.privateProjects params,(data) =>
         @showData data
 
   ###
@@ -493,7 +502,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"string","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.privateProjects params, (data) =>
+      params = @parseParames params,[],["type","page","pageSize"],[],[]
+      @coding.project.privateProjects params,(data) =>
         @showData data
 
   ###
@@ -511,7 +521,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"string","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.privateProjects params, (data) =>
+      params = @parseParames params,[],["type","page","pageSize"],[],[]
+      @coding.project.privateProjects params,(data) =>
         @showData data
 
   ###
@@ -529,7 +540,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"string","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.privateProjects params, (data) =>
+      params = @parseParames params,[],["type","page","pageSize"],[],[]
+      @coding.project.privateProjects params,(data) =>
         @showData data
 
   ###
@@ -547,7 +559,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"string","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.privateProjects params, (data) =>
+      params = @parseParames params,[],["type","page","pageSize"],[],[]
+      @coding.project.privateProjects params,(data) =>
         @showData data
 
   ###
@@ -566,7 +579,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"name","description":"Enter name","type":"string","required":false},{"name":"description","description":"Enter description","type":"string","required":false},{"name":"type","description":"Enter type","type":"string","required":false},{"name":"gitEnabled","description":"Enter gitEnabled","type":"string","required":false},{"name":"gitIgnore","description":"Enter gitIgnore","type":"string","required":false},{"name":"gitReadmeEnabled","description":"Enter gitReadmeEnabled","type":"string","required":false},{"name":"gitLicense","description":"Enter gitLicense","type":"string","required":false},{"name":"importFrom","description":"Enter importFrom","type":"string","required":false},{"name":"vcsType","description":"Enter vcsType","type":"string","required":false},{"name":"icon","description":"Enter icon","type":"file","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.createProject user,params, (data) =>
+      params = @parseParames params,[],[],[],["name","description","type","gitEnabled","gitIgnore","gitReadmeEnabled","gitLicense","importFrom","vcsType","icon"]
+      @coding.project.createProject user,params,(data) =>
         @showData data
 
   ###
@@ -585,7 +599,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"string","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.publicProjects user,params, (data) =>
+      params = @parseParames params,[],["type","page","pageSize"],[],[]
+      @coding.project.publicProjects user,params,(data) =>
         @showData data
 
   ###
@@ -604,7 +619,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"string","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.publicProjects user,params, (data) =>
+      params = @parseParames params,[],["type","page","pageSize"],[],[]
+      @coding.project.publicProjects user,params,(data) =>
         @showData data
 
   ###
@@ -623,7 +639,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"string","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.publicProjects user,params, (data) =>
+      params = @parseParames params,[],["type","page","pageSize"],[],[]
+      @coding.project.publicProjects user,params,(data) =>
         @showData data
 
   ###
@@ -642,7 +659,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"string","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.publicProjects user,params, (data) =>
+      params = @parseParames params,[],["type","page","pageSize"],[],[]
+      @coding.project.publicProjects user,params,(data) =>
         @showData data
 
   ###
@@ -661,7 +679,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"string","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.publicProjects user,params, (data) =>
+      params = @parseParames params,[],["type","page","pageSize"],[],[]
+      @coding.project.publicProjects user,params,(data) =>
         @showData data
 
   ###
@@ -680,7 +699,8 @@ class Projects extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"string","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.project.publicProjects user,params, (data) =>
+      params = @parseParames params,[],["type","page","pageSize"],[],[]
+      @coding.project.publicProjects user,params,(data) =>
         @showData data
 
 

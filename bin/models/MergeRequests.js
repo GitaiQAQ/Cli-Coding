@@ -82,6 +82,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["srcBranch", "desBranch", "title", "content", "reviewers", "tasks"], [], []);
           return _this.coding.mergeRequest.create(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -113,6 +114,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["diff"], [], []);
           return _this.coding.mergeRequest.get(user, project, iid, params, function(data) {
             return _this.showData(data);
           });
@@ -169,6 +171,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["srcBranch", "desBranch", "title", "content", "reviewers", "tasks"], [], []);
           return _this.coding.mergeRequest.update(user, project, iid, params, function(data) {
             return _this.showData(data);
           });
@@ -223,6 +226,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["message", "del_source_branch"], [], []);
           return _this.coding.mergeRequest.merge(user, project, iid, params, function(data) {
             return _this.showData(data);
           });
@@ -277,6 +281,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.mergeRequest.list(user, project, status, params, function(data) {
             return _this.showData(data);
           });

@@ -54,6 +54,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], [], ["ref", "path"], []);
           return _this.coding.repoFile.del(user, project, file, params, function(data) {
             return _this.showData(data);
           });
@@ -90,6 +91,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], [], ["ref", "path"], []);
           return _this.coding.repoFile.update(user, project, file, params, function(data) {
             return _this.showData(data);
           });
@@ -126,6 +128,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], [], ["ref", "path"], []);
           return _this.coding.repoFile.create(user, project, file, params, function(data) {
             return _this.showData(data);
           });

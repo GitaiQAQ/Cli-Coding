@@ -29,10 +29,11 @@ class Historys extends BaseModel
   get: (user,project,commits) =>
     @debug "Historys::get()"
 
-    @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false},{"name":"currentApp","description":"Enter currentApp","type":"string","required":false},{"name":"ref","description":"Enter ref","type":"string","required":false},{"name":"path","description":"Enter path","type":"string","required":false}],(err,params)=>
+    @prompt.get [{"name":"userAgent","description":"Enter userAgent","type":"string","required":false},{"name":"accept","description":"Enter accept","type":"string","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false},{"name":"currentApp","description":"Enter currentApp","type":"string","required":false},{"name":"ref","description":"Enter ref","type":"string","required":false},{"name":"path","description":"Enter path","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.history.get user,project,commits,params, (data) =>
+      params = @parseParames params,["userAgent","accept"],["page","pageSize"],["currentApp","ref","path"],[]
+      @coding.history.get user,project,commits,params,(data) =>
         @showData data
 
 

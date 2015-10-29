@@ -120,11 +120,15 @@
           "name": "password",
           "description": "Enter password",
           "type": "string",
-          "required": false,
-          "hidden": true
+          "required": false
         }, {
           "name": "confirm_password",
           "description": "Enter confirm_password",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "sid",
+          "description": "Enter sid",
           "type": "string",
           "required": false
         }
@@ -133,6 +137,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["email", "key", "password", "confirm_password"], ["sid"], []);
           return _this.coding.user.activate(params, function(data) {
             return _this.showData(data);
           });
@@ -163,6 +168,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["phone"], [], []);
           return _this.coding.user.generateActivatePhoneCode(params, function(data) {
             return _this.showData(data);
           });
@@ -207,14 +213,19 @@
           "name": "password",
           "description": "Enter password",
           "type": "string",
-          "required": true,
-          "hidden": true
+          "required": true
+        }, {
+          "name": "sid",
+          "description": "Enter sid",
+          "type": "string",
+          "required": false
         }
       ], (function(_this) {
         return function(err, params) {
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["phone", "code", "user", "email", "password"], ["sid"], []);
           return _this.coding.user.activatePhone(params, function(data) {
             return _this.showData(data);
           });
@@ -262,6 +273,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], [], ["sid"], []);
           return _this.coding.user.avatar(params, function(data) {
             return _this.showData(data);
           });
@@ -293,6 +305,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], [], ["realRemoteAddress"], []);
           return _this.coding.user.captcha(action, params, function(data) {
             return _this.showData(data);
           });
@@ -328,6 +341,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["settingType", "settingContent"], [], []);
           return _this.coding.user.changeNoticeSetting(params, function(data) {
             return _this.showData(data);
           });
@@ -358,6 +372,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["key"], [], []);
           return _this.coding.user.checkEmail(params, function(data) {
             return _this.showData(data);
           });
@@ -388,6 +403,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["phone"], [], []);
           return _this.coding.user.checkPhone(params, function(data) {
             return _this.showData(data);
           });
@@ -413,12 +429,18 @@
           "description": "Enter code",
           "type": "integer",
           "required": false
+        }, {
+          "name": "sid",
+          "description": "Enter sid",
+          "type": "string",
+          "required": false
         }
       ], (function(_this) {
         return function(err, params) {
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["code"], ["sid"], []);
           return _this.coding.user.checkTwoFactorAuthCode(params, function(data) {
             return _this.showData(data);
           });
@@ -534,8 +556,7 @@
           "name": "password",
           "description": "Enter password",
           "type": "string",
-          "required": false,
-          "hidden": true
+          "required": false
         }, {
           "name": "j_captcha",
           "description": "Enter j_captcha",
@@ -544,6 +565,11 @@
         }, {
           "name": "remember_me",
           "description": "Enter remember_me",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "sid",
+          "description": "Enter sid",
           "type": "string",
           "required": false
         }, {
@@ -557,6 +583,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["email", "password", "j_captcha", "remember_me"], ["sid", "realRemoteAddress"], []);
           return _this.coding.user.login(params, function(data) {
             return _this.showData(data);
           });
@@ -587,6 +614,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["phone"], [], []);
           return _this.coding.user.generateLoginPhoneCode(params, function(data) {
             return _this.showData(data);
           });
@@ -638,6 +666,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["phone", "code", "j_captcha", "remember_me"], ["realRemoteAddress"], []);
           return _this.coding.user.loginByPhone(params, function(data) {
             return _this.showData(data);
           });
@@ -656,9 +685,22 @@
 
     Users.prototype.logout = function() {
       this.debug("Users::logout()");
-      return this.coding.user.logout(params, (function(_this) {
-        return function(data) {
-          return _this.showData(data);
+      return this.prompt.get([
+        {
+          "name": "sid",
+          "description": "Enter sid",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          params = _this.parseParames(params, [], [], ["sid"], []);
+          return _this.coding.user.logout(params, function(data) {
+            return _this.showData(data);
+          });
         };
       })(this));
     };
@@ -720,6 +762,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["email", "user", "j_captcha"], ["realRemoteAddress"], []);
           return _this.coding.user.register(params, function(data) {
             return _this.showData(data);
           });
@@ -750,6 +793,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["phone"], [], []);
           return _this.coding.user.generateRegisterPhoneCode(params, function(data) {
             return _this.showData(data);
           });
@@ -791,6 +835,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["phone", "code"], ["realRemoteAddress"], []);
           return _this.coding.user.phoneRegister(params, function(data) {
             return _this.showData(data);
           });
@@ -866,12 +911,18 @@
           "description": "Enter code",
           "type": "string",
           "required": false
+        }, {
+          "name": "sid",
+          "description": "Enter sid",
+          "type": "string",
+          "required": false
         }
       ], (function(_this) {
         return function(err, params) {
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["tags", "name", "sex", "phone", "birthday", "location", "company", "slogan", "introduction", "job", "code"], ["sid"], []);
           return _this.coding.user.avatar(params, function(data) {
             return _this.showData(data);
           });
@@ -896,26 +947,29 @@
           "name": "current_password",
           "description": "Enter current_password",
           "type": "string",
-          "required": false,
-          "hidden": true
+          "required": false
         }, {
           "name": "password",
           "description": "Enter password",
           "type": "string",
-          "required": false,
-          "hidden": true
+          "required": false
         }, {
           "name": "confirm_password",
           "description": "Enter confirm_password",
           "type": "string",
-          "required": false,
-          "hidden": true
+          "required": false
+        }, {
+          "name": "sid",
+          "description": "Enter sid",
+          "type": "string",
+          "required": false
         }
       ], (function(_this) {
         return function(err, params) {
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["current_password", "password", "confirm_password"], ["sid"], []);
           return _this.coding.user.updatePwd(params, function(data) {
             return _this.showData(data);
           });
@@ -941,12 +995,18 @@
           "description": "Enter avatar",
           "type": "string",
           "required": true
+        }, {
+          "name": "sid",
+          "description": "Enter sid",
+          "type": "string",
+          "required": false
         }
       ], (function(_this) {
         return function(err, params) {
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["avatar"], ["sid"], []);
           return _this.coding.user.avatar(params, function(data) {
             return _this.showData(data);
           });
@@ -977,6 +1037,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["users"], [], []);
           return _this.coding.user.follow(params, function(data) {
             return _this.showData(data);
           });
@@ -1012,6 +1073,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.user.follower(params, function(data) {
             return _this.showData(data);
           });
@@ -1048,6 +1110,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.user.follower(user, params, function(data) {
             return _this.showData(data);
           });
@@ -1083,6 +1146,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.user.friends(params, function(data) {
             return _this.showData(data);
           });
@@ -1119,6 +1183,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.user.friends(user, params, function(data) {
             return _this.showData(data);
           });
@@ -1184,6 +1249,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["project_id"], [], []);
           return _this.coding.user.changeNoticeSetting(params, function(data) {
             return _this.showData(data);
           });
@@ -1224,6 +1290,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["key", "page", "pageSize"], [], []);
           return _this.coding.user.search(params, function(data) {
             return _this.showData(data);
           });
@@ -1254,6 +1321,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["users"], [], []);
           return _this.coding.user.unfollow(params, function(data) {
             return _this.showData(data);
           });

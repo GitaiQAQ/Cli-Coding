@@ -135,7 +135,8 @@ class Files extends BaseModel
     @prompt.get [{"name":"names","description":"Enter names","type":"array","required":false}],(err,params)=>
       if err
         return err
-      @coding.file.checkExisted user,project,dir,params, (data) =>
+      params = @parseParames params,[],[],["names"],[]
+      @coding.file.checkExisted user,project,dir,params,(data) =>
         @showData data
 
   ###
@@ -169,7 +170,8 @@ class Files extends BaseModel
     @prompt.get [{"name":"fileIds","description":"Enter fileIds","type":"array","required":false}],(err,params)=>
       if err
         return err
-      @coding.file.view user,project,params, (data) =>
+      params = @parseParames params,[],[],["fileIds"],[]
+      @coding.file.view user,project,params,(data) =>
         @showData data
 
   ###
@@ -263,7 +265,8 @@ class Files extends BaseModel
     @prompt.get [{"name":"name","description":"Enter name","type":"string","required":false},{"name":"content","description":"Enter content","type":"string","required":false},{"name":"fileId","description":"Enter fileId","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.file.edit user,project,fileId,params, (data) =>
+      params = @parseParames params,[],["name","content","fileId"],[],[]
+      @coding.file.edit user,project,fileId,params,(data) =>
         @showData data
 
   ###
@@ -282,7 +285,8 @@ class Files extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"integer","required":false},{"name":"width","description":"Enter width","type":"integer","required":false},{"name":"height","description":"Enter height","type":"integer","required":false},{"name":"flag","description":"Enter flag","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.file.view user,project,fileId,params, (data) =>
+      params = @parseParames params,[],["type","width","height","flag"],[],[]
+      @coding.file.view user,project,fileId,params,(data) =>
         @showData data
 
   ###
@@ -301,7 +305,8 @@ class Files extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"integer","required":false},{"name":"width","description":"Enter width","type":"integer","required":false},{"name":"height","description":"Enter height","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.file.preview user,project,fileId,params, (data) =>
+      params = @parseParames params,[],["type","width","height"],[],[]
+      @coding.file.preview user,project,fileId,params,(data) =>
         @showData data
 
   ###
@@ -320,7 +325,8 @@ class Files extends BaseModel
     @prompt.get [{"name":"remark","description":"Enter remark","type":"string","required":true}],(err,params)=>
       if err
         return err
-      @coding.file.updateFileRemark user,project,file_id,history_id,params, (data) =>
+      params = @parseParames params,[],["remark"],[],[]
+      @coding.file.updateFileRemark user,project,file_id,history_id,params,(data) =>
         @showData data
 
   ###
@@ -339,7 +345,8 @@ class Files extends BaseModel
     @prompt.get [{"name":"projectFile.deleted_at","description":"Enter projectFile.deleted_at","type":"string","required":false},{"name":"projectFile.projects_id","description":"Enter projectFile.projects_id","type":"integer","required":false},{"name":"projectFile.files_id","description":"Enter projectFile.files_id","type":"integer","required":false},{"name":"projectFile.comments","description":"Enter projectFile.comments","type":"integer","required":false},{"name":"projectFile.id","description":"Enter projectFile.id","type":"integer","required":false},{"name":"folder.owner_id","description":"Enter folder.owner_id","type":"integer","required":false},{"name":"folder.parent_id","description":"Enter folder.parent_id","type":"integer","required":false},{"name":"folder.created_at","description":"Enter folder.created_at","type":"ref","required":false},{"name":"folder.updated_at","description":"Enter folder.updated_at","type":"ref","required":false},{"name":"folder.type","description":"Enter folder.type","type":"integer","required":false},{"name":"folder.size","description":"Enter folder.size","type":"integer","required":false},{"name":"folder.name","description":"Enter folder.name","type":"string","required":false},{"name":"folder.storage_type","description":"Enter folder.storage_type","type":"string","required":false},{"name":"folder.storage_key","description":"Enter folder.storage_key","type":"string","required":false},{"name":"folder.history_id","description":"Enter folder.history_id","type":"integer","required":false},{"name":"folder.id","description":"Enter folder.id","type":"integer","required":false},{"name":"name","description":"Enter name","type":"string","required":false},{"name":"content","description":"Enter content","type":"string","required":false},{"name":"folderId","description":"Enter folderId","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.file.create user,project,folderId,params, (data) =>
+      params = @parseParames params,[],["projectFile.deleted_at","projectFile.projects_id","projectFile.files_id","projectFile.comments","projectFile.id","folder.owner_id","folder.parent_id","folder.created_at","folder.updated_at","folder.type","folder.size","folder.name","folder.storage_type","folder.storage_key","folder.history_id","folder.id","name","content","folderId"],[],[]
+      @coding.file.create user,project,folderId,params,(data) =>
         @showData data
 
   ###
@@ -358,7 +365,8 @@ class Files extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"integer","required":false},{"name":"width","description":"Enter width","type":"integer","required":false},{"name":"height","description":"Enter height","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.file.history user,project,id,params, (data) =>
+      params = @parseParames params,[],["type","width","height"],[],[]
+      @coding.file.history user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -377,7 +385,8 @@ class Files extends BaseModel
     @prompt.get [{"name":"name","description":"Enter name","type":"string","required":false},{"name":"parentId","description":"Enter parentId","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.file.mkdir user,project,params, (data) =>
+      params = @parseParames params,[],["name","parentId"],[],[]
+      @coding.file.mkdir user,project,params,(data) =>
         @showData data
 
   ###
@@ -411,7 +420,8 @@ class Files extends BaseModel
     @prompt.get [{"name":"fileId","description":"Enter fileId","type":"ref","required":false}],(err,params)=>
       if err
         return err
-      @coding.file.move user,project,dirId,params, (data) =>
+      params = @parseParames params,[],["fileId"],[],[]
+      @coding.file.move user,project,dirId,params,(data) =>
         @showData data
 
   ###
@@ -430,7 +440,8 @@ class Files extends BaseModel
     @prompt.get [{"name":"name","description":"Enter name","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.file.renameFolder user,project,dir,params, (data) =>
+      params = @parseParames params,[],["name"],[],[]
+      @coding.file.renameFolder user,project,dir,params,(data) =>
         @showData data
 
   ###
@@ -449,7 +460,8 @@ class Files extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"integer","required":false},{"name":"width","description":"Enter width","type":"integer","required":false},{"name":"height","description":"Enter height","type":"integer","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.file.files user,project,dir,params, (data) =>
+      params = @parseParames params,[],["type","width","height","page","pageSize"],[],[]
+      @coding.file.files user,project,dir,params,(data) =>
         @showData data
 
   ###
@@ -468,7 +480,8 @@ class Files extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.file.folders user,project,params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],[],[]
+      @coding.file.folders user,project,params,(data) =>
         @showData data
 
   ###
@@ -487,7 +500,8 @@ class Files extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.file.folders user,project,params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],[],[]
+      @coding.file.folders user,project,params,(data) =>
         @showData data
 
   ###

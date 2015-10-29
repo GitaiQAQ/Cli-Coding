@@ -28,10 +28,11 @@ class Blobs extends BaseModel
   get: (user,project,blob) =>
     @debug "Blobs::get()"
 
-    @prompt.get [{"name":"currentApp","description":"Enter currentApp","type":"string","required":false},{"name":"ref","description":"Enter ref","type":"string","required":false},{"name":"path","description":"Enter path","type":"string","required":false}],(err,params)=>
+    @prompt.get [{"name":"userAgent","description":"Enter userAgent","type":"string","required":false},{"name":"accept","description":"Enter accept","type":"string","required":false},{"name":"currentApp","description":"Enter currentApp","type":"string","required":false},{"name":"ref","description":"Enter ref","type":"string","required":false},{"name":"path","description":"Enter path","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.blob.get user,project,blob,params, (data) =>
+      params = @parseParames params,["userAgent","accept"],[],["currentApp","ref","path"],[]
+      @coding.blob.get user,project,blob,params,(data) =>
         @showData data
 
 

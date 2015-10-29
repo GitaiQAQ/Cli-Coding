@@ -125,7 +125,8 @@ class Depots extends BaseModel
     @prompt.get [{"name":"hook_url","description":"Enter hook_url","type":"string","required":false},{"name":"token","description":"Enter token","type":"string","required":false},{"name":"type_push","description":"Enter type_push","type":"boolean","required":false},{"name":"type_mr_pr","description":"Enter type_mr_pr","type":"boolean","required":false},{"name":"type_topic","description":"Enter type_topic","type":"boolean","required":false},{"name":"type_member","description":"Enter type_member","type":"boolean","required":false},{"name":"type_comment","description":"Enter type_comment","type":"boolean","required":false},{"name":"type_document","description":"Enter type_document","type":"boolean","required":false},{"name":"type_watch","description":"Enter type_watch","type":"boolean","required":false},{"name":"type_star","description":"Enter type_star","type":"boolean","required":false},{"name":"type_task","description":"Enter type_task","type":"boolean","required":false}],(err,params)=>
       if err
         return err
-      @coding.depot.createWebhook user,project,params, (data) =>
+      params = @parseParames params,[],["hook_url","token","type_push","type_mr_pr","type_topic","type_member","type_comment","type_document","type_watch","type_star","type_task"],[],[]
+      @coding.depot.createWebhook user,project,params,(data) =>
         @showData data
 
   ###
@@ -159,7 +160,8 @@ class Depots extends BaseModel
     @prompt.get [{"name":"hook_url","description":"Enter hook_url","type":"string","required":false},{"name":"token","description":"Enter token","type":"string","required":false},{"name":"type_push","description":"Enter type_push","type":"boolean","required":false},{"name":"type_mr_pr","description":"Enter type_mr_pr","type":"boolean","required":false},{"name":"type_topic","description":"Enter type_topic","type":"boolean","required":false},{"name":"type_member","description":"Enter type_member","type":"boolean","required":false},{"name":"type_comment","description":"Enter type_comment","type":"boolean","required":false},{"name":"type_document","description":"Enter type_document","type":"boolean","required":false},{"name":"type_watch","description":"Enter type_watch","type":"boolean","required":false},{"name":"type_star","description":"Enter type_star","type":"boolean","required":false},{"name":"type_task","description":"Enter type_task","type":"boolean","required":false}],(err,params)=>
       if err
         return err
-      @coding.depot.updateWebhook user,project,id,params, (data) =>
+      params = @parseParames params,[],["hook_url","token","type_push","type_mr_pr","type_topic","type_member","type_comment","type_document","type_watch","type_star","type_task"],[],[]
+      @coding.depot.updateWebhook user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -208,7 +210,8 @@ class Depots extends BaseModel
     @prompt.get [{"name":"origin_url","description":"Enter origin_url","type":"string","required":true},{"name":"vcs_type","description":"Enter vcs_type","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.depot.importRepo user,project,params, (data) =>
+      params = @parseParames params,[],["origin_url","vcs_type"],[],[]
+      @coding.depot.importRepo user,project,params,(data) =>
         @showData data
 
   ###
@@ -227,7 +230,8 @@ class Depots extends BaseModel
     @prompt.get [{"name":"origin_url","description":"Enter origin_url","type":"string","required":true},{"name":"vcs_type","description":"Enter vcs_type","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.depot.importRepo user,project,params, (data) =>
+      params = @parseParames params,[],["origin_url","vcs_type"],[],[]
+      @coding.depot.importRepo user,project,params,(data) =>
         @showData data
 
   ###
@@ -246,7 +250,8 @@ class Depots extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"string","required":false},{"name":"gitReadmeEnabled","description":"Enter gitReadmeEnabled","type":"string","required":false},{"name":"gitIgnore","description":"Enter gitIgnore","type":"string","required":false},{"name":"gitLicense","description":"Enter gitLicense","type":"string","required":false},{"name":"importFrom","description":"Enter importFrom","type":"string","required":false},{"name":"vcsType","description":"Enter vcsType","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.depot.initDepot user,project,params, (data) =>
+      params = @parseParames params,[],["type","gitReadmeEnabled","gitIgnore","gitLicense","importFrom","vcsType"],[],[]
+      @coding.depot.initDepot user,project,params,(data) =>
         @showData data
 
 

@@ -109,6 +109,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.project.pinProject(params, function(data) {
             return _this.showData(data);
           });
@@ -139,6 +140,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], [], ["ids"], []);
           return _this.coding.project.pinProject(params, function(data) {
             return _this.showData(data);
           });
@@ -169,6 +171,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], [], ["ids"], []);
           return _this.coding.project.pinProject(params, function(data) {
             return _this.showData(data);
           });
@@ -209,6 +212,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["id", "name", "description"], [], []);
           return _this.coding.project.update(params, function(data) {
             return _this.showData(data);
           });
@@ -261,6 +265,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.project.publicProjects(params, function(data) {
             return _this.showData(data);
           });
@@ -310,6 +315,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["name"], [], []);
           return _this.coding.project.deleteProject(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -517,6 +523,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "sort", "page", "pageSize"], [], []);
           return _this.coding.project.projectList(params, function(data) {
             return _this.showData(data);
           });
@@ -557,6 +564,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "page", "pageSize"], [], []);
           return _this.coding.project.privateProjects(params, function(data) {
             return _this.showData(data);
           });
@@ -597,6 +605,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "page", "pageSize"], [], []);
           return _this.coding.project.privateProjects(params, function(data) {
             return _this.showData(data);
           });
@@ -637,6 +646,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "page", "pageSize"], [], []);
           return _this.coding.project.privateProjects(params, function(data) {
             return _this.showData(data);
           });
@@ -677,6 +687,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "page", "pageSize"], [], []);
           return _this.coding.project.privateProjects(params, function(data) {
             return _this.showData(data);
           });
@@ -717,6 +728,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "page", "pageSize"], [], []);
           return _this.coding.project.privateProjects(params, function(data) {
             return _this.showData(data);
           });
@@ -757,6 +769,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "page", "pageSize"], [], []);
           return _this.coding.project.privateProjects(params, function(data) {
             return _this.showData(data);
           });
@@ -833,6 +846,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], [], [], ["name", "description", "type", "gitEnabled", "gitIgnore", "gitReadmeEnabled", "gitLicense", "importFrom", "vcsType", "icon"]);
           return _this.coding.project.createProject(user, params, function(data) {
             return _this.showData(data);
           });
@@ -874,6 +888,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "page", "pageSize"], [], []);
           return _this.coding.project.publicProjects(user, params, function(data) {
             return _this.showData(data);
           });
@@ -915,6 +930,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "page", "pageSize"], [], []);
           return _this.coding.project.publicProjects(user, params, function(data) {
             return _this.showData(data);
           });
@@ -956,6 +972,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "page", "pageSize"], [], []);
           return _this.coding.project.publicProjects(user, params, function(data) {
             return _this.showData(data);
           });
@@ -997,6 +1014,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "page", "pageSize"], [], []);
           return _this.coding.project.publicProjects(user, params, function(data) {
             return _this.showData(data);
           });
@@ -1038,6 +1056,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "page", "pageSize"], [], []);
           return _this.coding.project.publicProjects(user, params, function(data) {
             return _this.showData(data);
           });
@@ -1079,6 +1098,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "page", "pageSize"], [], []);
           return _this.coding.project.publicProjects(user, params, function(data) {
             return _this.showData(data);
           });

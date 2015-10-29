@@ -54,6 +54,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.tag.list(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -95,6 +96,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["tag_name", "tag_point", "message"], [], []);
           return _this.coding.tag.create(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -126,6 +128,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["tag_name"], [], []);
           return _this.coding.tag.del(user, project, params, function(data) {
             return _this.showData(data);
           });

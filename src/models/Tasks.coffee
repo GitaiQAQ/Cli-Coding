@@ -169,7 +169,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"owner_id","description":"Enter owner_id","type":"string","required":false},{"name":"priority","description":"Enter priority","type":"integer","required":false},{"name":"deadline","description":"Enter deadline","type":"string","required":false},{"name":"description","description":"Enter description","type":"string","required":false},{"name":"content","description":"Enter content","type":"string","required":false},{"name":"labels","description":"Enter labels","type":"string","required":false},{"name":"watchers","description":"Enter watchers","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.create project,params, (data) =>
+      params = @parseParames params,[],["owner_id","priority","deadline","description","content","labels","watchers"],[],[]
+      @coding.task.create project,params,(data) =>
         @showData data
 
   ###
@@ -188,7 +189,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"parseDescription","description":"Enter parseDescription","type":"boolean","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.create project,id,params, (data) =>
+      params = @parseParames params,[],["parseDescription"],[],[]
+      @coding.task.create project,id,params,(data) =>
         @showData data
 
   ###
@@ -223,7 +225,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false},{"name":"key","description":"Enter key","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.list project,owner,status,params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],["key"],[]
+      @coding.task.list project,owner,status,params,(data) =>
         @showData data
 
   ###
@@ -271,7 +274,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"status","description":"Enter status","type":"integer","required":false},{"name":"priority","description":"Enter priority","type":"integer","required":false},{"name":"id","description":"Enter id","type":"integer","required":false},{"name":"owner_id","description":"Enter owner_id","type":"integer","required":false},{"name":"deadline","description":"Enter deadline","type":"string","required":false},{"name":"description","description":"Enter description","type":"string","required":false},{"name":"content","description":"Enter content","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.update user,project,id,params, (data) =>
+      params = @parseParames params,[],["status","priority","id","owner_id","deadline","description","content"],[],[]
+      @coding.task.update user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -290,7 +294,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"content","description":"Enter content","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.createComment user,project,id,params, (data) =>
+      params = @parseParames params,[],[],["content"],[]
+      @coding.task.createComment user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -324,7 +329,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.comment user,project,id,params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],[],[]
+      @coding.task.comment user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -343,7 +349,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"content","description":"Enter content","type":"string","required":false},{"name":"id","description":"Enter id","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.update user,project,id,params, (data) =>
+      params = @parseParames params,[],["content","id"],[],[]
+      @coding.task.update user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -362,7 +369,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"deadline","description":"Enter deadline","type":"string","required":false},{"name":"id","description":"Enter id","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.update user,project,id,params, (data) =>
+      params = @parseParames params,[],["deadline","id"],[],[]
+      @coding.task.update user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -396,7 +404,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"description","description":"Enter description","type":"string","required":false},{"name":"id","description":"Enter id","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.update user,project,id,params, (data) =>
+      params = @parseParames params,[],["description","id"],[],[]
+      @coding.task.update user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -445,7 +454,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"labelIdStrs","description":"Enter labelIdStrs","type":"string","required":true}],(err,params)=>
       if err
         return err
-      @coding.task.watch user,project,id,params, (data) =>
+      params = @parseParames params,[],["labelIdStrs"],[],[]
+      @coding.task.watch user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -464,7 +474,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"owner_id","description":"Enter owner_id","type":"integer","required":false},{"name":"id","description":"Enter id","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.update user,project,id,params, (data) =>
+      params = @parseParames params,[],["owner_id","id"],[],[]
+      @coding.task.update user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -483,7 +494,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"priority","description":"Enter priority","type":"integer","required":false},{"name":"id","description":"Enter id","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.update user,project,id,params, (data) =>
+      params = @parseParames params,[],["priority","id"],[],[]
+      @coding.task.update user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -502,7 +514,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"status","description":"Enter status","type":"integer","required":false},{"name":"id","description":"Enter id","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.update user,project,id,params, (data) =>
+      params = @parseParames params,[],["status","id"],[],[]
+      @coding.task.update user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -551,7 +564,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.getTaskListByLabel user,project,id,params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],[],[]
+      @coding.task.getTaskListByLabel user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -601,7 +615,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false},{"name":"user","description":"Enter user","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.getTaskListByLabel user,project,id,params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],["user"],[]
+      @coding.task.getTaskListByLabel user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -620,7 +635,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.count user,project,status,params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],[],[]
+      @coding.task.count user,project,status,params,(data) =>
         @showData data
 
   ###
@@ -640,7 +656,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false},{"name":"key","description":"Enter key","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.list user,project,status,params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],["key"],[]
+      @coding.task.list user,project,status,params,(data) =>
         @showData data
 
   ###
@@ -659,7 +676,8 @@ class Tasks extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.task.count user,status,params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],[],[]
+      @coding.task.count user,status,params,(data) =>
         @showData data
 
 

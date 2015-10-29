@@ -65,7 +65,8 @@ class PullRequests extends BaseModel
     @prompt.get [{"name":"src_branch","description":"Enter src_branch","type":"string","required":false},{"name":"des_user_name","description":"Enter des_user_name","type":"string","required":false},{"name":"des_project_name","description":"Enter des_project_name","type":"string","required":false},{"name":"des_branch","description":"Enter des_branch","type":"string","required":false},{"name":"diff","description":"Enter diff","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.pullRequest.create user,project,params, (data) =>
+      params = @parseParames params,[],["src_branch","des_user_name","des_project_name","des_branch","diff"],[],[]
+      @coding.pullRequest.create user,project,params,(data) =>
         @showData data
 
   ###
@@ -84,7 +85,8 @@ class PullRequests extends BaseModel
     @prompt.get [{"name":"diff","description":"Enter diff","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.pullRequest.get user,project,iid,params, (data) =>
+      params = @parseParames params,[],["diff"],[],[]
+      @coding.pullRequest.get user,project,iid,params,(data) =>
         @showData data
 
   ###
@@ -148,7 +150,8 @@ class PullRequests extends BaseModel
     @prompt.get [{"name":"message","description":"Enter message","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.pullRequest.merge user,project,iid,params, (data) =>
+      params = @parseParames params,[],["message"],[],[]
+      @coding.pullRequest.merge user,project,iid,params,(data) =>
         @showData data
 
   ###
@@ -182,7 +185,8 @@ class PullRequests extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.pullRequest.list user,project,status,params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],[],[]
+      @coding.pullRequest.list user,project,status,params,(data) =>
         @showData data
 
 

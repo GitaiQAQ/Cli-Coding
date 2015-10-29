@@ -95,6 +95,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["withIDEKey"], [], []);
           return _this.coding.key.list(user, params, function(data) {
             return _this.showData(data);
           });
@@ -131,6 +132,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["title", "content"], [], []);
           return _this.coding.key.create(user, params, function(data) {
             return _this.showData(data);
           });
@@ -185,6 +187,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["title", "content"], [], []);
           return _this.coding.key.webhook(user, project, params, function(data) {
             return _this.showData(data);
           });

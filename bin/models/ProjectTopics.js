@@ -85,6 +85,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["orderBy", "page", "pageSize"], [], []);
           return _this.coding.projectTopic.list(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -136,6 +137,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["parent", "title", "content", "label", "type"], [], []);
           return _this.coding.projectTopic.create(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -195,6 +197,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["orderBy", "page", "pageSize"], [], []);
           return _this.coding.projectTopic.getProjectTopicByLabel(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -254,6 +257,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["orderBy", "page", "pageSize"], [], []);
           return _this.coding.projectTopic.list(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -295,6 +299,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["orderBy", "page", "pageSize"], [], []);
           return _this.coding.projectTopic.watchedProjectTopicList(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -331,6 +336,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "toc"], [], []);
           return _this.coding.projectTopic.detail(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -377,6 +383,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["topic_id", "title", "content", "label"], [], []);
           return _this.coding.projectTopic.update(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -436,6 +443,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize", "type"], [], []);
           return _this.coding.projectTopic.comments(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -503,6 +511,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["labelIdStrs"], [], []);
           return _this.coding.projectTopic.operateTopicLabel(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -557,6 +566,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.projectTopic.watchers(user, project, id, params, function(data) {
             return _this.showData(data);
           });

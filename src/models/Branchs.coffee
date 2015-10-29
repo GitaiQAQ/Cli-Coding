@@ -70,7 +70,8 @@ class Branchs extends BaseModel
     @prompt.get [{"name":"branch_name","description":"Enter branch_name","type":"string","required":true}],(err,params)=>
       if err
         return err
-      @coding.branch.default user,project,params, (data) =>
+      params = @parseParames params,[],["branch_name"],[],[]
+      @coding.branch.default user,project,params,(data) =>
         @showData data
 
   ###
@@ -89,7 +90,8 @@ class Branchs extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.branch.listBranches user,project,params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],[],[]
+      @coding.branch.listBranches user,project,params,(data) =>
         @showData data
 
   ###
@@ -108,7 +110,8 @@ class Branchs extends BaseModel
     @prompt.get [{"name":"branch_name","description":"Enter branch_name","type":"string","required":true},{"name":"start_point","description":"Enter start_point","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.branch.create user,project,params, (data) =>
+      params = @parseParames params,[],["branch_name","start_point"],[],[]
+      @coding.branch.create user,project,params,(data) =>
         @showData data
 
   ###
@@ -127,7 +130,8 @@ class Branchs extends BaseModel
     @prompt.get [{"name":"branch_name","description":"Enter branch_name","type":"string","required":true}],(err,params)=>
       if err
         return err
-      @coding.branch.del user,project,params, (data) =>
+      params = @parseParames params,[],["branch_name"],[],[]
+      @coding.branch.del user,project,params,(data) =>
         @showData data
 
   ###
@@ -146,7 +150,8 @@ class Branchs extends BaseModel
     @prompt.get [{"name":"branch_name","description":"Enter branch_name","type":"string","required":true},{"name":"target_global_key","description":"Enter target_global_key","type":"string","required":true}],(err,params)=>
       if err
         return err
-      @coding.branch.addMember user,project,params, (data) =>
+      params = @parseParames params,[],["branch_name","target_global_key"],[],[]
+      @coding.branch.addMember user,project,params,(data) =>
         @showData data
 
   ###
@@ -165,7 +170,8 @@ class Branchs extends BaseModel
     @prompt.get [{"name":"branch_name","description":"Enter branch_name","type":"string","required":true}],(err,params)=>
       if err
         return err
-      @coding.branch.protectedBranch user,project,params, (data) =>
+      params = @parseParames params,[],["branch_name"],[],[]
+      @coding.branch.protectedBranch user,project,params,(data) =>
         @showData data
 
   ###
@@ -184,7 +190,8 @@ class Branchs extends BaseModel
     @prompt.get [{"name":"branch_name","description":"Enter branch_name","type":"string","required":true}],(err,params)=>
       if err
         return err
-      @coding.branch.protectedBranch user,project,params, (data) =>
+      params = @parseParames params,[],["branch_name"],[],[]
+      @coding.branch.protectedBranch user,project,params,(data) =>
         @showData data
 
   ###
@@ -203,7 +210,8 @@ class Branchs extends BaseModel
     @prompt.get [{"name":"branch_name","description":"Enter branch_name","type":"string","required":true}],(err,params)=>
       if err
         return err
-      @coding.branch.members user,project,params, (data) =>
+      params = @parseParames params,[],["branch_name"],[],[]
+      @coding.branch.members user,project,params,(data) =>
         @showData data
 
   ###
@@ -222,7 +230,8 @@ class Branchs extends BaseModel
     @prompt.get [{"name":"branch_name","description":"Enter branch_name","type":"string","required":true},{"name":"target_global_key","description":"Enter target_global_key","type":"string","required":true}],(err,params)=>
       if err
         return err
-      @coding.branch.deleteMember user,project,params, (data) =>
+      params = @parseParames params,[],["branch_name","target_global_key"],[],[]
+      @coding.branch.deleteMember user,project,params,(data) =>
         @showData data
 
 

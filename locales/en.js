@@ -37,5 +37,6 @@
 	"Users.tweets_count": "Users.tweets_count",
 	"Users.followed": "Users.followed",
 	"Users.follow": "Users.follow",
-	"Users.is_phone_validated": "Users.is_phone_validated"
+	"Users.is_phone_validated": "Users.is_phone_validated",
+	"Users.400": "Users.400"
 }

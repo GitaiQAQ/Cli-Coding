@@ -97,7 +97,8 @@ class Tweets extends BaseModel
     @prompt.get [{"name":"device","description":"Enter device","type":"string","required":false},{"name":"location","description":"Enter location","type":"string","required":false},{"name":"coord","description":"Enter coord","type":"string","required":false},{"name":"address","description":"Enter address","type":"string","required":false},{"name":"content","description":"Enter content","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.tweet.create params, (data) =>
+      params = @parseParames params,[],["device","location","coord","address","content"],[],[]
+      @coding.tweet.create params,(data) =>
         @showData data
 
   ###
@@ -158,7 +159,8 @@ class Tweets extends BaseModel
     @prompt.get [{"name":"default_like_count","description":"Enter default_like_count","type":"integer","required":false},{"name":"last_id","description":"Enter last_id","type":"integer","required":true}],(err,params)=>
       if err
         return err
-      @coding.tweet.lastTweetList params, (data) =>
+      params = @parseParames params,[],["default_like_count","last_id"],[],[]
+      @coding.tweet.lastTweetList params,(data) =>
         @showData data
 
   ###
@@ -176,7 +178,8 @@ class Tweets extends BaseModel
     @prompt.get [{"name":"sort","description":"Enter sort","type":"string","required":false},{"name":"last_id","description":"Enter last_id","type":"integer","required":false},{"name":"default_like_count","description":"Enter default_like_count","type":"integer","required":false},{"name":"filter","description":"Enter filter","type":"boolean","required":false}],(err,params)=>
       if err
         return err
-      @coding.tweet.list params, (data) =>
+      params = @parseParames params,[],["sort","last_id","default_like_count","filter"],[],[]
+      @coding.tweet.list params,(data) =>
         @showData data
 
   ###
@@ -194,7 +197,8 @@ class Tweets extends BaseModel
     @prompt.get [{"name":"last_id","description":"Enter last_id","type":"integer","required":false},{"name":"user_id","description":"Enter user_id","type":"integer","required":false},{"name":"user","description":"Enter user","type":"string","required":false},{"name":"type","description":"Enter type","type":"string","required":false},{"name":"default_like_count","description":"Enter default_like_count","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.tweet.userPublic params, (data) =>
+      params = @parseParames params,[],["last_id","user_id","user","type","default_like_count"],[],[]
+      @coding.tweet.userPublic params,(data) =>
         @showData data
 
   ###
@@ -213,7 +217,8 @@ class Tweets extends BaseModel
     @prompt.get [{"name":"default_like_count","description":"Enter default_like_count","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.tweet.detail user,tweet_id,params, (data) =>
+      params = @parseParames params,[],["default_like_count"],[],[]
+      @coding.tweet.detail user,tweet_id,params,(data) =>
         @showData data
 
   ###
@@ -232,7 +237,8 @@ class Tweets extends BaseModel
     @prompt.get [{"name":"content","description":"Enter content","type":"string","required":false},{"name":"afterFilter","description":"Enter afterFilter","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.tweet.comment id,params, (data) =>
+      params = @parseParames params,[],["content","afterFilter"],[],[]
+      @coding.tweet.comment id,params,(data) =>
         @showData data
 
   ###
@@ -266,7 +272,8 @@ class Tweets extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.tweet.comment id,params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],[],[]
+      @coding.tweet.comment id,params,(data) =>
         @showData data
 
   ###
@@ -315,7 +322,8 @@ class Tweets extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.tweet.likeTweetList tweet_id,params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],[],[]
+      @coding.tweet.likeTweetList tweet_id,params,(data) =>
         @showData data
 
   ###
@@ -348,7 +356,8 @@ class Tweets extends BaseModel
     @prompt.get [{"name":"sort","description":"Enter sort","type":"string","required":false},{"name":"last_id","description":"Enter last_id","type":"integer","required":false},{"name":"default_like_count","description":"Enter default_like_count","type":"integer","required":false},{"name":"filter","description":"Enter filter","type":"boolean","required":false}],(err,params)=>
       if err
         return err
-      @coding.tweet.publicTweets params, (data) =>
+      params = @parseParames params,[],["sort","last_id","default_like_count","filter"],[],[]
+      @coding.tweet.publicTweets params,(data) =>
         @showData data
 
 

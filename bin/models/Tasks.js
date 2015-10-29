@@ -131,6 +131,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["owner_id", "priority", "deadline", "description", "content", "labels", "watchers"], [], []);
           return _this.coding.task.create(project, params, function(data) {
             return _this.showData(data);
           });
@@ -162,6 +163,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["parseDescription"], [], []);
           return _this.coding.task.create(project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -222,6 +224,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], ["key"], []);
           return _this.coding.task.list(project, owner, status, params, function(data) {
             return _this.showData(data);
           });
@@ -318,6 +321,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["status", "priority", "id", "owner_id", "deadline", "description", "content"], [], []);
           return _this.coding.task.update(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -349,6 +353,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], [], ["content"], []);
           return _this.coding.task.createComment(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -403,6 +408,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.task.comment(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -439,6 +445,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["content", "id"], [], []);
           return _this.coding.task.update(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -475,6 +482,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["deadline", "id"], [], []);
           return _this.coding.task.update(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -529,6 +537,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["description", "id"], [], []);
           return _this.coding.task.update(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -596,6 +605,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["labelIdStrs"], [], []);
           return _this.coding.task.watch(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -632,6 +642,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["owner_id", "id"], [], []);
           return _this.coding.task.update(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -668,6 +679,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["priority", "id"], [], []);
           return _this.coding.task.update(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -704,6 +716,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["status", "id"], [], []);
           return _this.coding.task.update(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -776,6 +789,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.task.getTaskListByLabel(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -854,6 +868,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], ["user"], []);
           return _this.coding.task.getTaskListByLabel(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -890,6 +905,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.task.count(user, project, status, params, function(data) {
             return _this.showData(data);
           });
@@ -932,6 +948,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], ["key"], []);
           return _this.coding.task.list(user, project, status, params, function(data) {
             return _this.showData(data);
           });
@@ -968,6 +985,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.task.count(user, status, params, function(data) {
             return _this.showData(data);
           });

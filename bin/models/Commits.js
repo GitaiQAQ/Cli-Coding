@@ -37,6 +37,16 @@
       this.debug("Commits::show()");
       return this.prompt.get([
         {
+          "name": "userAgent",
+          "description": "Enter userAgent",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "accept",
+          "description": "Enter accept",
+          "type": "string",
+          "required": false
+        }, {
           "name": "diff",
           "description": "Enter diff",
           "type": "string",
@@ -62,6 +72,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, ["userAgent", "accept"], ["diff", "w"], ["currentApp", "ref"], []);
           return _this.coding.commit.show(user, project, commit, params, function(data) {
             return _this.showData(data);
           });

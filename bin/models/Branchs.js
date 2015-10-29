@@ -61,6 +61,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["branch_name"], [], []);
           return _this.coding.branch["default"](user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -97,6 +98,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.branch.listBranches(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -133,6 +135,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["branch_name", "start_point"], [], []);
           return _this.coding.branch.create(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -164,6 +167,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["branch_name"], [], []);
           return _this.coding.branch.del(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -200,6 +204,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["branch_name", "target_global_key"], [], []);
           return _this.coding.branch.addMember(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -231,6 +236,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["branch_name"], [], []);
           return _this.coding.branch.protectedBranch(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -262,6 +268,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["branch_name"], [], []);
           return _this.coding.branch.protectedBranch(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -293,6 +300,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["branch_name"], [], []);
           return _this.coding.branch.members(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -329,6 +337,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["branch_name", "target_global_key"], [], []);
           return _this.coding.branch.deleteMember(user, project, params, function(data) {
             return _this.showData(data);
           });

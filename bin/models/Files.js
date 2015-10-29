@@ -87,6 +87,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], [], ["names"], []);
           return _this.coding.file.checkExisted(user, project, dir, params, function(data) {
             return _this.showData(data);
           });
@@ -136,6 +137,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], [], ["fileIds"], []);
           return _this.coding.file.view(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -267,6 +269,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["name", "content", "fileId"], [], []);
           return _this.coding.file.edit(user, project, fileId, params, function(data) {
             return _this.showData(data);
           });
@@ -313,6 +316,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "width", "height", "flag"], [], []);
           return _this.coding.file.view(user, project, fileId, params, function(data) {
             return _this.showData(data);
           });
@@ -354,6 +358,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "width", "height"], [], []);
           return _this.coding.file.preview(user, project, fileId, params, function(data) {
             return _this.showData(data);
           });
@@ -385,6 +390,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["remark"], [], []);
           return _this.coding.file.updateFileRemark(user, project, file_id, history_id, params, function(data) {
             return _this.showData(data);
           });
@@ -506,6 +512,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["projectFile.deleted_at", "projectFile.projects_id", "projectFile.files_id", "projectFile.comments", "projectFile.id", "folder.owner_id", "folder.parent_id", "folder.created_at", "folder.updated_at", "folder.type", "folder.size", "folder.name", "folder.storage_type", "folder.storage_key", "folder.history_id", "folder.id", "name", "content", "folderId"], [], []);
           return _this.coding.file.create(user, project, folderId, params, function(data) {
             return _this.showData(data);
           });
@@ -547,6 +554,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "width", "height"], [], []);
           return _this.coding.file.history(user, project, id, params, function(data) {
             return _this.showData(data);
           });
@@ -583,6 +591,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["name", "parentId"], [], []);
           return _this.coding.file.mkdir(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -632,6 +641,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["fileId"], [], []);
           return _this.coding.file.move(user, project, dirId, params, function(data) {
             return _this.showData(data);
           });
@@ -663,6 +673,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["name"], [], []);
           return _this.coding.file.renameFolder(user, project, dir, params, function(data) {
             return _this.showData(data);
           });
@@ -714,6 +725,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["type", "width", "height", "page", "pageSize"], [], []);
           return _this.coding.file.files(user, project, dir, params, function(data) {
             return _this.showData(data);
           });
@@ -750,6 +762,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.file.folders(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -786,6 +799,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.file.folders(user, project, params, function(data) {
             return _this.showData(data);
           });

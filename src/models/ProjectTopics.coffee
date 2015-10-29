@@ -105,7 +105,8 @@ class ProjectTopics extends BaseModel
     @prompt.get [{"name":"orderBy","description":"Enter orderBy","type":"integer","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.projectTopic.list user,project,params, (data) =>
+      params = @parseParames params,[],["orderBy","page","pageSize"],[],[]
+      @coding.projectTopic.list user,project,params,(data) =>
         @showData data
 
   ###
@@ -124,7 +125,8 @@ class ProjectTopics extends BaseModel
     @prompt.get [{"name":"parent","description":"Enter parent","type":"integer","required":false},{"name":"title","description":"Enter title","type":"string","required":false},{"name":"content","description":"Enter content","type":"string","required":false},{"name":"label","description":"Enter label","type":"string","required":false},{"name":"type","description":"Enter type","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.projectTopic.create user,project,params, (data) =>
+      params = @parseParames params,[],["parent","title","content","label","type"],[],[]
+      @coding.projectTopic.create user,project,params,(data) =>
         @showData data
 
   ###
@@ -158,7 +160,8 @@ class ProjectTopics extends BaseModel
     @prompt.get [{"name":"orderBy","description":"Enter orderBy","type":"integer","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.projectTopic.getProjectTopicByLabel user,project,id,params, (data) =>
+      params = @parseParames params,[],["orderBy","page","pageSize"],[],[]
+      @coding.projectTopic.getProjectTopicByLabel user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -192,7 +195,8 @@ class ProjectTopics extends BaseModel
     @prompt.get [{"name":"orderBy","description":"Enter orderBy","type":"integer","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.projectTopic.list user,project,params, (data) =>
+      params = @parseParames params,[],["orderBy","page","pageSize"],[],[]
+      @coding.projectTopic.list user,project,params,(data) =>
         @showData data
 
   ###
@@ -211,7 +215,8 @@ class ProjectTopics extends BaseModel
     @prompt.get [{"name":"orderBy","description":"Enter orderBy","type":"integer","required":false},{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.projectTopic.watchedProjectTopicList user,project,params, (data) =>
+      params = @parseParames params,[],["orderBy","page","pageSize"],[],[]
+      @coding.projectTopic.watchedProjectTopicList user,project,params,(data) =>
         @showData data
 
   ###
@@ -230,7 +235,8 @@ class ProjectTopics extends BaseModel
     @prompt.get [{"name":"type","description":"Enter type","type":"integer","required":false},{"name":"toc","description":"Enter toc","type":"boolean","required":false}],(err,params)=>
       if err
         return err
-      @coding.projectTopic.detail user,project,id,params, (data) =>
+      params = @parseParames params,[],["type","toc"],[],[]
+      @coding.projectTopic.detail user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -249,7 +255,8 @@ class ProjectTopics extends BaseModel
     @prompt.get [{"name":"topic_id","description":"Enter topic_id","type":"integer","required":false},{"name":"title","description":"Enter title","type":"string","required":false},{"name":"content","description":"Enter content","type":"string","required":false},{"name":"label","description":"Enter label","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.projectTopic.update user,project,id,params, (data) =>
+      params = @parseParames params,[],["topic_id","title","content","label"],[],[]
+      @coding.projectTopic.update user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -283,7 +290,8 @@ class ProjectTopics extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false},{"name":"type","description":"Enter type","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.projectTopic.comments user,project,id,params, (data) =>
+      params = @parseParames params,[],["page","pageSize","type"],[],[]
+      @coding.projectTopic.comments user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -332,7 +340,8 @@ class ProjectTopics extends BaseModel
     @prompt.get [{"name":"labelIdStrs","description":"Enter labelIdStrs","type":"string","required":true}],(err,params)=>
       if err
         return err
-      @coding.projectTopic.operateTopicLabel user,project,id,params, (data) =>
+      params = @parseParames params,[],["labelIdStrs"],[],[]
+      @coding.projectTopic.operateTopicLabel user,project,id,params,(data) =>
         @showData data
 
   ###
@@ -366,7 +375,8 @@ class ProjectTopics extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.projectTopic.watchers user,project,id,params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],[],[]
+      @coding.projectTopic.watchers user,project,id,params,(data) =>
         @showData data
 
 

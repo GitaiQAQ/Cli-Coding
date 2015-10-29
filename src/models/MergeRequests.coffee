@@ -60,7 +60,8 @@ class MergeRequests extends BaseModel
     @prompt.get [{"name":"srcBranch","description":"Enter srcBranch","type":"string","required":false},{"name":"desBranch","description":"Enter desBranch","type":"string","required":false},{"name":"title","description":"Enter title","type":"string","required":false},{"name":"content","description":"Enter content","type":"string","required":false},{"name":"reviewers","description":"Enter reviewers","type":"string","required":false},{"name":"tasks","description":"Enter tasks","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.mergeRequest.create user,project,params, (data) =>
+      params = @parseParames params,[],["srcBranch","desBranch","title","content","reviewers","tasks"],[],[]
+      @coding.mergeRequest.create user,project,params,(data) =>
         @showData data
 
   ###
@@ -79,7 +80,8 @@ class MergeRequests extends BaseModel
     @prompt.get [{"name":"diff","description":"Enter diff","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.mergeRequest.get user,project,iid,params, (data) =>
+      params = @parseParames params,[],["diff"],[],[]
+      @coding.mergeRequest.get user,project,iid,params,(data) =>
         @showData data
 
   ###
@@ -98,7 +100,8 @@ class MergeRequests extends BaseModel
     @prompt.get [{"name":"srcBranch","description":"Enter srcBranch","type":"string","required":false},{"name":"desBranch","description":"Enter desBranch","type":"string","required":false},{"name":"title","description":"Enter title","type":"string","required":false},{"name":"content","description":"Enter content","type":"string","required":false},{"name":"reviewers","description":"Enter reviewers","type":"string","required":false},{"name":"tasks","description":"Enter tasks","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.mergeRequest.update user,project,iid,params, (data) =>
+      params = @parseParames params,[],["srcBranch","desBranch","title","content","reviewers","tasks"],[],[]
+      @coding.mergeRequest.update user,project,iid,params,(data) =>
         @showData data
 
   ###
@@ -132,7 +135,8 @@ class MergeRequests extends BaseModel
     @prompt.get [{"name":"message","description":"Enter message","type":"string","required":false},{"name":"del_source_branch","description":"Enter del_source_branch","type":"boolean","required":false}],(err,params)=>
       if err
         return err
-      @coding.mergeRequest.merge user,project,iid,params, (data) =>
+      params = @parseParames params,[],["message","del_source_branch"],[],[]
+      @coding.mergeRequest.merge user,project,iid,params,(data) =>
         @showData data
 
   ###
@@ -166,7 +170,8 @@ class MergeRequests extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.mergeRequest.list user,project,status,params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],[],[]
+      @coding.mergeRequest.list user,project,status,params,(data) =>
         @showData data
 
 

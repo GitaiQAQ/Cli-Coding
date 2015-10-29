@@ -40,7 +40,8 @@ class Tags extends BaseModel
     @prompt.get [{"name":"page","description":"Enter page","type":"integer","required":false},{"name":"pageSize","description":"Enter pageSize","type":"integer","required":false}],(err,params)=>
       if err
         return err
-      @coding.tag.list user,project,params, (data) =>
+      params = @parseParames params,[],["page","pageSize"],[],[]
+      @coding.tag.list user,project,params,(data) =>
         @showData data
 
   ###
@@ -59,7 +60,8 @@ class Tags extends BaseModel
     @prompt.get [{"name":"tag_name","description":"Enter tag_name","type":"string","required":true},{"name":"tag_point","description":"Enter tag_point","type":"string","required":false},{"name":"message","description":"Enter message","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.tag.create user,project,params, (data) =>
+      params = @parseParames params,[],["tag_name","tag_point","message"],[],[]
+      @coding.tag.create user,project,params,(data) =>
         @showData data
 
   ###
@@ -78,7 +80,8 @@ class Tags extends BaseModel
     @prompt.get [{"name":"tag_name","description":"Enter tag_name","type":"string","required":true}],(err,params)=>
       if err
         return err
-      @coding.tag.del user,project,params, (data) =>
+      params = @parseParames params,[],["tag_name"],[],[]
+      @coding.tag.del user,project,params,(data) =>
         @showData data
 
 

@@ -95,7 +95,8 @@ class Keys extends BaseModel
     @prompt.get [{"name":"withIDEKey","description":"Enter withIDEKey","type":"boolean","required":false}],(err,params)=>
       if err
         return err
-      @coding.key.list user,params, (data) =>
+      params = @parseParames params,[],["withIDEKey"],[],[]
+      @coding.key.list user,params,(data) =>
         @showData data
 
   ###
@@ -114,7 +115,8 @@ class Keys extends BaseModel
     @prompt.get [{"name":"title","description":"Enter title","type":"string","required":false},{"name":"content","description":"Enter content","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.key.create user,params, (data) =>
+      params = @parseParames params,[],["title","content"],[],[]
+      @coding.key.create user,params,(data) =>
         @showData data
 
   ###
@@ -148,7 +150,8 @@ class Keys extends BaseModel
     @prompt.get [{"name":"title","description":"Enter title","type":"string","required":false},{"name":"content","description":"Enter content","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.key.webhook user,project,params, (data) =>
+      params = @parseParames params,[],["title","content"],[],[]
+      @coding.key.webhook user,project,params,(data) =>
         @showData data
 
   ###

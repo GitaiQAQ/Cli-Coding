@@ -40,7 +40,8 @@ class RepoFiles extends BaseModel
     @prompt.get [{"name":"ref","description":"Enter ref","type":"string","required":false},{"name":"path","description":"Enter path","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.repoFile.del user,project,file,params, (data) =>
+      params = @parseParames params,[],[],["ref","path"],[]
+      @coding.repoFile.del user,project,file,params,(data) =>
         @showData data
 
   ###
@@ -59,7 +60,8 @@ class RepoFiles extends BaseModel
     @prompt.get [{"name":"ref","description":"Enter ref","type":"string","required":false},{"name":"path","description":"Enter path","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.repoFile.update user,project,file,params, (data) =>
+      params = @parseParames params,[],[],["ref","path"],[]
+      @coding.repoFile.update user,project,file,params,(data) =>
         @showData data
 
   ###
@@ -78,7 +80,8 @@ class RepoFiles extends BaseModel
     @prompt.get [{"name":"ref","description":"Enter ref","type":"string","required":false},{"name":"path","description":"Enter path","type":"string","required":false}],(err,params)=>
       if err
         return err
-      @coding.repoFile.create user,project,file,params, (data) =>
+      params = @parseParames params,[],[],["ref","path"],[]
+      @coding.repoFile.create user,project,file,params,(data) =>
         @showData data
 
 

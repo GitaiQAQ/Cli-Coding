@@ -79,6 +79,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["src_branch", "des_user_name", "des_project_name", "des_branch", "diff"], [], []);
           return _this.coding.pullRequest.create(user, project, params, function(data) {
             return _this.showData(data);
           });
@@ -110,6 +111,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["diff"], [], []);
           return _this.coding.pullRequest.get(user, project, iid, params, function(data) {
             return _this.showData(data);
           });
@@ -195,6 +197,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["message"], [], []);
           return _this.coding.pullRequest.merge(user, project, iid, params, function(data) {
             return _this.showData(data);
           });
@@ -249,6 +252,7 @@
           if (err) {
             return err;
           }
+          params = _this.parseParames(params, [], ["page", "pageSize"], [], []);
           return _this.coding.pullRequest.list(user, project, status, params, function(data) {
             return _this.showData(data);
           });

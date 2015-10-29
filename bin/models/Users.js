@@ -127,11 +127,6 @@
           "description": "Enter confirm_password",
           "type": "string",
           "required": false
-        }, {
-          "name": "sid",
-          "description": "Enter sid",
-          "type": "string",
-          "required": false
         }
       ], (function(_this) {
         return function(err, params) {
@@ -214,11 +209,6 @@
           "type": "string",
           "required": true,
           "hidden": true
-        }, {
-          "name": "sid",
-          "description": "Enter sid",
-          "type": "string",
-          "required": false
         }
       ], (function(_this) {
         return function(err, params) {
@@ -423,11 +413,6 @@
           "description": "Enter code",
           "type": "integer",
           "required": false
-        }, {
-          "name": "sid",
-          "description": "Enter sid",
-          "type": "string",
-          "required": false
         }
       ], (function(_this) {
         return function(err, params) {
@@ -562,11 +547,6 @@
           "type": "string",
           "required": false
         }, {
-          "name": "sid",
-          "description": "Enter sid",
-          "type": "string",
-          "required": false
-        }, {
           "name": "realRemoteAddress",
           "description": "Enter realRemoteAddress",
           "type": "string",
@@ -676,21 +656,9 @@
 
     Users.prototype.logout = function() {
       this.debug("Users::logout()");
-      return this.prompt.get([
-        {
-          "name": "sid",
-          "description": "Enter sid",
-          "type": "string",
-          "required": false
-        }
-      ], (function(_this) {
-        return function(err, params) {
-          if (err) {
-            return err;
-          }
-          return _this.coding.user.logout(params, function(data) {
-            return _this.showData(data);
-          });
+      return this.coding.user.logout(params, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
         };
       })(this));
     };
@@ -898,11 +866,6 @@
           "description": "Enter code",
           "type": "string",
           "required": false
-        }, {
-          "name": "sid",
-          "description": "Enter sid",
-          "type": "string",
-          "required": false
         }
       ], (function(_this) {
         return function(err, params) {
@@ -947,11 +910,6 @@
           "type": "string",
           "required": false,
           "hidden": true
-        }, {
-          "name": "sid",
-          "description": "Enter sid",
-          "type": "string",
-          "required": false
         }
       ], (function(_this) {
         return function(err, params) {
@@ -983,11 +941,6 @@
           "description": "Enter avatar",
           "type": "string",
           "required": true
-        }, {
-          "name": "sid",
-          "description": "Enter sid",
-          "type": "string",
-          "required": false
         }
       ], (function(_this) {
         return function(err, params) {

@@ -176,7 +176,7 @@ class Users extends BaseModel
   activate: () =>
     @debug "Users::activate()"
 
-    @prompt.get [{"name":"email","description":"Enter email","type":"string","required":false},{"name":"key","description":"Enter key","type":"string","required":false},{"name":"password","description":"Enter password","type":"string","required":false,"hidden": true},{"name":"confirm_password","description":"Enter confirm_password","type":"string","required":false},{"name":"sid","description":"Enter sid","type":"string","required":false}],(err,params)=>
+    @prompt.get [{"name":"email","description":"Enter email","type":"string","required":false},{"name":"key","description":"Enter key","type":"string","required":false},{"name":"password","description":"Enter password","type":"string","required":false,"hidden": true},{"name":"confirm_password","description":"Enter confirm_password","type":"string","required":false}],(err,params)=>
       if err
         return err
       @coding.user.activate params, (data) =>
@@ -213,7 +213,7 @@ class Users extends BaseModel
   activatePhone: () =>
     @debug "Users::activatePhone()"
 
-    @prompt.get [{"name":"phone","description":"Enter phone","type":"string","required":true},{"name":"code","description":"Enter code","type":"string","required":true},{"name":"user","description":"Enter user","type":"string","required":true},{"name":"email","description":"Enter email","type":"string","required":true},{"name":"password","description":"Enter password","type":"string","required":true,"hidden": true},{"name":"sid","description":"Enter sid","type":"string","required":false}],(err,params)=>
+    @prompt.get [{"name":"phone","description":"Enter phone","type":"string","required":true},{"name":"code","description":"Enter code","type":"string","required":true},{"name":"user","description":"Enter user","type":"string","required":true},{"name":"email","description":"Enter email","type":"string","required":true},{"name":"password","description":"Enter password","type":"string","required":true,"hidden": true}],(err,params)=>
       if err
         return err
       @coding.user.activatePhone params, (data) =>
@@ -337,7 +337,7 @@ class Users extends BaseModel
   checkTwoFactorAuthCode: () =>
     @debug "Users::checkTwoFactorAuthCode()"
 
-    @prompt.get [{"name":"code","description":"Enter code","type":"integer","required":false},{"name":"sid","description":"Enter sid","type":"string","required":false}],(err,params)=>
+    @prompt.get [{"name":"code","description":"Enter code","type":"integer","required":false}],(err,params)=>
       if err
         return err
       @coding.user.checkTwoFactorAuthCode params, (data) =>
@@ -427,7 +427,7 @@ class Users extends BaseModel
   login: () =>
     @debug "Users::login()"
 
-    @prompt.get [{"name":"email","description":"Enter email","type":"string","required":false},{"name":"password","description":"Enter password","type":"string","required":false,"hidden": true},{"name":"j_captcha","description":"Enter j_captcha","type":"string","required":false},{"name":"remember_me","description":"Enter remember_me","type":"string","required":false},{"name":"sid","description":"Enter sid","type":"string","required":false},{"name":"realRemoteAddress","description":"Enter realRemoteAddress","type":"string","required":false}],(err,params)=>
+    @prompt.get [{"name":"email","description":"Enter email","type":"string","required":false},{"name":"password","description":"Enter password","type":"string","required":false,"hidden": true},{"name":"j_captcha","description":"Enter j_captcha","type":"string","required":false},{"name":"remember_me","description":"Enter remember_me","type":"string","required":false},{"name":"realRemoteAddress","description":"Enter realRemoteAddress","type":"string","required":false}],(err,params)=>
       if err
         return err
       @coding.user.login params, (data) =>
@@ -482,11 +482,8 @@ class Users extends BaseModel
   logout: () =>
     @debug "Users::logout()"
 
-    @prompt.get [{"name":"sid","description":"Enter sid","type":"string","required":false}],(err,params)=>
-      if err
-        return err
-      @coding.user.logout params, (data) =>
-        @showData data
+    @coding.user.logout params, (data) =>
+      @showData data
 
   ###
 
@@ -572,7 +569,7 @@ class Users extends BaseModel
   avatar: () =>
     @debug "Users::avatar()"
 
-    @prompt.get [{"name":"tags","description":"Enter tags","type":"string","required":false},{"name":"name","description":"Enter name","type":"string","required":false},{"name":"sex","description":"Enter sex","type":"string","required":false},{"name":"phone","description":"Enter phone","type":"string","required":false},{"name":"birthday","description":"Enter birthday","type":"string","required":false},{"name":"location","description":"Enter location","type":"string","required":false},{"name":"company","description":"Enter company","type":"string","required":false},{"name":"slogan","description":"Enter slogan","type":"string","required":false},{"name":"introduction","description":"Enter introduction","type":"string","required":false},{"name":"job","description":"Enter job","type":"string","required":false},{"name":"code","description":"Enter code","type":"string","required":false},{"name":"sid","description":"Enter sid","type":"string","required":false}],(err,params)=>
+    @prompt.get [{"name":"tags","description":"Enter tags","type":"string","required":false},{"name":"name","description":"Enter name","type":"string","required":false},{"name":"sex","description":"Enter sex","type":"string","required":false},{"name":"phone","description":"Enter phone","type":"string","required":false},{"name":"birthday","description":"Enter birthday","type":"string","required":false},{"name":"location","description":"Enter location","type":"string","required":false},{"name":"company","description":"Enter company","type":"string","required":false},{"name":"slogan","description":"Enter slogan","type":"string","required":false},{"name":"introduction","description":"Enter introduction","type":"string","required":false},{"name":"job","description":"Enter job","type":"string","required":false},{"name":"code","description":"Enter code","type":"string","required":false}],(err,params)=>
       if err
         return err
       @coding.user.avatar params, (data) =>
@@ -591,7 +588,7 @@ class Users extends BaseModel
   updatePwd: () =>
     @debug "Users::updatePwd()"
 
-    @prompt.get [{"name":"current_password","description":"Enter current_password","type":"string","required":false,"hidden": true},{"name":"password","description":"Enter password","type":"string","required":false,"hidden": true},{"name":"confirm_password","description":"Enter confirm_password","type":"string","required":false,"hidden": true},{"name":"sid","description":"Enter sid","type":"string","required":false}],(err,params)=>
+    @prompt.get [{"name":"current_password","description":"Enter current_password","type":"string","required":false,"hidden": true},{"name":"password","description":"Enter password","type":"string","required":false,"hidden": true},{"name":"confirm_password","description":"Enter confirm_password","type":"string","required":false,"hidden": true}],(err,params)=>
       if err
         return err
       @coding.user.updatePwd params, (data) =>
@@ -610,7 +607,7 @@ class Users extends BaseModel
   avatar: () =>
     @debug "Users::avatar()"
 
-    @prompt.get [{"name":"avatar","description":"Enter avatar","type":"string","required":true},{"name":"sid","description":"Enter sid","type":"string","required":false}],(err,params)=>
+    @prompt.get [{"name":"avatar","description":"Enter avatar","type":"string","required":true}],(err,params)=>
       if err
         return err
       @coding.user.avatar params, (data) =>

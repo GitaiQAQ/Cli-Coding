@@ -47,7 +47,7 @@
       this.coding = this.cmd.coding;
       this.opts = this.cmd.opts;
       this.prompt = prompt;
-      this.transport = this.cmd.opts.transport;
+      this.transport = this.cmd.opts.transport || this.transport;
       this.table = new Table({
         chars: {
           'top': '═',

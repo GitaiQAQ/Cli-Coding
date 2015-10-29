@@ -34,7 +34,7 @@ class module.exports
     @opts =     @cmd.opts
     @prompt = prompt
 
-    @transport = @cmd.opts.transport
+    @transport = @cmd.opts.transport || @transport
 
     @table = new Table
       chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'

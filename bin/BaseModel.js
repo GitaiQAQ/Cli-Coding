@@ -78,10 +78,15 @@
 
     exports.prototype.transport = function(data) {
       var key;
-      for (key in data) {
-        this.table.push([this.__(this.constructor.name + "." + key), data[key]]);
+      if (!data.code) {
+        data = data.data;
+        for (key in data) {
+          this.table.push([this.__(this.constructor.name + "." + key), data[key]]);
+        }
+        return console.log(this.table.toString());
+      } else {
+        return console.log(data);
       }
-      return console.log(this.table.toString());
     };
 
     return exports;

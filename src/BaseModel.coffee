@@ -48,7 +48,11 @@ class module.exports
     @transport data
 
   transport:(data)=>
-    for key of data
-      @table.push([@__("#{@constructor.name}.#{key}"),data[key]])
+    unless data.code
+      data = data.data
+      for key of data
+        @table.push([@__("#{@constructor.name}.#{key}"),data[key]])
 
-    console.log @table.toString()
+      console.log @table.toString()
+    else
+      console.log data

@@ -11,11 +11,21 @@
     extend(Projects, superClass);
 
     function Projects() {
-      this.public_projects = bind(this.public_projects, this);
+      this.publicProjects = bind(this.publicProjects, this);
+      this.publicProjects = bind(this.publicProjects, this);
+      this.publicProjects = bind(this.publicProjects, this);
+      this.publicProjects = bind(this.publicProjects, this);
+      this.publicProjects = bind(this.publicProjects, this);
+      this.publicProjects = bind(this.publicProjects, this);
       this.createProject = bind(this.createProject, this);
-      this.private_projects = bind(this.private_projects, this);
-      this.project_list = bind(this.project_list, this);
-      this.watchers = bind(this.watchers, this);
+      this.privateProjects = bind(this.privateProjects, this);
+      this.privateProjects = bind(this.privateProjects, this);
+      this.privateProjects = bind(this.privateProjects, this);
+      this.privateProjects = bind(this.privateProjects, this);
+      this.privateProjects = bind(this.privateProjects, this);
+      this.privateProjects = bind(this.privateProjects, this);
+      this.projectList = bind(this.projectList, this);
+      this.watched = bind(this.watched, this);
       this.watched = bind(this.watched, this);
       this.watch = bind(this.watch, this);
       this.visitProject = bind(this.visitProject, this);
@@ -24,323 +34,1056 @@
       this.stared = bind(this.stared, this);
       this.star = bind(this.star, this);
       this.setProjectIcon = bind(this.setProjectIcon, this);
+      this.deleteProject = bind(this.deleteProject, this);
       this.queryByName = bind(this.queryByName, this);
-      this.publicProject = bind(this.publicProject, this);
+      this.publicProjects = bind(this.publicProjects, this);
       this.recommendedList = bind(this.recommendedList, this);
-      this.update_1 = bind(this.update_1, this);
-      this.getPinProjects = bind(this.getPinProjects, this);
+      this.update = bind(this.update, this);
+      this.pinProject = bind(this.pinProject, this);
+      this.pinProject = bind(this.pinProject, this);
+      this.pinProject = bind(this.pinProject, this);
       this.init = bind(this.init, this);
       return Projects.__super__.constructor.apply(this, arguments);
     }
 
     Projects.prototype.init = function() {
       this.debug("init()");
-      this.program.command("getPinProjects").description("获取常用项目列表").action(this.getPinProjects);
-      this.program.command("update_1").description("更新项目信息").action(this.update_1);
+      this.program.command("pinProject").description("获取常用项目列表").action(this.pinProject);
+      this.program.command("pinProject").description("设置常用项目").action(this.pinProject);
+      this.program.command("pinProject").description("取消常用项目").action(this.pinProject);
+      this.program.command("update").description("更新项目信息").action(this.update);
       this.program.command("recommendedList").description("推荐项目list").action(this.recommendedList);
-      this.program.command("publicProject").description("公有项目列表").action(this.publicProject);
-      this.program.command("queryByName").description("通过名称查询")["arguments"]('<user> <project>').action(this.queryByName);
-      this.program.command("setProjectIcon").description("设置项目图标")["arguments"]('<user> <project>').action(this.setProjectIcon);
-      this.program.command("star").description("收藏项目")["arguments"]('<user> <project>').action(this.star);
-      this.program.command("stared").description("项目是否被收藏")["arguments"]('<user> <project>').action(this.stared);
-      this.program.command("unstar").description("项目取消收藏")["arguments"]('<user> <project>').action(this.unstar);
-      this.program.command("unwatch").description("项目取消关注")["arguments"]('<user> <project>').action(this.unwatch);
-      this.program.command("visitProject").description("更新项目阅读时间")["arguments"]('<user> <project>').action(this.visitProject);
-      this.program.command("watch").description("关注项目")["arguments"]('<user> <project>').action(this.watch);
-      this.program.command("watched").description("项目是否被关注")["arguments"]('<user> <project>').action(this.watched);
-      this.program.command("watchers").description("项目关注者")["arguments"]('<user> <project>').action(this.watchers);
-      this.program.command("project_list").description("我的项目列表").action(this.project_list);
-      this.program.command("private_projects").description("私有项目列表").action(this.private_projects);
-      this.program.command("createProject").description("创建项目")["arguments"]('<global_key>').action(this.createProject);
-      return this.program.command("public_projects").description("公有项目列表")["arguments"]('<global_key>').action(this.public_projects);
+      this.program.command("publicProjects").description("公有项目列表").action(this.publicProjects);
+      this.program.command("queryByName").description("通过名称查询")["arguments"]("<user> <project>").action(this.queryByName);
+      this.program.command("deleteProject").description("删除项目")["arguments"]("<user> <project>").action(this.deleteProject);
+      this.program.command("setProjectIcon").description("设置项目图标")["arguments"]("<user> <project>").action(this.setProjectIcon);
+      this.program.command("star").description("收藏项目")["arguments"]("<user> <project>").action(this.star);
+      this.program.command("stared").description("项目是否被收藏")["arguments"]("<user> <project>").action(this.stared);
+      this.program.command("unstar").description("项目取消收藏")["arguments"]("<user> <project>").action(this.unstar);
+      this.program.command("unwatch").description("项目取消关注")["arguments"]("<user> <project>").action(this.unwatch);
+      this.program.command("visitProject").description("更新项目阅读时间")["arguments"]("<user> <project>").action(this.visitProject);
+      this.program.command("watch").description("关注项目")["arguments"]("<user> <project>").action(this.watch);
+      this.program.command("watched").description("项目是否被关注")["arguments"]("<user> <project>").action(this.watched);
+      this.program.command("watched").description("项目关注者")["arguments"]("<user> <project>").action(this.watched);
+      this.program.command("projectList").description("我的项目列表").action(this.projectList);
+      this.program.command("privateProjects").description("私有项目列表").action(this.privateProjects);
+      this.program.command("privateProjects").description("私有项目列表").action(this.privateProjects);
+      this.program.command("privateProjects").description("私有项目列表").action(this.privateProjects);
+      this.program.command("privateProjects").description("私有项目列表").action(this.privateProjects);
+      this.program.command("privateProjects").description("私有项目列表").action(this.privateProjects);
+      this.program.command("privateProjects").description("私有项目列表").action(this.privateProjects);
+      this.program.command("createProject").description("创建项目")["arguments"]("<user>").action(this.createProject);
+      this.program.command("publicProjects").description("公有项目列表")["arguments"]("<user>").action(this.publicProjects);
+      this.program.command("publicProjects").description("公有项目列表")["arguments"]("<user>").action(this.publicProjects);
+      this.program.command("publicProjects").description("公有项目列表")["arguments"]("<user>").action(this.publicProjects);
+      this.program.command("publicProjects").description("公有项目列表")["arguments"]("<user>").action(this.publicProjects);
+      this.program.command("publicProjects").description("公有项目列表")["arguments"]("<user>").action(this.publicProjects);
+      return this.program.command("publicProjects").description("公有项目列表")["arguments"]("<user>").action(this.publicProjects);
     };
 
 
     /*
     
-     operationId  : getPinProjects
-     description  : 获取常用项目列表
-     args     	: 
-     params 		: page,pageSize,page,pageSize,
+     method            : get
+     summary         : pinProject
+     description    : 获取常用项目列表
+     query            : page,pageSize
      */
 
-    Projects.prototype.getPinProjects = function() {
-      this.debug("getPinProjects()");
-      return this.coding.projects.getPinProjects(params, function(data) {
-        return console.log(data);
-      });
+    Projects.prototype.pinProject = function() {
+      this.debug("Projects::pinProject()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.pinProject(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : update_1
-     description  : 更新项目信息
-     args     	: 
-     params 		: id,name,description,id,name,description,
+     method            : post
+     summary         : pinProject
+     description    : 设置常用项目
+     body            : ids
      */
 
-    Projects.prototype.update_1 = function() {
-      this.debug("update_1()");
-      return this.coding.projects.update_1(params, function(data) {
-        return console.log(data);
-      });
+    Projects.prototype.pinProject = function() {
+      this.debug("Projects::pinProject()");
+      return this.prompt.get([
+        {
+          "name": "ids",
+          "description": "Enter ids",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.pinProject(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : recommendedList
-     description  : 推荐项目list
-     args     	: 
-     params 		:
+     method            : delete
+     summary         : pinProject
+     description    : 取消常用项目
+     body            : ids
+     */
+
+    Projects.prototype.pinProject = function() {
+      this.debug("Projects::pinProject()");
+      return this.prompt.get([
+        {
+          "name": "ids",
+          "description": "Enter ids",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.pinProject(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : put
+     summary         : update
+     description    : 更新项目信息
+     query            : id,name,description
+     */
+
+    Projects.prototype.update = function() {
+      this.debug("Projects::update()");
+      return this.prompt.get([
+        {
+          "name": "id",
+          "description": "Enter id",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "name",
+          "description": "Enter name",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "description",
+          "description": "Enter description",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.update(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : get
+     summary         : recommendedList
+     description    : 推荐项目list
      */
 
     Projects.prototype.recommendedList = function() {
-      this.debug("recommendedList()");
-      return this.coding.projects.recommendedList(params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Projects::recommendedList()");
+      return this.coding.project.recommendedList((function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : publicProject
-     description  : 公有项目列表
-     args     	: 
-     params 		: page,pageSize,page,pageSize,
+     method            : get
+     summary         : publicProjects
+     description    : 公有项目列表
+     query            : page,pageSize
      */
 
-    Projects.prototype.publicProject = function() {
-      this.debug("publicProject()");
-      return this.coding.projects.publicProject(params, function(data) {
-        return console.log(data);
-      });
+    Projects.prototype.publicProjects = function() {
+      this.debug("Projects::publicProjects()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.publicProjects(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : queryByName
-     description  : 通过名称查询
-     args     	: user,project
-     params 		:
+     method            : get
+     summary         : queryByName
+     description    : 通过名称查询
+     path            : user,project
      */
 
     Projects.prototype.queryByName = function(user, project) {
-      this.debug("queryByName()");
-      return this.coding.projects.queryByName(user, project, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Projects::queryByName()");
+      return this.coding.project.queryByName(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : setProjectIcon
-     description  : 设置项目图标
-     args     	: user,project
-     params 		:
+     method            : delete
+     summary         : deleteProject
+     description    : 删除项目
+     path            : user,project
+     query            : name
+     */
+
+    Projects.prototype.deleteProject = function(user, project) {
+      this.debug("Projects::deleteProject()");
+      return this.prompt.get([
+        {
+          "name": "name",
+          "description": "Enter name",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.deleteProject(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : post
+     summary         : setProjectIcon
+     description    : 设置项目图标
+     path            : user,project
      */
 
     Projects.prototype.setProjectIcon = function(user, project) {
-      this.debug("setProjectIcon()");
-      return this.coding.projects.setProjectIcon(user, project, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Projects::setProjectIcon()");
+      return this.coding.project.setProjectIcon(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : star
-     description  : 收藏项目
-     args     	: user,project
-     params 		:
+     method            : post
+     summary         : star
+     description    : 收藏项目
+     path            : user,project
      */
 
     Projects.prototype.star = function(user, project) {
-      this.debug("star()");
-      return this.coding.projects.star(user, project, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Projects::star()");
+      return this.coding.project.star(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : stared
-     description  : 项目是否被收藏
-     args     	: user,project
-     params 		:
+     method            : post
+     summary         : stared
+     description    : 项目是否被收藏
+     path            : user,project
      */
 
     Projects.prototype.stared = function(user, project) {
-      this.debug("stared()");
-      return this.coding.projects.stared(user, project, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Projects::stared()");
+      return this.coding.project.stared(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : unstar
-     description  : 项目取消收藏
-     args     	: user,project
-     params 		:
+     method            : post
+     summary         : unstar
+     description    : 项目取消收藏
+     path            : user,project
      */
 
     Projects.prototype.unstar = function(user, project) {
-      this.debug("unstar()");
-      return this.coding.projects.unstar(user, project, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Projects::unstar()");
+      return this.coding.project.unstar(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : unwatch
-     description  : 项目取消关注
-     args     	: user,project
-     params 		:
+     method            : post
+     summary         : unwatch
+     description    : 项目取消关注
+     path            : user,project
      */
 
     Projects.prototype.unwatch = function(user, project) {
-      this.debug("unwatch()");
-      return this.coding.projects.unwatch(user, project, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Projects::unwatch()");
+      return this.coding.project.unwatch(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : visitProject
-     description  : 更新项目阅读时间
-     args     	: user,project
-     params 		:
+     method            : get
+     summary         : visitProject
+     description    : 更新项目阅读时间
+     path            : user,project
      */
 
     Projects.prototype.visitProject = function(user, project) {
-      this.debug("visitProject()");
-      return this.coding.projects.visitProject(user, project, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Projects::visitProject()");
+      return this.coding.project.visitProject(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : watch
-     description  : 关注项目
-     args     	: user,project
-     params 		:
+     method            : post
+     summary         : watch
+     description    : 关注项目
+     path            : user,project
      */
 
     Projects.prototype.watch = function(user, project) {
-      this.debug("watch()");
-      return this.coding.projects.watch(user, project, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Projects::watch()");
+      return this.coding.project.watch(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : watched
-     description  : 项目是否被关注
-     args     	: user,project
-     params 		:
+     method            : post
+     summary         : watched
+     description    : 项目是否被关注
+     path            : user,project
      */
 
     Projects.prototype.watched = function(user, project) {
-      this.debug("watched()");
-      return this.coding.projects.watched(user, project, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Projects::watched()");
+      return this.coding.project.watched(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : watchers
-     description  : 项目关注者
-     args     	: user,project
-     params 		:
+     method            : get
+     summary         : watched
+     description    : 项目关注者
+     path            : user,project
      */
 
-    Projects.prototype.watchers = function(user, project) {
-      this.debug("watchers()");
-      return this.coding.projects.watchers(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Projects.prototype.watched = function(user, project) {
+      this.debug("Projects::watched()");
+      return this.coding.project.watched(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : project_list
-     description  : 我的项目列表
-     args     	: 
-     params 		: type,sort,page,pageSize,type,sort,page,pageSize,
+     method            : get
+     summary         : projectList
+     description    : 我的项目列表
+     query            : type,sort,page,pageSize
      */
 
-    Projects.prototype.project_list = function() {
-      this.debug("project_list()");
-      return this.coding.projects.project_list(params, function(data) {
-        return console.log(data);
-      });
+    Projects.prototype.projectList = function() {
+      this.debug("Projects::projectList()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "sort",
+          "description": "Enter sort",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.projectList(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : private_projects
-     description  : 私有项目列表
-     args     	: 
-     params 		: type,page,pageSize,type,page,pageSize,
+     method            : get
+     summary         : privateProjects
+     description    : 私有项目列表
+     query            : type,page,pageSize
      */
 
-    Projects.prototype.private_projects = function() {
-      this.debug("private_projects()");
-      return this.coding.projects.private_projects(params, function(data) {
-        return console.log(data);
-      });
+    Projects.prototype.privateProjects = function() {
+      this.debug("Projects::privateProjects()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.privateProjects(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : createProject
-     description  : 创建项目
-     args     	: global_key
-     params 		:
+     method            : post
+     summary         : privateProjects
+     description    : 私有项目列表
+     query            : type,page,pageSize
      */
 
-    Projects.prototype.createProject = function(global_key) {
-      this.debug("createProject()");
-      return this.coding.projects.createProject(global_key, params, function(data) {
-        return console.log(data);
-      });
+    Projects.prototype.privateProjects = function() {
+      this.debug("Projects::privateProjects()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.privateProjects(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : public_projects
-     description  : 公有项目列表
-     args     	: global_key
-     params 		: type,page,pageSize,type,page,pageSize,
+     method            : put
+     summary         : privateProjects
+     description    : 私有项目列表
+     query            : type,page,pageSize
      */
 
-    Projects.prototype.public_projects = function(global_key) {
-      this.debug("public_projects()");
-      return this.coding.projects.public_projects(global_key, params, function(data) {
-        return console.log(data);
-      });
+    Projects.prototype.privateProjects = function() {
+      this.debug("Projects::privateProjects()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.privateProjects(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : delete
+     summary         : privateProjects
+     description    : 私有项目列表
+     query            : type,page,pageSize
+     */
+
+    Projects.prototype.privateProjects = function() {
+      this.debug("Projects::privateProjects()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.privateProjects(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : options
+     summary         : privateProjects
+     description    : 私有项目列表
+     query            : type,page,pageSize
+     */
+
+    Projects.prototype.privateProjects = function() {
+      this.debug("Projects::privateProjects()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.privateProjects(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : patch
+     summary         : privateProjects
+     description    : 私有项目列表
+     query            : type,page,pageSize
+     */
+
+    Projects.prototype.privateProjects = function() {
+      this.debug("Projects::privateProjects()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.privateProjects(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : post
+     summary         : createProject
+     description    : 创建项目
+     path            : user
+     formData        : name,description,type,gitEnabled,gitIgnore,gitReadmeEnabled,gitLicense,importFrom,vcsType,icon
+     */
+
+    Projects.prototype.createProject = function(user) {
+      this.debug("Projects::createProject()");
+      return this.prompt.get([
+        {
+          "name": "name",
+          "description": "Enter name",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "description",
+          "description": "Enter description",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "type",
+          "description": "Enter type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "gitEnabled",
+          "description": "Enter gitEnabled",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "gitIgnore",
+          "description": "Enter gitIgnore",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "gitReadmeEnabled",
+          "description": "Enter gitReadmeEnabled",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "gitLicense",
+          "description": "Enter gitLicense",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "importFrom",
+          "description": "Enter importFrom",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "vcsType",
+          "description": "Enter vcsType",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "icon",
+          "description": "Enter icon",
+          "type": "file",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.createProject(user, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : get
+     summary         : publicProjects
+     description    : 公有项目列表
+     path            : user
+     query            : type,page,pageSize
+     */
+
+    Projects.prototype.publicProjects = function(user) {
+      this.debug("Projects::publicProjects()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.publicProjects(user, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : post
+     summary         : publicProjects
+     description    : 公有项目列表
+     path            : user
+     query            : type,page,pageSize
+     */
+
+    Projects.prototype.publicProjects = function(user) {
+      this.debug("Projects::publicProjects()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.publicProjects(user, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : put
+     summary         : publicProjects
+     description    : 公有项目列表
+     path            : user
+     query            : type,page,pageSize
+     */
+
+    Projects.prototype.publicProjects = function(user) {
+      this.debug("Projects::publicProjects()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.publicProjects(user, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : delete
+     summary         : publicProjects
+     description    : 公有项目列表
+     path            : user
+     query            : type,page,pageSize
+     */
+
+    Projects.prototype.publicProjects = function(user) {
+      this.debug("Projects::publicProjects()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.publicProjects(user, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : options
+     summary         : publicProjects
+     description    : 公有项目列表
+     path            : user
+     query            : type,page,pageSize
+     */
+
+    Projects.prototype.publicProjects = function(user) {
+      this.debug("Projects::publicProjects()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.publicProjects(user, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : patch
+     summary         : publicProjects
+     description    : 公有项目列表
+     path            : user
+     query            : type,page,pageSize
+     */
+
+    Projects.prototype.publicProjects = function(user) {
+      this.debug("Projects::publicProjects()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.project.publicProjects(user, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
     return Projects;

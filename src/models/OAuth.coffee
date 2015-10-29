@@ -1,21 +1,22 @@
 BaseModel = require '../BaseModel'
 
-class Oauth extends BaseModel
+class OAuth extends BaseModel
   init:=>
     @debug "init()"
-    @program.command "login"
-      .action @login
+    @program.command "authorize"
+      .alias "auth"
+      .action @authorize
 
-    @program.command "logout"
-      .alias 'clear'
-      .action @logout
+    @program.command "clean"
+      .action @clean
 
-  login:=>
+  authorize:=>
     @debug "login()"
-    @coding.oauth.authorize @opts.clientId,@opts.clientSecret,@opts.port,@opts.scope
+    @coding.oauth.authorize @opts.clientId,@opts.clientSecret,@opts.port,@opts.scope,(data) =>
+      @showData data
 
-  logout:=>
+  clean:=>
     @debug "logout()"
     @coding.oauth.clean
 
-module.exports = (cmd) -> new Oauth cmd
+module.exports = (cmd) -> new OAuth cmd

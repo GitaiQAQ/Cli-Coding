@@ -21,7 +21,7 @@
 
     Cmd.prototype.handleOptions = function() {
       Cmd.__super__.handleOptions.apply(this, arguments);
-      return this.program.usage("[options]").description('A simple command-line tool for coding.net by nodejs').version(packageInfo.version);
+      return this.program.description('A simple command-line tool for coding.net by nodejs').version(packageInfo.version);
     };
 
     return Cmd;

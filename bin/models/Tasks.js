@@ -11,30 +11,34 @@
     extend(Tasks, superClass);
 
     function Tasks() {
-      this.userTasks = bind(this.userTasks, this);
-      this.list_5 = bind(this.list_5, this);
-      this.userTasksOfProject = bind(this.userTasksOfProject, this);
-      this.getTaskByLabel = bind(this.getTaskByLabel, this);
-      this.userTasksCountInProject = bind(this.userTasksCountInProject, this);
-      this.userTasksCount = bind(this.userTasksCount, this);
-      this.pageTaskWatchers = bind(this.pageTaskWatchers, this);
-      this.watch_2 = bind(this.watch_2, this);
-      this.updateStatus = bind(this.updateStatus, this);
-      this.updatePriority = bind(this.updatePriority, this);
-      this.updateOwner = bind(this.updateOwner, this);
-      this.operateTaskLabels = bind(this.operateTaskLabels, this);
-      this.addTaskLabel = bind(this.addTaskLabel, this);
-      this.getDescription = bind(this.getDescription, this);
-      this.updateDeadline = bind(this.updateDeadline, this);
-      this.updateContent = bind(this.updateContent, this);
-      this.getComments = bind(this.getComments, this);
-      this.deleteComment = bind(this.deleteComment, this);
-      this.pubComment = bind(this.pubComment, this);
-      this.update4client = bind(this.update4client, this);
-      this.taskCountByUser = bind(this.taskCountByUser, this);
-      this.taskCreating = bind(this.taskCreating, this);
-      this.listOfOwner = bind(this.listOfOwner, this);
-      this.getTask = bind(this.getTask, this);
+      this.count = bind(this.count, this);
+      this.list = bind(this.list, this);
+      this.count = bind(this.count, this);
+      this.getTaskListByLabel = bind(this.getTaskListByLabel, this);
+      this.count = bind(this.count, this);
+      this.count = bind(this.count, this);
+      this.getTaskListByLabel = bind(this.getTaskListByLabel, this);
+      this.watch = bind(this.watch, this);
+      this.watch = bind(this.watch, this);
+      this.update = bind(this.update, this);
+      this.update = bind(this.update, this);
+      this.update = bind(this.update, this);
+      this.watch = bind(this.watch, this);
+      this.watch = bind(this.watch, this);
+      this.label = bind(this.label, this);
+      this.update = bind(this.update, this);
+      this.watch = bind(this.watch, this);
+      this.update = bind(this.update, this);
+      this.update = bind(this.update, this);
+      this.comment = bind(this.comment, this);
+      this.createComment = bind(this.createComment, this);
+      this.createComment = bind(this.createComment, this);
+      this.update = bind(this.update, this);
+      this.count = bind(this.count, this);
+      this.create = bind(this.create, this);
+      this.list = bind(this.list, this);
+      this.del = bind(this.del, this);
+      this.create = bind(this.create, this);
       this.create = bind(this.create, this);
       this.init = bind(this.init, this);
       return Tasks.__super__.constructor.apply(this, arguments);
@@ -42,431 +46,933 @@
 
     Tasks.prototype.init = function() {
       this.debug("init()");
-      this.program.command("create").description("创建任务")["arguments"]('<project>').action(this.create);
-      this.program.command("getTask").description("创建任务")["arguments"]('<project> <id>').action(this.getTask);
-      this.program.command("listOfOwner").description("列出某人的任务列表")["arguments"]('<project> <owner> <status>').action(this.listOfOwner);
-      this.program.command("taskCreating").description("全局任务创建").action(this.taskCreating);
-      this.program.command("taskCountByUser").description("任务统计信息")["arguments"]('<user> <project>').action(this.taskCountByUser);
-      this.program.command("update4client").description("修改任务")["arguments"]('<user> <project> <id>').action(this.update4client);
-      this.program.command("pubComment").description("创建任务评论")["arguments"]('<user> <project> <id>').action(this.pubComment);
-      this.program.command("deleteComment").description("删除任务评论")["arguments"]('<user> <project> <id> <commentId>').action(this.deleteComment);
-      this.program.command("getComments").description("获取任务评论")["arguments"]('<user> <project> <id>').action(this.getComments);
-      this.program.command("updateContent").description("修改任务内容")["arguments"]('<user> <project> <id>').action(this.updateContent);
-      this.program.command("updateDeadline").description("修改任务截止日期")["arguments"]('<user> <project> <id>').action(this.updateDeadline);
-      this.program.command("getDescription").description("获取任务描述")["arguments"]('<user> <project> <id>').action(this.getDescription);
-      this.program.command("addTaskLabel").description("添加任务标签")["arguments"]('<user> <project> <id> <labelId>').action(this.addTaskLabel);
-      this.program.command("operateTaskLabels").description("批量操作任务标签")["arguments"]('<user> <project> <id>').action(this.operateTaskLabels);
-      this.program.command("updateOwner").description("修改任务执行者")["arguments"]('<user> <project> <id>').action(this.updateOwner);
-      this.program.command("updatePriority").description("修改任务优先级")["arguments"]('<user> <project> <id>').action(this.updatePriority);
-      this.program.command("updateStatus").description("修改任务状态")["arguments"]('<user> <project> <id>').action(this.updateStatus);
-      this.program.command("watch_2").description("关注任务")["arguments"]('<user> <project> <id>').action(this.watch_2);
-      this.program.command("pageTaskWatchers").description("关注该任务的用户")["arguments"]('<user> <project> <id>').action(this.pageTaskWatchers);
-      this.program.command("userTasksCount").description(" 获取当前用户项目的已完成、正在进行的、关注的数值")["arguments"]('<user> <project>').action(this.userTasksCount);
-      this.program.command("userTasksCountInProject").description("统计所有 已完成 和 正在处理 的任务数")["arguments"]('<user> <project>').action(this.userTasksCountInProject);
-      this.program.command("getTaskByLabel").description("查询标签下的任务列表")["arguments"]('<user> <project> <id>').action(this.getTaskByLabel);
-      this.program.command("userTasksOfProject").description("列出当前用户某项目某状态的任务列表")["arguments"]('<user> <project> <status>').action(this.userTasksOfProject);
-      this.program.command("list_5").description("任务列表")["arguments"]('<user> <project> <status>').action(this.list_5);
-      return this.program.command("userTasks").description("当前用户某状态的任务列表")["arguments"]('<user> <status>').action(this.userTasks);
+      this.program.command("create").description("创建任务")["arguments"]("<project>").action(this.create);
+      this.program.command("create").description("创建任务")["arguments"]("<project> <id>").action(this.create);
+      this.program.command("del").description("删除任务")["arguments"]("<project> <id>").action(this.del);
+      this.program.command("list").description("列出某人的任务列表")["arguments"]("<project> <owner> <status>").action(this.list);
+      this.program.command("create").description("全局任务创建").action(this.create);
+      this.program.command("count").description("任务统计信息")["arguments"]("<user> <project>").action(this.count);
+      this.program.command("update").description("修改任务")["arguments"]("<user> <project> <id>").action(this.update);
+      this.program.command("createComment").description("创建任务评论")["arguments"]("<user> <project> <id>").action(this.createComment);
+      this.program.command("createComment").description("删除任务评论")["arguments"]("<user> <project> <id> <commentId>").action(this.createComment);
+      this.program.command("comment").description("获取任务评论")["arguments"]("<user> <project> <id>").action(this.comment);
+      this.program.command("update").description("修改任务内容")["arguments"]("<user> <project> <id>").action(this.update);
+      this.program.command("update").description("修改任务截止日期")["arguments"]("<user> <project> <id>").action(this.update);
+      this.program.command("watch").description("获取任务描述")["arguments"]("<user> <project> <id>").action(this.watch);
+      this.program.command("update").description("修改任务描述")["arguments"]("<user> <project> <id>").action(this.update);
+      this.program.command("label").description("添加任务标签")["arguments"]("<user> <project> <id> <labelId>").action(this.label);
+      this.program.command("watch").description("删除任务标签")["arguments"]("<user> <project> <id> <labelId>").action(this.watch);
+      this.program.command("watch").description("批量操作任务标签")["arguments"]("<user> <project> <id>").action(this.watch);
+      this.program.command("update").description("修改任务执行者")["arguments"]("<user> <project> <id>").action(this.update);
+      this.program.command("update").description("修改任务优先级")["arguments"]("<user> <project> <id>").action(this.update);
+      this.program.command("update").description("修改任务状态")["arguments"]("<user> <project> <id>").action(this.update);
+      this.program.command("watch").description("关注任务")["arguments"]("<user> <project> <id>").action(this.watch);
+      this.program.command("watch").description("取消任务关注")["arguments"]("<user> <project> <id>").action(this.watch);
+      this.program.command("getTaskListByLabel").description("关注该任务的用户")["arguments"]("<user> <project> <id>").action(this.getTaskListByLabel);
+      this.program.command("count").description(" 获取当前用户项目的已完成、正在进行的、关注的数值")["arguments"]("<user> <project>").action(this.count);
+      this.program.command("count").description("统计所有 已完成 和 正在处理 的任务数")["arguments"]("<user> <project>").action(this.count);
+      this.program.command("getTaskListByLabel").description("查询标签下的任务列表")["arguments"]("<user> <project> <id>").action(this.getTaskListByLabel);
+      this.program.command("count").description("列出当前用户某项目某状态的任务列表")["arguments"]("<user> <project> <status>").action(this.count);
+      this.program.command("list").description("任务列表")["arguments"]("<user> <project> <status>").action(this.list);
+      return this.program.command("count").description("当前用户某状态的任务列表")["arguments"]("<user> <status>").action(this.count);
     };
 
 
     /*
     
-     operationId  : create
-     description  : 创建任务
-     args     	: project
-     params 		: owner_id,priority,deadline,description,content,labels,watchers,owner_id,priority,deadline,description,content,labels,watchers,
+     method            : post
+     summary         : create
+     description    : 创建任务
+     path            : project
+     query            : owner_id,priority,deadline,description,content,labels,watchers
      */
 
     Tasks.prototype.create = function(project) {
-      this.debug("create()");
-      return this.coding.tasks.create(project, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Tasks::create()");
+      return this.prompt.get([
+        {
+          "name": "owner_id",
+          "description": "Enter owner_id",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "priority",
+          "description": "Enter priority",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "deadline",
+          "description": "Enter deadline",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "description",
+          "description": "Enter description",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "content",
+          "description": "Enter content",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "labels",
+          "description": "Enter labels",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "watchers",
+          "description": "Enter watchers",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.create(project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : getTask
-     description  : 创建任务
-     args     	: project,id
-     params 		: parseDescription,parseDescription,
+     method            : get
+     summary         : create
+     description    : 创建任务
+     path            : project,id
+     query            : parseDescription
      */
 
-    Tasks.prototype.getTask = function(project, id) {
-      this.debug("getTask()");
-      return this.coding.tasks.getTask(project, id, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.create = function(project, id) {
+      this.debug("Tasks::create()");
+      return this.prompt.get([
+        {
+          "name": "parseDescription",
+          "description": "Enter parseDescription",
+          "type": "boolean",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.create(project, id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : listOfOwner
-     description  : 列出某人的任务列表
-     args     	: project,owner,status
-     params 		: page,pageSize,page,pageSize,
+     method            : delete
+     summary         : del
+     description    : 删除任务
+     path            : project,id
      */
 
-    Tasks.prototype.listOfOwner = function(project, owner, status) {
-      this.debug("listOfOwner()");
-      return this.coding.tasks.listOfOwner(project, owner, status, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.del = function(project, id) {
+      this.debug("Tasks::del()");
+      return this.coding.task.del(project, id, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : taskCreating
-     description  : 全局任务创建
-     args     	: 
-     params 		:
+     method            : get
+     summary         : list
+     description    : 列出某人的任务列表
+     path            : project,owner,status
+     query            : page,pageSize
+     body            : key
      */
 
-    Tasks.prototype.taskCreating = function() {
-      this.debug("taskCreating()");
-      return this.coding.tasks.taskCreating(params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.list = function(project, owner, status) {
+      this.debug("Tasks::list()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "key",
+          "description": "Enter key",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.list(project, owner, status, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : taskCountByUser
-     description  : 任务统计信息
-     args     	: user,project
-     params 		:
+     method            : get
+     summary         : create
+     description    : 全局任务创建
      */
 
-    Tasks.prototype.taskCountByUser = function(user, project) {
-      this.debug("taskCountByUser()");
-      return this.coding.tasks.taskCountByUser(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.create = function() {
+      this.debug("Tasks::create()");
+      return this.coding.task.create((function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : update4client
-     description  : 修改任务
-     args     	: user,project,id
-     params 		: status,priority,id,owner_id,deadline,description,content,status,priority,id,owner_id,deadline,description,content,
+     method            : get
+     summary         : count
+     description    : 任务统计信息
+     path            : user,project
      */
 
-    Tasks.prototype.update4client = function(user, project, id) {
-      this.debug("update4client()");
-      return this.coding.tasks.update4client(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.count = function(user, project) {
+      this.debug("Tasks::count()");
+      return this.coding.task.count(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : pubComment
-     description  : 创建任务评论
-     args     	: user,project,id
-     params 		:
+     method            : put
+     summary         : update
+     description    : 修改任务
+     path            : user,project,id
+     query            : status,priority,id,owner_id,deadline,description,content
      */
 
-    Tasks.prototype.pubComment = function(user, project, id) {
-      this.debug("pubComment()");
-      return this.coding.tasks.pubComment(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.update = function(user, project, id) {
+      this.debug("Tasks::update()");
+      return this.prompt.get([
+        {
+          "name": "status",
+          "description": "Enter status",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "priority",
+          "description": "Enter priority",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "id",
+          "description": "Enter id",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "owner_id",
+          "description": "Enter owner_id",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "deadline",
+          "description": "Enter deadline",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "description",
+          "description": "Enter description",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "content",
+          "description": "Enter content",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.update(user, project, id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : deleteComment
-     description  : 删除任务评论
-     args     	: user,project,id,commentId
-     params 		:
+     method            : post
+     summary         : createComment
+     description    : 创建任务评论
+     path            : user,project,id
+     body            : content
      */
 
-    Tasks.prototype.deleteComment = function(user, project, id, commentId) {
-      this.debug("deleteComment()");
-      return this.coding.tasks.deleteComment(user, project, id, commentId, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.createComment = function(user, project, id) {
+      this.debug("Tasks::createComment()");
+      return this.prompt.get([
+        {
+          "name": "content",
+          "description": "Enter content",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.createComment(user, project, id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : getComments
-     description  : 获取任务评论
-     args     	: user,project,id
-     params 		: page,pageSize,page,pageSize,
+     method            : delete
+     summary         : createComment
+     description    : 删除任务评论
+     path            : user,project,id,commentId
      */
 
-    Tasks.prototype.getComments = function(user, project, id) {
-      this.debug("getComments()");
-      return this.coding.tasks.getComments(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.createComment = function(user, project, id, commentId) {
+      this.debug("Tasks::createComment()");
+      return this.coding.task.createComment(user, project, id, commentId, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : updateContent
-     description  : 修改任务内容
-     args     	: user,project,id
-     params 		: content,id,content,id,
+     method            : get
+     summary         : comment
+     description    : 获取任务评论
+     path            : user,project,id
+     query            : page,pageSize
      */
 
-    Tasks.prototype.updateContent = function(user, project, id) {
-      this.debug("updateContent()");
-      return this.coding.tasks.updateContent(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.comment = function(user, project, id) {
+      this.debug("Tasks::comment()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.comment(user, project, id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : updateDeadline
-     description  : 修改任务截止日期
-     args     	: user,project,id
-     params 		: deadline,id,deadline,id,
+     method            : put
+     summary         : update
+     description    : 修改任务内容
+     path            : user,project,id
+     query            : content,id
      */
 
-    Tasks.prototype.updateDeadline = function(user, project, id) {
-      this.debug("updateDeadline()");
-      return this.coding.tasks.updateDeadline(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.update = function(user, project, id) {
+      this.debug("Tasks::update()");
+      return this.prompt.get([
+        {
+          "name": "content",
+          "description": "Enter content",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "id",
+          "description": "Enter id",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.update(user, project, id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : getDescription
-     description  : 获取任务描述
-     args     	: user,project,id
-     params 		:
+     method            : put
+     summary         : update
+     description    : 修改任务截止日期
+     path            : user,project,id
+     query            : deadline,id
      */
 
-    Tasks.prototype.getDescription = function(user, project, id) {
-      this.debug("getDescription()");
-      return this.coding.tasks.getDescription(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.update = function(user, project, id) {
+      this.debug("Tasks::update()");
+      return this.prompt.get([
+        {
+          "name": "deadline",
+          "description": "Enter deadline",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "id",
+          "description": "Enter id",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.update(user, project, id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : addTaskLabel
-     description  : 添加任务标签
-     args     	: user,project,id,labelId
-     params 		:
+     method            : get
+     summary         : watch
+     description    : 获取任务描述
+     path            : user,project,id
      */
 
-    Tasks.prototype.addTaskLabel = function(user, project, id, labelId) {
-      this.debug("addTaskLabel()");
-      return this.coding.tasks.addTaskLabel(user, project, id, labelId, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.watch = function(user, project, id) {
+      this.debug("Tasks::watch()");
+      return this.coding.task.watch(user, project, id, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : operateTaskLabels
-     description  : 批量操作任务标签
-     args     	: user,project,id
-     params 		: label_id,label_id,
+     method            : put
+     summary         : update
+     description    : 修改任务描述
+     path            : user,project,id
+     query            : description,id
      */
 
-    Tasks.prototype.operateTaskLabels = function(user, project, id) {
-      this.debug("operateTaskLabels()");
-      return this.coding.tasks.operateTaskLabels(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.update = function(user, project, id) {
+      this.debug("Tasks::update()");
+      return this.prompt.get([
+        {
+          "name": "description",
+          "description": "Enter description",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "id",
+          "description": "Enter id",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.update(user, project, id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : updateOwner
-     description  : 修改任务执行者
-     args     	: user,project,id
-     params 		: owner_id,id,owner_id,id,
+     method            : post
+     summary         : label
+     description    : 添加任务标签
+     path            : user,project,id,labelId
      */
 
-    Tasks.prototype.updateOwner = function(user, project, id) {
-      this.debug("updateOwner()");
-      return this.coding.tasks.updateOwner(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.label = function(user, project, id, labelId) {
+      this.debug("Tasks::label()");
+      return this.coding.task.label(user, project, id, labelId, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : updatePriority
-     description  : 修改任务优先级
-     args     	: user,project,id
-     params 		: priority,id,priority,id,
+     method            : delete
+     summary         : watch
+     description    : 删除任务标签
+     path            : user,project,id,labelId
      */
 
-    Tasks.prototype.updatePriority = function(user, project, id) {
-      this.debug("updatePriority()");
-      return this.coding.tasks.updatePriority(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.watch = function(user, project, id, labelId) {
+      this.debug("Tasks::watch()");
+      return this.coding.task.watch(user, project, id, labelId, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : updateStatus
-     description  : 修改任务状态
-     args     	: user,project,id
-     params 		: status,id,status,id,
+     method            : post
+     summary         : watch
+     description    : 批量操作任务标签
+     path            : user,project,id
+     query            : labelIdStrs
      */
 
-    Tasks.prototype.updateStatus = function(user, project, id) {
-      this.debug("updateStatus()");
-      return this.coding.tasks.updateStatus(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.watch = function(user, project, id) {
+      this.debug("Tasks::watch()");
+      return this.prompt.get([
+        {
+          "name": "labelIdStrs",
+          "description": "Enter labelIdStrs",
+          "type": "string",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.watch(user, project, id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : watch_2
-     description  : 关注任务
-     args     	: user,project,id
-     params 		:
+     method            : put
+     summary         : update
+     description    : 修改任务执行者
+     path            : user,project,id
+     query            : owner_id,id
      */
 
-    Tasks.prototype.watch_2 = function(user, project, id) {
-      this.debug("watch_2()");
-      return this.coding.tasks.watch_2(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.update = function(user, project, id) {
+      this.debug("Tasks::update()");
+      return this.prompt.get([
+        {
+          "name": "owner_id",
+          "description": "Enter owner_id",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "id",
+          "description": "Enter id",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.update(user, project, id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : pageTaskWatchers
-     description  : 关注该任务的用户
-     args     	: user,project,id
-     params 		: page,pageSize,page,pageSize,
+     method            : put
+     summary         : update
+     description    : 修改任务优先级
+     path            : user,project,id
+     query            : priority,id
      */
 
-    Tasks.prototype.pageTaskWatchers = function(user, project, id) {
-      this.debug("pageTaskWatchers()");
-      return this.coding.tasks.pageTaskWatchers(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.update = function(user, project, id) {
+      this.debug("Tasks::update()");
+      return this.prompt.get([
+        {
+          "name": "priority",
+          "description": "Enter priority",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "id",
+          "description": "Enter id",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.update(user, project, id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : userTasksCount
-     description  :  获取当前用户项目的已完成、正在进行的、关注的数值
-     args     	: user,project
-     params 		:
+     method            : put
+     summary         : update
+     description    : 修改任务状态
+     path            : user,project,id
+     query            : status,id
      */
 
-    Tasks.prototype.userTasksCount = function(user, project) {
-      this.debug("userTasksCount()");
-      return this.coding.tasks.userTasksCount(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.update = function(user, project, id) {
+      this.debug("Tasks::update()");
+      return this.prompt.get([
+        {
+          "name": "status",
+          "description": "Enter status",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "id",
+          "description": "Enter id",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.update(user, project, id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : userTasksCountInProject
-     description  : 统计所有 已完成 和 正在处理 的任务数
-     args     	: user,project
-     params 		:
+     method            : post
+     summary         : watch
+     description    : 关注任务
+     path            : user,project,id
      */
 
-    Tasks.prototype.userTasksCountInProject = function(user, project) {
-      this.debug("userTasksCountInProject()");
-      return this.coding.tasks.userTasksCountInProject(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.watch = function(user, project, id) {
+      this.debug("Tasks::watch()");
+      return this.coding.task.watch(user, project, id, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : getTaskByLabel
-     description  : 查询标签下的任务列表
-     args     	: user,project,id
-     params 		: page,pageSize,page,pageSize,
+     method            : delete
+     summary         : watch
+     description    : 取消任务关注
+     path            : user,project,id
      */
 
-    Tasks.prototype.getTaskByLabel = function(user, project, id) {
-      this.debug("getTaskByLabel()");
-      return this.coding.tasks.getTaskByLabel(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.watch = function(user, project, id) {
+      this.debug("Tasks::watch()");
+      return this.coding.task.watch(user, project, id, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : userTasksOfProject
-     description  : 列出当前用户某项目某状态的任务列表
-     args     	: user,project,status
-     params 		: page,pageSize,page,pageSize,
+     method            : get
+     summary         : getTaskListByLabel
+     description    : 关注该任务的用户
+     path            : user,project,id
+     query            : page,pageSize
      */
 
-    Tasks.prototype.userTasksOfProject = function(user, project, status) {
-      this.debug("userTasksOfProject()");
-      return this.coding.tasks.userTasksOfProject(user, project, status, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.getTaskListByLabel = function(user, project, id) {
+      this.debug("Tasks::getTaskListByLabel()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.getTaskListByLabel(user, project, id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : list_5
-     description  : 任务列表
-     args     	: user,project,status
-     params 		: page,pageSize,page,pageSize,
+     method            : get
+     summary         : count
+     description    :  获取当前用户项目的已完成、正在进行的、关注的数值
+     path            : user,project
      */
 
-    Tasks.prototype.list_5 = function(user, project, status) {
-      this.debug("list_5()");
-      return this.coding.tasks.list_5(user, project, status, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.count = function(user, project) {
+      this.debug("Tasks::count()");
+      return this.coding.task.count(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : userTasks
-     description  : 当前用户某状态的任务列表
-     args     	: user,status
-     params 		: page,pageSize,page,pageSize,
+     method            : get
+     summary         : count
+     description    : 统计所有 已完成 和 正在处理 的任务数
+     path            : user,project
      */
 
-    Tasks.prototype.userTasks = function(user, status) {
-      this.debug("userTasks()");
-      return this.coding.tasks.userTasks(user, status, params, function(data) {
-        return console.log(data);
-      });
+    Tasks.prototype.count = function(user, project) {
+      this.debug("Tasks::count()");
+      return this.coding.task.count(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : get
+     summary         : getTaskListByLabel
+     description    : 查询标签下的任务列表
+     path            : user,project,id
+     query            : page,pageSize
+     body            : user
+     */
+
+    Tasks.prototype.getTaskListByLabel = function(user, project, id) {
+      this.debug("Tasks::getTaskListByLabel()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "user",
+          "description": "Enter user",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.getTaskListByLabel(user, project, id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : get
+     summary         : count
+     description    : 列出当前用户某项目某状态的任务列表
+     path            : user,project,status
+     query            : page,pageSize
+     */
+
+    Tasks.prototype.count = function(user, project, status) {
+      this.debug("Tasks::count()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.count(user, project, status, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : get
+     summary         : list
+     description    : 任务列表
+     path            : user,project,status
+     query            : page,pageSize
+     body            : key
+     */
+
+    Tasks.prototype.list = function(user, project, status) {
+      this.debug("Tasks::list()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "key",
+          "description": "Enter key",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.list(user, project, status, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : get
+     summary         : count
+     description    : 当前用户某状态的任务列表
+     path            : user,status
+     query            : page,pageSize
+     */
+
+    Tasks.prototype.count = function(user, status) {
+      this.debug("Tasks::count()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.task.count(user, status, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
     return Tasks;

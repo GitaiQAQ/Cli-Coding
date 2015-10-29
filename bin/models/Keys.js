@@ -11,120 +11,221 @@
     extend(Keys, superClass);
 
     function Keys() {
-      this.unBindDeployKey = bind(this.unBindDeployKey, this);
-      this.listDeployKeys = bind(this.listDeployKeys, this);
-      this.saveDeployKey = bind(this.saveDeployKey, this);
-      this.bindDeployKey = bind(this.bindDeployKey, this);
-      this.list_1 = bind(this.list_1, this);
-      this.show_1 = bind(this.show_1, this);
+      this.webhook = bind(this.webhook, this);
+      this.list = bind(this.list, this);
+      this.webhook = bind(this.webhook, this);
+      this.webhook = bind(this.webhook, this);
+      this.create = bind(this.create, this);
+      this.list = bind(this.list, this);
+      this.key = bind(this.key, this);
+      this.get = bind(this.get, this);
       this.init = bind(this.init, this);
       return Keys.__super__.constructor.apply(this, arguments);
     }
 
     Keys.prototype.init = function() {
       this.debug("init()");
-      this.program.command("show_1").description("通过KeyId获取个人公钥")["arguments"]('<global_key> <keyId>').action(this.show_1);
-      this.program.command("list_1").description("列出个人公钥")["arguments"]('<global_key>').action(this.list_1);
-      this.program.command("bindDeployKey").description("绑定部署公钥")["arguments"]('<global_key> <project> <id>').action(this.bindDeployKey);
-      this.program.command("saveDeployKey").description("新建部署公钥")["arguments"]('<global_key> <project>').action(this.saveDeployKey);
-      this.program.command("listDeployKeys").description("列出部署公钥")["arguments"]('<global_key> <project>').action(this.listDeployKeys);
-      return this.program.command("unBindDeployKey").description("解绑部署公钥")["arguments"]('<global_key> <project> <id>').action(this.unBindDeployKey);
+      this.program.command("get").description("通过KeyId获取个人公钥")["arguments"]("<user> <keyId>").action(this.get);
+      this.program.command("key").description("删除个人公钥")["arguments"]("<user> <keyId>").action(this.key);
+      this.program.command("list").description("列出个人公钥")["arguments"]("<user>").action(this.list);
+      this.program.command("create").description("创建个人公钥")["arguments"]("<user>").action(this.create);
+      this.program.command("webhook").description("绑定部署公钥")["arguments"]("<user> <project> <id>").action(this.webhook);
+      this.program.command("webhook").description("新建部署公钥")["arguments"]("<user> <project>").action(this.webhook);
+      this.program.command("list").description("列出部署公钥")["arguments"]("<user> <project>").action(this.list);
+      return this.program.command("webhook").description("解绑部署公钥")["arguments"]("<user> <project> <id>").action(this.webhook);
     };
 
 
     /*
     
-     operationId  : show_1
-     description  : 通过KeyId获取个人公钥
-     args     	: global_key,keyId
-     params 		:
+     method            : get
+     summary         : get
+     description    : 通过KeyId获取个人公钥
+     path            : user,keyId
      */
 
-    Keys.prototype.show_1 = function(global_key, keyId) {
-      this.debug("show_1()");
-      return this.coding.keys.show_1(global_key, keyId, params, function(data) {
-        return console.log(data);
-      });
+    Keys.prototype.get = function(user, keyId) {
+      this.debug("Keys::get()");
+      return this.coding.key.get(user, keyId, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : list_1
-     description  : 列出个人公钥
-     args     	: global_key
-     params 		: withIDEKey,withIDEKey,
+     method            : delete
+     summary         : key
+     description    : 删除个人公钥
+     path            : user,keyId
      */
 
-    Keys.prototype.list_1 = function(global_key) {
-      this.debug("list_1()");
-      return this.coding.keys.list_1(global_key, params, function(data) {
-        return console.log(data);
-      });
+    Keys.prototype.key = function(user, keyId) {
+      this.debug("Keys::key()");
+      return this.coding.key.key(user, keyId, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : bindDeployKey
-     description  : 绑定部署公钥
-     args     	: global_key,project,id
-     params 		:
+     method            : get
+     summary         : list
+     description    : 列出个人公钥
+     path            : user
+     query            : withIDEKey
      */
 
-    Keys.prototype.bindDeployKey = function(global_key, project, id) {
-      this.debug("bindDeployKey()");
-      return this.coding.keys.bindDeployKey(global_key, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Keys.prototype.list = function(user) {
+      this.debug("Keys::list()");
+      return this.prompt.get([
+        {
+          "name": "withIDEKey",
+          "description": "Enter withIDEKey",
+          "type": "boolean",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.key.list(user, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : saveDeployKey
-     description  : 新建部署公钥
-     args     	: global_key,project
-     params 		: title,content,title,content,
+     method            : post
+     summary         : create
+     description    : 创建个人公钥
+     path            : user
+     query            : title,content
      */
 
-    Keys.prototype.saveDeployKey = function(global_key, project) {
-      this.debug("saveDeployKey()");
-      return this.coding.keys.saveDeployKey(global_key, project, params, function(data) {
-        return console.log(data);
-      });
+    Keys.prototype.create = function(user) {
+      this.debug("Keys::create()");
+      return this.prompt.get([
+        {
+          "name": "title",
+          "description": "Enter title",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "content",
+          "description": "Enter content",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.key.create(user, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : listDeployKeys
-     description  : 列出部署公钥
-     args     	: global_key,project
-     params 		:
+     method            : post
+     summary         : webhook
+     description    : 绑定部署公钥
+     path            : user,project,id
      */
 
-    Keys.prototype.listDeployKeys = function(global_key, project) {
-      this.debug("listDeployKeys()");
-      return this.coding.keys.listDeployKeys(global_key, project, params, function(data) {
-        return console.log(data);
-      });
+    Keys.prototype.webhook = function(user, project, id) {
+      this.debug("Keys::webhook()");
+      return this.coding.key.webhook(user, project, id, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : unBindDeployKey
-     description  : 解绑部署公钥
-     args     	: global_key,project,id
-     params 		:
+     method            : post
+     summary         : webhook
+     description    : 新建部署公钥
+     path            : user,project
+     query            : title,content
      */
 
-    Keys.prototype.unBindDeployKey = function(global_key, project, id) {
-      this.debug("unBindDeployKey()");
-      return this.coding.keys.unBindDeployKey(global_key, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Keys.prototype.webhook = function(user, project) {
+      this.debug("Keys::webhook()");
+      return this.prompt.get([
+        {
+          "name": "title",
+          "description": "Enter title",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "content",
+          "description": "Enter content",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.key.webhook(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : get
+     summary         : list
+     description    : 列出部署公钥
+     path            : user,project
+     */
+
+    Keys.prototype.list = function(user, project) {
+      this.debug("Keys::list()");
+      return this.coding.key.list(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : post
+     summary         : webhook
+     description    : 解绑部署公钥
+     path            : user,project,id
+     */
+
+    Keys.prototype.webhook = function(user, project, id) {
+      this.debug("Keys::webhook()");
+      return this.coding.key.webhook(user, project, id, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
     return Keys;

@@ -13,154 +13,430 @@
     function Depots() {
       this.initDepot = bind(this.initDepot, this);
       this.importRepo = bind(this.importRepo, this);
-      this.listWebHook = bind(this.listWebHook, this);
-      this.getWebHook = bind(this.getWebHook, this);
-      this.createWebHook = bind(this.createWebHook, this);
-      this.forks = bind(this.forks, this);
+      this.importRepo = bind(this.importRepo, this);
+      this.list = bind(this.list, this);
+      this.deleteWebhook = bind(this.deleteWebhook, this);
+      this.updateWebhook = bind(this.updateWebhook, this);
+      this.getWebhook = bind(this.getWebhook, this);
+      this.createWebhook = bind(this.createWebhook, this);
+      this.forkList = bind(this.forkList, this);
       this.fork = bind(this.fork, this);
-      this.index = bind(this.index, this);
+      this.get = bind(this.get, this);
       this.init = bind(this.init, this);
       return Depots.__super__.constructor.apply(this, arguments);
     }
 
     Depots.prototype.init = function() {
       this.debug("init()");
-      this.program.command("index").description("获取仓库信息")["arguments"]('<user> <project>').action(this.index);
-      this.program.command("fork").description("fork")["arguments"]('<user> <project>').action(this.fork);
-      this.program.command("forks").description("项目被fork的列表")["arguments"]('<user> <project>').action(this.forks);
-      this.program.command("createWebHook").description("创建 webhook")["arguments"]('<user> <project>').action(this.createWebHook);
-      this.program.command("getWebHook").description("获取 webhook")["arguments"]('<user> <project> <id>').action(this.getWebHook);
-      this.program.command("listWebHook").description("列出项目设置的 webhook")["arguments"]('<user> <project>').action(this.listWebHook);
-      this.program.command("importRepo").description("导入仓库")["arguments"]('<user> <project>').action(this.importRepo);
-      return this.program.command("initDepot").description("初始化仓库")["arguments"]('<user> <project>').action(this.initDepot);
+      this.program.command("get").description("获取仓库信息")["arguments"]("<user> <project>").action(this.get);
+      this.program.command("fork").description("fork")["arguments"]("<user> <project>").action(this.fork);
+      this.program.command("forkList").description("项目被fork的列表")["arguments"]("<user> <project>").action(this.forkList);
+      this.program.command("createWebhook").description("创建 webhook")["arguments"]("<user> <project>").action(this.createWebhook);
+      this.program.command("getWebhook").description("获取 webhook")["arguments"]("<user> <project> <id>").action(this.getWebhook);
+      this.program.command("updateWebhook").description("编辑 webhook")["arguments"]("<user> <project> <id>").action(this.updateWebhook);
+      this.program.command("deleteWebhook").description("删除 webhook")["arguments"]("<user> <project> <id>").action(this.deleteWebhook);
+      this.program.command("list").description("列出项目设置的 webhook")["arguments"]("<user> <project>").action(this.list);
+      this.program.command("importRepo").description("导入仓库")["arguments"]("<user> <project>").action(this.importRepo);
+      this.program.command("importRepo").description("导入仓库")["arguments"]("<user> <project>").action(this.importRepo);
+      return this.program.command("initDepot").description("初始化仓库")["arguments"]("<user> <project>").action(this.initDepot);
     };
 
 
     /*
     
-     operationId  : index
-     description  : 获取仓库信息
-     args     	: user,project
-     params 		:
+     method            : get
+     summary         : get
+     description    : 获取仓库信息
+     path            : user,project
      */
 
-    Depots.prototype.index = function(user, project) {
-      this.debug("index()");
-      return this.coding.depots.index(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Depots.prototype.get = function(user, project) {
+      this.debug("Depots::get()");
+      return this.coding.depot.get(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : fork
-     description  : fork
-     args     	: user,project
-     params 		:
+     method            : post
+     summary         : fork
+     description    : fork
+     path            : user,project
      */
 
     Depots.prototype.fork = function(user, project) {
-      this.debug("fork()");
-      return this.coding.depots.fork(user, project, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Depots::fork()");
+      return this.coding.depot.fork(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : forks
-     description  : 项目被fork的列表
-     args     	: user,project
-     params 		:
+     method            : get
+     summary         : forkList
+     description    : 项目被fork的列表
+     path            : user,project
      */
 
-    Depots.prototype.forks = function(user, project) {
-      this.debug("forks()");
-      return this.coding.depots.forks(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Depots.prototype.forkList = function(user, project) {
+      this.debug("Depots::forkList()");
+      return this.coding.depot.forkList(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : createWebHook
-     description  : 创建 webhook
-     args     	: user,project
-     params 		: hook_url,token,type_push,type_mr_pr,type_topic,type_member,type_comment,type_document,type_watch,type_star,type_task,hook_url,token,type_push,type_mr_pr,type_topic,type_member,type_comment,type_document,type_watch,type_star,type_task,
+     method            : post
+     summary         : createWebhook
+     description    : 创建 webhook
+     path            : user,project
+     query            : hook_url,token,type_push,type_mr_pr,type_topic,type_member,type_comment,type_document,type_watch,type_star,type_task
      */
 
-    Depots.prototype.createWebHook = function(user, project) {
-      this.debug("createWebHook()");
-      return this.coding.depots.createWebHook(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Depots.prototype.createWebhook = function(user, project) {
+      this.debug("Depots::createWebhook()");
+      return this.prompt.get([
+        {
+          "name": "hook_url",
+          "description": "Enter hook_url",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "token",
+          "description": "Enter token",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "type_push",
+          "description": "Enter type_push",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "type_mr_pr",
+          "description": "Enter type_mr_pr",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "type_topic",
+          "description": "Enter type_topic",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "type_member",
+          "description": "Enter type_member",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "type_comment",
+          "description": "Enter type_comment",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "type_document",
+          "description": "Enter type_document",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "type_watch",
+          "description": "Enter type_watch",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "type_star",
+          "description": "Enter type_star",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "type_task",
+          "description": "Enter type_task",
+          "type": "boolean",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.depot.createWebhook(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : getWebHook
-     description  : 获取 webhook
-     args     	: user,project,id
-     params 		:
+     method            : get
+     summary         : getWebhook
+     description    : 获取 webhook
+     path            : user,project,id
      */
 
-    Depots.prototype.getWebHook = function(user, project, id) {
-      this.debug("getWebHook()");
-      return this.coding.depots.getWebHook(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Depots.prototype.getWebhook = function(user, project, id) {
+      this.debug("Depots::getWebhook()");
+      return this.coding.depot.getWebhook(user, project, id, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : listWebHook
-     description  : 列出项目设置的 webhook
-     args     	: user,project
-     params 		:
+     method            : put
+     summary         : updateWebhook
+     description    : 编辑 webhook
+     path            : user,project,id
+     query            : hook_url,token,type_push,type_mr_pr,type_topic,type_member,type_comment,type_document,type_watch,type_star,type_task
      */
 
-    Depots.prototype.listWebHook = function(user, project) {
-      this.debug("listWebHook()");
-      return this.coding.depots.listWebHook(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Depots.prototype.updateWebhook = function(user, project, id) {
+      this.debug("Depots::updateWebhook()");
+      return this.prompt.get([
+        {
+          "name": "hook_url",
+          "description": "Enter hook_url",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "token",
+          "description": "Enter token",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "type_push",
+          "description": "Enter type_push",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "type_mr_pr",
+          "description": "Enter type_mr_pr",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "type_topic",
+          "description": "Enter type_topic",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "type_member",
+          "description": "Enter type_member",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "type_comment",
+          "description": "Enter type_comment",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "type_document",
+          "description": "Enter type_document",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "type_watch",
+          "description": "Enter type_watch",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "type_star",
+          "description": "Enter type_star",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "type_task",
+          "description": "Enter type_task",
+          "type": "boolean",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.depot.updateWebhook(user, project, id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : importRepo
-     description  : 导入仓库
-     args     	: user,project
-     params 		: origin_url,vcs_type,origin_url,vcs_type,
+     method            : delete
+     summary         : deleteWebhook
+     description    : 删除 webhook
+     path            : user,project,id
+     */
+
+    Depots.prototype.deleteWebhook = function(user, project, id) {
+      this.debug("Depots::deleteWebhook()");
+      return this.coding.depot.deleteWebhook(user, project, id, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : get
+     summary         : list
+     description    : 列出项目设置的 webhook
+     path            : user,project
+     */
+
+    Depots.prototype.list = function(user, project) {
+      this.debug("Depots::list()");
+      return this.coding.depot.list(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : get
+     summary         : importRepo
+     description    : 导入仓库
+     path            : user,project
+     query            : origin_url,vcs_type
      */
 
     Depots.prototype.importRepo = function(user, project) {
-      this.debug("importRepo()");
-      return this.coding.depots.importRepo(user, project, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Depots::importRepo()");
+      return this.prompt.get([
+        {
+          "name": "origin_url",
+          "description": "Enter origin_url",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "vcs_type",
+          "description": "Enter vcs_type",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.depot.importRepo(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : initDepot
-     description  : 初始化仓库
-     args     	: user,project
-     params 		: type,gitReadmeEnabled,gitIgnore,gitLicense,importFrom,vcsType,type,gitReadmeEnabled,gitIgnore,gitLicense,importFrom,vcsType,
+     method            : post
+     summary         : importRepo
+     description    : 导入仓库
+     path            : user,project
+     query            : origin_url,vcs_type
+     */
+
+    Depots.prototype.importRepo = function(user, project) {
+      this.debug("Depots::importRepo()");
+      return this.prompt.get([
+        {
+          "name": "origin_url",
+          "description": "Enter origin_url",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "vcs_type",
+          "description": "Enter vcs_type",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.depot.importRepo(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : post
+     summary         : initDepot
+     description    : 初始化仓库
+     path            : user,project
+     query            : type,gitReadmeEnabled,gitIgnore,gitLicense,importFrom,vcsType
      */
 
     Depots.prototype.initDepot = function(user, project) {
-      this.debug("initDepot()");
-      return this.coding.depots.initDepot(user, project, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Depots::initDepot()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "gitReadmeEnabled",
+          "description": "Enter gitReadmeEnabled",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "gitIgnore",
+          "description": "Enter gitIgnore",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "gitLicense",
+          "description": "Enter gitLicense",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "importFrom",
+          "description": "Enter importFrom",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "vcsType",
+          "description": "Enter vcsType",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.depot.initDepot(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
     return Depots;

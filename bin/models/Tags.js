@@ -11,66 +11,126 @@
     extend(Tags, superClass);
 
     function Tags() {
-      this.deleteTag = bind(this.deleteTag, this);
-      this.createTag = bind(this.createTag, this);
-      this.list_4 = bind(this.list_4, this);
+      this.del = bind(this.del, this);
+      this.create = bind(this.create, this);
+      this.list = bind(this.list, this);
       this.init = bind(this.init, this);
       return Tags.__super__.constructor.apply(this, arguments);
     }
 
     Tags.prototype.init = function() {
       this.debug("init()");
-      this.program.command("list_4").description("标签列表")["arguments"]('<user> <project>').action(this.list_4);
-      this.program.command("createTag").description("创建标签")["arguments"]('<user> <project>').action(this.createTag);
-      return this.program.command("deleteTag").description("删除标签")["arguments"]('<user> <project>').action(this.deleteTag);
+      this.program.command("list").description("标签列表")["arguments"]("<user> <project>").action(this.list);
+      this.program.command("create").description("创建标签")["arguments"]("<user> <project>").action(this.create);
+      return this.program.command("del").description("删除标签")["arguments"]("<user> <project>").action(this.del);
     };
 
 
     /*
     
-     operationId  : list_4
-     description  : 标签列表
-     args     	: user,project
-     params 		: page,pageSize,page,pageSize,
+     method            : get
+     summary         : list
+     description    : 标签列表
+     path            : user,project
+     query            : page,pageSize
      */
 
-    Tags.prototype.list_4 = function(user, project) {
-      this.debug("list_4()");
-      return this.coding.tags.list_4(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Tags.prototype.list = function(user, project) {
+      this.debug("Tags::list()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.tag.list(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : createTag
-     description  : 创建标签
-     args     	: user,project
-     params 		: tag_name,tag_point,message,tag_name,tag_point,message,
+     method            : post
+     summary         : create
+     description    : 创建标签
+     path            : user,project
+     query            : tag_name,tag_point,message
      */
 
-    Tags.prototype.createTag = function(user, project) {
-      this.debug("createTag()");
-      return this.coding.tags.createTag(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Tags.prototype.create = function(user, project) {
+      this.debug("Tags::create()");
+      return this.prompt.get([
+        {
+          "name": "tag_name",
+          "description": "Enter tag_name",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "tag_point",
+          "description": "Enter tag_point",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "message",
+          "description": "Enter message",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.tag.create(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : deleteTag
-     description  : 删除标签
-     args     	: user,project
-     params 		: tag_name,tag_name,
+     method            : post
+     summary         : del
+     description    : 删除标签
+     path            : user,project
+     query            : tag_name
      */
 
-    Tags.prototype.deleteTag = function(user, project) {
-      this.debug("deleteTag()");
-      return this.coding.tags.deleteTag(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Tags.prototype.del = function(user, project) {
+      this.debug("Tags::del()");
+      return this.prompt.get([
+        {
+          "name": "tag_name",
+          "description": "Enter tag_name",
+          "type": "string",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.tag.del(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
     return Tags;

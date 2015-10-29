@@ -6,7 +6,7 @@ class Cmd extends CmdBase
   handleOptions: =>
     super
     @program
-  		.usage "[options]"
+  		#.usage "[options]"
   		.description 'A simple command-line tool for coding.net by nodejs'
   		.version packageInfo.version
 

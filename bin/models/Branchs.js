@@ -11,174 +11,329 @@
     extend(Branchs, superClass);
 
     function Branchs() {
-      this.removeProtectedBranchMember = bind(this.removeProtectedBranchMember, this);
-      this.listProtectedBranchMember = bind(this.listProtectedBranchMember, this);
-      this.enableProtectedBranch = bind(this.enableProtectedBranch, this);
-      this.disableProtectedBranch = bind(this.disableProtectedBranch, this);
-      this.addProtectedBranchMember = bind(this.addProtectedBranchMember, this);
-      this.deleteBranch = bind(this.deleteBranch, this);
-      this.createBranch = bind(this.createBranch, this);
-      this.list = bind(this.list, this);
-      this.setDefaultBranch = bind(this.setDefaultBranch, this);
+      this.deleteMember = bind(this.deleteMember, this);
+      this.members = bind(this.members, this);
+      this.protectedBranch = bind(this.protectedBranch, this);
+      this.protectedBranch = bind(this.protectedBranch, this);
+      this.addMember = bind(this.addMember, this);
+      this.del = bind(this.del, this);
+      this.create = bind(this.create, this);
+      this.listBranches = bind(this.listBranches, this);
+      this["default"] = bind(this["default"], this);
       this.init = bind(this.init, this);
       return Branchs.__super__.constructor.apply(this, arguments);
     }
 
     Branchs.prototype.init = function() {
       this.debug("init()");
-      this.program.command("setDefaultBranch").description("设置默认分支")["arguments"]('<user> <project>').action(this.setDefaultBranch);
-      this.program.command("list").description("分页显示分支列表")["arguments"]('<user> <project>').action(this.list);
-      this.program.command("createBranch").description("新建分支")["arguments"]('<user> <project>').action(this.createBranch);
-      this.program.command("deleteBranch").description("删除分支")["arguments"]('<user> <project>').action(this.deleteBranch);
-      this.program.command("addProtectedBranchMember").description("添加保护分支成员")["arguments"]('<user> <project>').action(this.addProtectedBranchMember);
-      this.program.command("disableProtectedBranch").description("取消保护分支")["arguments"]('<user> <project>').action(this.disableProtectedBranch);
-      this.program.command("enableProtectedBranch").description("设置保护分支")["arguments"]('<user> <project>').action(this.enableProtectedBranch);
-      this.program.command("listProtectedBranchMember").description("列出保护分支中的成员")["arguments"]('<user> <project>').action(this.listProtectedBranchMember);
-      return this.program.command("removeProtectedBranchMember").description("删除保护分支成员")["arguments"]('<user> <project>').action(this.removeProtectedBranchMember);
+      this.program.command("default").description("设置默认分支")["arguments"]("<user> <project>").action(this["default"]);
+      this.program.command("listBranches").description("分页显示分支列表")["arguments"]("<user> <project>").action(this.listBranches);
+      this.program.command("create").description("新建分支")["arguments"]("<user> <project>").action(this.create);
+      this.program.command("del").description("删除分支")["arguments"]("<user> <project>").action(this.del);
+      this.program.command("addMember").description("添加保护分支成员")["arguments"]("<user> <project>").action(this.addMember);
+      this.program.command("protectedBranch").description("取消保护分支")["arguments"]("<user> <project>").action(this.protectedBranch);
+      this.program.command("protectedBranch").description("设置保护分支")["arguments"]("<user> <project>").action(this.protectedBranch);
+      this.program.command("members").description("列出保护分支中的成员")["arguments"]("<user> <project>").action(this.members);
+      return this.program.command("deleteMember").description("删除保护分支成员")["arguments"]("<user> <project>").action(this.deleteMember);
     };
 
 
     /*
     
-     operationId  : setDefaultBranch
-     description  : 设置默认分支
-     args     	: user,project
-     params 		: default_branch,default_branch,
+     method            : post
+     summary         : default
+     description    : 设置默认分支
+     path            : user,project
+     query            : branch_name
      */
 
-    Branchs.prototype.setDefaultBranch = function(user, project) {
-      this.debug("setDefaultBranch()");
-      return this.coding.branchs.setDefaultBranch(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Branchs.prototype["default"] = function(user, project) {
+      this.debug("Branchs::default()");
+      return this.prompt.get([
+        {
+          "name": "branch_name",
+          "description": "Enter branch_name",
+          "type": "string",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.branch["default"](user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : list
-     description  : 分页显示分支列表
-     args     	: user,project
-     params 		: page,pageSize,page,pageSize,
+     method            : get
+     summary         : listBranches
+     description    : 分页显示分支列表
+     path            : user,project
+     query            : page,pageSize
      */
 
-    Branchs.prototype.list = function(user, project) {
-      this.debug("list()");
-      return this.coding.branchs.list(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Branchs.prototype.listBranches = function(user, project) {
+      this.debug("Branchs::listBranches()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.branch.listBranches(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : createBranch
-     description  : 新建分支
-     args     	: user,project
-     params 		: branch_name,start_point,branch_name,start_point,
+     method            : post
+     summary         : create
+     description    : 新建分支
+     path            : user,project
+     query            : branch_name,start_point
      */
 
-    Branchs.prototype.createBranch = function(user, project) {
-      this.debug("createBranch()");
-      return this.coding.branchs.createBranch(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Branchs.prototype.create = function(user, project) {
+      this.debug("Branchs::create()");
+      return this.prompt.get([
+        {
+          "name": "branch_name",
+          "description": "Enter branch_name",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "start_point",
+          "description": "Enter start_point",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.branch.create(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : deleteBranch
-     description  : 删除分支
-     args     	: user,project
-     params 		: branch_name,branch_name,
+     method            : post
+     summary         : del
+     description    : 删除分支
+     path            : user,project
+     query            : branch_name
      */
 
-    Branchs.prototype.deleteBranch = function(user, project) {
-      this.debug("deleteBranch()");
-      return this.coding.branchs.deleteBranch(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Branchs.prototype.del = function(user, project) {
+      this.debug("Branchs::del()");
+      return this.prompt.get([
+        {
+          "name": "branch_name",
+          "description": "Enter branch_name",
+          "type": "string",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.branch.del(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : addProtectedBranchMember
-     description  : 添加保护分支成员
-     args     	: user,project
-     params 		: branch_name,target_global_key,branch_name,target_global_key,
+     method            : post
+     summary         : addMember
+     description    : 添加保护分支成员
+     path            : user,project
+     query            : branch_name,target_global_key
      */
 
-    Branchs.prototype.addProtectedBranchMember = function(user, project) {
-      this.debug("addProtectedBranchMember()");
-      return this.coding.branchs.addProtectedBranchMember(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Branchs.prototype.addMember = function(user, project) {
+      this.debug("Branchs::addMember()");
+      return this.prompt.get([
+        {
+          "name": "branch_name",
+          "description": "Enter branch_name",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "target_global_key",
+          "description": "Enter target_global_key",
+          "type": "string",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.branch.addMember(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : disableProtectedBranch
-     description  : 取消保护分支
-     args     	: user,project
-     params 		: branch_name,branch_name,
+     method            : post
+     summary         : protectedBranch
+     description    : 取消保护分支
+     path            : user,project
+     query            : branch_name
      */
 
-    Branchs.prototype.disableProtectedBranch = function(user, project) {
-      this.debug("disableProtectedBranch()");
-      return this.coding.branchs.disableProtectedBranch(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Branchs.prototype.protectedBranch = function(user, project) {
+      this.debug("Branchs::protectedBranch()");
+      return this.prompt.get([
+        {
+          "name": "branch_name",
+          "description": "Enter branch_name",
+          "type": "string",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.branch.protectedBranch(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : enableProtectedBranch
-     description  : 设置保护分支
-     args     	: user,project
-     params 		: branch_name,branch_name,
+     method            : post
+     summary         : protectedBranch
+     description    : 设置保护分支
+     path            : user,project
+     query            : branch_name
      */
 
-    Branchs.prototype.enableProtectedBranch = function(user, project) {
-      this.debug("enableProtectedBranch()");
-      return this.coding.branchs.enableProtectedBranch(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Branchs.prototype.protectedBranch = function(user, project) {
+      this.debug("Branchs::protectedBranch()");
+      return this.prompt.get([
+        {
+          "name": "branch_name",
+          "description": "Enter branch_name",
+          "type": "string",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.branch.protectedBranch(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : listProtectedBranchMember
-     description  : 列出保护分支中的成员
-     args     	: user,project
-     params 		: branch_name,branch_name,
+     method            : get
+     summary         : members
+     description    : 列出保护分支中的成员
+     path            : user,project
+     query            : branch_name
      */
 
-    Branchs.prototype.listProtectedBranchMember = function(user, project) {
-      this.debug("listProtectedBranchMember()");
-      return this.coding.branchs.listProtectedBranchMember(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Branchs.prototype.members = function(user, project) {
+      this.debug("Branchs::members()");
+      return this.prompt.get([
+        {
+          "name": "branch_name",
+          "description": "Enter branch_name",
+          "type": "string",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.branch.members(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : removeProtectedBranchMember
-     description  : 删除保护分支成员
-     args     	: user,project
-     params 		: branch_name,target_global_key,branch_name,target_global_key,
+     method            : post
+     summary         : deleteMember
+     description    : 删除保护分支成员
+     path            : user,project
+     query            : branch_name,target_global_key
      */
 
-    Branchs.prototype.removeProtectedBranchMember = function(user, project) {
-      this.debug("removeProtectedBranchMember()");
-      return this.coding.branchs.removeProtectedBranchMember(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Branchs.prototype.deleteMember = function(user, project) {
+      this.debug("Branchs::deleteMember()");
+      return this.prompt.get([
+        {
+          "name": "branch_name",
+          "description": "Enter branch_name",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "target_global_key",
+          "description": "Enter target_global_key",
+          "type": "string",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.branch.deleteMember(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
     return Branchs;

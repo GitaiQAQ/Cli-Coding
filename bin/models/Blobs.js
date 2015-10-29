@@ -11,30 +11,56 @@
     extend(Blobs, superClass);
 
     function Blobs() {
-      this.blob = bind(this.blob, this);
+      this.get = bind(this.get, this);
       this.init = bind(this.init, this);
       return Blobs.__super__.constructor.apply(this, arguments);
     }
 
     Blobs.prototype.init = function() {
       this.debug("init()");
-      return this.program.command("blob").description("获取 blob")["arguments"]('<user> <project> <blob>').action(this.blob);
+      return this.program.command("get").description("获取 blob")["arguments"]("<user> <project> <blob>").action(this.get);
     };
 
 
     /*
     
-     operationId  : blob
-     description  : 获取 blob
-     args     	: user,project,blob
-     params 		:
+     method            : get
+     summary         : get
+     description    : 获取 blob
+     header         : userAgent,accept
+     path            : user,project,blob
+     body            : currentApp,ref,path
      */
 
-    Blobs.prototype.blob = function(user, project, blob) {
-      this.debug("blob()");
-      return this.coding.blobs.blob(user, project, blob, params, function(data) {
-        return console.log(data);
-      });
+    Blobs.prototype.get = function(user, project, blob) {
+      this.debug("Blobs::get()");
+      return this.prompt.get([
+        {
+          "name": "currentApp",
+          "description": "Enter currentApp",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "ref",
+          "description": "Enter ref",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "path",
+          "description": "Enter path",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.blob.get(user, project, blob, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
     return Blobs;

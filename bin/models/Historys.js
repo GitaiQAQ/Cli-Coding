@@ -11,30 +11,67 @@
     extend(Historys, superClass);
 
     function Historys() {
-      this.history = bind(this.history, this);
+      this.get = bind(this.get, this);
       this.init = bind(this.init, this);
       return Historys.__super__.constructor.apply(this, arguments);
     }
 
     Historys.prototype.init = function() {
       this.debug("init()");
-      return this.program.command("history").description("获取代码的历史")["arguments"]('<user> <project> <commits>').action(this.history);
+      return this.program.command("get").description("获取代码的历史")["arguments"]("<user> <project> <commits>").action(this.get);
     };
 
 
     /*
     
-     operationId  : history
-     description  : 获取代码的历史
-     args     	: user,project,commits
-     params 		: page,pageSize,page,pageSize,
+     method            : get
+     summary         : get
+     description    : 获取代码的历史
+     header         : userAgent,accept
+     path            : user,project,commits
+     query            : page,pageSize
+     body            : currentApp,ref,path
      */
 
-    Historys.prototype.history = function(user, project, commits) {
-      this.debug("history()");
-      return this.coding.historys.history(user, project, commits, params, function(data) {
-        return console.log(data);
-      });
+    Historys.prototype.get = function(user, project, commits) {
+      this.debug("Historys::get()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "currentApp",
+          "description": "Enter currentApp",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "ref",
+          "description": "Enter ref",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "path",
+          "description": "Enter path",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.history.get(user, project, commits, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
     return Historys;

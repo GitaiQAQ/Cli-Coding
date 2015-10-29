@@ -40,12 +40,12 @@
       this.branchs = require('./models/Branchs')(this.cmd);
       this.commits = require('./models/Commits')(this.cmd);
       this.historys = require('./models/Historys')(this.cmd);
-      this.repoFiles = require('./models/Repo_files')(this.cmd);
-      this.mergeRequests = require('./models/Merge_requests')(this.cmd);
-      this.pullRequests = require('./models/Pull_requests')(this.cmd);
+      this.repoFiles = require('./models/RepoFiles')(this.cmd);
+      this.mergeRequests = require('./models/MergeRequests')(this.cmd);
+      this.pullRequests = require('./models/PullRequests')(this.cmd);
       this.tags = require('./models/Tags')(this.cmd);
       this.trees = require('./models/Trees')(this.cmd);
-      this.projectTopics = require('./models/Project_topics')(this.cmd);
+      this.projectTopics = require('./models/ProjectTopics')(this.cmd);
       this.keys = require('./models/Keys')(this.cmd);
       this.program.parse(process.argv);
       if (process.argv.length === 2) {

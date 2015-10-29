@@ -11,300 +11,532 @@
     extend(Tweets, superClass);
 
     function Tweets() {
-      this.public_tweets = bind(this.public_tweets, this);
-      this.unlike_tweet = bind(this.unlike_tweet, this);
-      this.getTweetLike = bind(this.getTweetLike, this);
-      this.like_tweet = bind(this.like_tweet, this);
-      this.deleteTweet = bind(this.deleteTweet, this);
-      this.query_comment = bind(this.query_comment, this);
-      this.delete_comment = bind(this.delete_comment, this);
+      this.publicTweets = bind(this.publicTweets, this);
+      this.unlike = bind(this.unlike, this);
+      this.likeTweetList = bind(this.likeTweetList, this);
+      this.like = bind(this.like, this);
+      this.del = bind(this.del, this);
+      this.comment = bind(this.comment, this);
+      this.comment = bind(this.comment, this);
       this.comment = bind(this.comment, this);
       this.detail = bind(this.detail, this);
-      this.user_public = bind(this.user_public, this);
-      this.public_tweets = bind(this.public_tweets, this);
-      this.lastTweet = bind(this.lastTweet, this);
-      this.insert_image = bind(this.insert_image, this);
-      this.query_a_comment = bind(this.query_a_comment, this);
+      this.userPublic = bind(this.userPublic, this);
+      this.list = bind(this.list, this);
+      this.lastTweetList = bind(this.lastTweetList, this);
+      this.image = bind(this.image, this);
+      this.comment = bind(this.comment, this);
       this.bestUser = bind(this.bestUser, this);
-      this.create_1 = bind(this.create_1, this);
+      this.create = bind(this.create, this);
       this.init = bind(this.init, this);
       return Tweets.__super__.constructor.apply(this, arguments);
     }
 
     Tweets.prototype.init = function() {
       this.debug("init()");
-      this.program.command("create_1").description("发送冒泡").action(this.create_1);
+      this.program.command("create").description("发送冒泡").action(this.create);
       this.program.command("bestUser").description("热门用户").action(this.bestUser);
-      this.program.command("query_a_comment").description("获取某个评论")["arguments"]('<id>').action(this.query_a_comment);
-      this.program.command("insert_image").description("冒泡插入图片").action(this.insert_image);
-      this.program.command("lastTweet").description("查询last_id以后的最新冒泡").action(this.lastTweet);
-      this.program.command("public_tweets").description("冒泡列表").action(this.public_tweets);
-      this.program.command("user_public").description("用户冒泡列表").action(this.user_public);
-      this.program.command("detail").description("获取冒泡详情")["arguments"]('<global_key> <tweet_id>').action(this.detail);
-      this.program.command("comment").description("冒泡评论")["arguments"]('<id>').action(this.comment);
-      this.program.command("delete_comment").description("删除冒泡评论")["arguments"]('<id> <comment_id>').action(this.delete_comment);
-      this.program.command("query_comment").description("获取冒泡评论列表")["arguments"]('<id>').action(this.query_comment);
-      this.program.command("deleteTweet").description("删除冒泡")["arguments"]('<tweet_id>').action(this.deleteTweet);
-      this.program.command("like_tweet").description("冒泡点赞")["arguments"]('<tweet_id>').action(this.like_tweet);
-      this.program.command("getTweetLike").description("赞过的冒泡列表")["arguments"]('<tweet_id>').action(this.getTweetLike);
-      this.program.command("unlike_tweet").description("冒泡取消点赞")["arguments"]('<tweet_id>').action(this.unlike_tweet);
-      return this.program.command("public_tweets").description("冒泡广场列表").action(this.public_tweets);
+      this.program.command("comment").description("获取某个评论")["arguments"]("<id>").action(this.comment);
+      this.program.command("image").description("冒泡插入图片").action(this.image);
+      this.program.command("lastTweetList").description("查询last_id以后的最新冒泡").action(this.lastTweetList);
+      this.program.command("list").description("冒泡列表").action(this.list);
+      this.program.command("userPublic").description("用户冒泡列表").action(this.userPublic);
+      this.program.command("detail").description("获取冒泡详情")["arguments"]("<user> <tweet_id>").action(this.detail);
+      this.program.command("comment").description("冒泡评论")["arguments"]("<id>").action(this.comment);
+      this.program.command("comment").description("删除冒泡评论")["arguments"]("<id> <comment_id>").action(this.comment);
+      this.program.command("comment").description("获取冒泡评论列表")["arguments"]("<id>").action(this.comment);
+      this.program.command("del").description("删除冒泡")["arguments"]("<tweet_id>").action(this.del);
+      this.program.command("like").description("冒泡点赞")["arguments"]("<tweet_id>").action(this.like);
+      this.program.command("likeTweetList").description("赞过的冒泡列表")["arguments"]("<tweet_id>").action(this.likeTweetList);
+      this.program.command("unlike").description("冒泡取消点赞")["arguments"]("<tweet_id>").action(this.unlike);
+      return this.program.command("publicTweets").description("冒泡广场列表").action(this.publicTweets);
     };
 
 
     /*
     
-     operationId  : create_1
-     description  : 发送冒泡
-     args     	: 
-     params 		: device,location,coord,address,content,device,location,coord,address,content,
+     method            : post
+     summary         : create
+     description    : 发送冒泡
+     query            : device,location,coord,address,content
      */
 
-    Tweets.prototype.create_1 = function() {
-      this.debug("create_1()");
-      return this.coding.tweets.create_1(params, function(data) {
-        return console.log(data);
-      });
+    Tweets.prototype.create = function() {
+      this.debug("Tweets::create()");
+      return this.prompt.get([
+        {
+          "name": "device",
+          "description": "Enter device",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "location",
+          "description": "Enter location",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "coord",
+          "description": "Enter coord",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "address",
+          "description": "Enter address",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "content",
+          "description": "Enter content",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.tweet.create(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : bestUser
-     description  : 热门用户
-     args     	: 
-     params 		:
+     method            : get
+     summary         : bestUser
+     description    : 热门用户
      */
 
     Tweets.prototype.bestUser = function() {
-      this.debug("bestUser()");
-      return this.coding.tweets.bestUser(params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Tweets::bestUser()");
+      return this.coding.tweet.bestUser((function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : query_a_comment
-     description  : 获取某个评论
-     args     	: id
-     params 		:
-     */
-
-    Tweets.prototype.query_a_comment = function(id) {
-      this.debug("query_a_comment()");
-      return this.coding.tweets.query_a_comment(id, params, function(data) {
-        return console.log(data);
-      });
-    };
-
-
-    /*
-    
-     operationId  : insert_image
-     description  : 冒泡插入图片
-     args     	: 
-     params 		:
-     */
-
-    Tweets.prototype.insert_image = function() {
-      this.debug("insert_image()");
-      return this.coding.tweets.insert_image(params, function(data) {
-        return console.log(data);
-      });
-    };
-
-
-    /*
-    
-     operationId  : lastTweet
-     description  : 查询last_id以后的最新冒泡
-     args     	: 
-     params 		: default_like_count,last_id,default_like_count,last_id,
-     */
-
-    Tweets.prototype.lastTweet = function() {
-      this.debug("lastTweet()");
-      return this.coding.tweets.lastTweet(params, function(data) {
-        return console.log(data);
-      });
-    };
-
-
-    /*
-    
-     operationId  : public_tweets
-     description  : 冒泡列表
-     args     	: 
-     params 		: sort,last_id,default_like_count,filter,sort,last_id,default_like_count,filter,
-     */
-
-    Tweets.prototype.public_tweets = function() {
-      this.debug("public_tweets()");
-      return this.coding.tweets.public_tweets(params, function(data) {
-        return console.log(data);
-      });
-    };
-
-
-    /*
-    
-     operationId  : user_public
-     description  : 用户冒泡列表
-     args     	: 
-     params 		: last_id,user_id,global_key,type,default_like_count,last_id,user_id,global_key,type,default_like_count,
-     */
-
-    Tweets.prototype.user_public = function() {
-      this.debug("user_public()");
-      return this.coding.tweets.user_public(params, function(data) {
-        return console.log(data);
-      });
-    };
-
-
-    /*
-    
-     operationId  : detail
-     description  : 获取冒泡详情
-     args     	: global_key,tweet_id
-     params 		: default_like_count,default_like_count,
-     */
-
-    Tweets.prototype.detail = function(global_key, tweet_id) {
-      this.debug("detail()");
-      return this.coding.tweets.detail(global_key, tweet_id, params, function(data) {
-        return console.log(data);
-      });
-    };
-
-
-    /*
-    
-     operationId  : comment
-     description  : 冒泡评论
-     args     	: id
-     params 		: content,afterFilter,content,afterFilter,
+     method            : get
+     summary         : comment
+     description    : 获取某个评论
+     path            : id
      */
 
     Tweets.prototype.comment = function(id) {
-      this.debug("comment()");
-      return this.coding.tweets.comment(id, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Tweets::comment()");
+      return this.coding.tweet.comment(id, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : delete_comment
-     description  : 删除冒泡评论
-     args     	: id,comment_id
-     params 		:
+     method            : post
+     summary         : image
+     description    : 冒泡插入图片
      */
 
-    Tweets.prototype.delete_comment = function(id, comment_id) {
-      this.debug("delete_comment()");
-      return this.coding.tweets.delete_comment(id, comment_id, params, function(data) {
-        return console.log(data);
-      });
+    Tweets.prototype.image = function() {
+      this.debug("Tweets::image()");
+      return this.coding.tweet.image((function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : query_comment
-     description  : 获取冒泡评论列表
-     args     	: id
-     params 		: page,pageSize,page,pageSize,
+     method            : get
+     summary         : lastTweetList
+     description    : 查询last_id以后的最新冒泡
+     query            : default_like_count,last_id
      */
 
-    Tweets.prototype.query_comment = function(id) {
-      this.debug("query_comment()");
-      return this.coding.tweets.query_comment(id, params, function(data) {
-        return console.log(data);
-      });
+    Tweets.prototype.lastTweetList = function() {
+      this.debug("Tweets::lastTweetList()");
+      return this.prompt.get([
+        {
+          "name": "default_like_count",
+          "description": "Enter default_like_count",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "last_id",
+          "description": "Enter last_id",
+          "type": "integer",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.tweet.lastTweetList(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : deleteTweet
-     description  : 删除冒泡
-     args     	: tweet_id
-     params 		:
+     method            : get
+     summary         : list
+     description    : 冒泡列表
+     query            : sort,last_id,default_like_count,filter
      */
 
-    Tweets.prototype.deleteTweet = function(tweet_id) {
-      this.debug("deleteTweet()");
-      return this.coding.tweets.deleteTweet(tweet_id, params, function(data) {
-        return console.log(data);
-      });
+    Tweets.prototype.list = function() {
+      this.debug("Tweets::list()");
+      return this.prompt.get([
+        {
+          "name": "sort",
+          "description": "Enter sort",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "last_id",
+          "description": "Enter last_id",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "default_like_count",
+          "description": "Enter default_like_count",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "filter",
+          "description": "Enter filter",
+          "type": "boolean",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.tweet.list(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : like_tweet
-     description  : 冒泡点赞
-     args     	: tweet_id
-     params 		:
+     method            : get
+     summary         : userPublic
+     description    : 用户冒泡列表
+     query            : last_id,user_id,user,type,default_like_count
      */
 
-    Tweets.prototype.like_tweet = function(tweet_id) {
-      this.debug("like_tweet()");
-      return this.coding.tweets.like_tweet(tweet_id, params, function(data) {
-        return console.log(data);
-      });
+    Tweets.prototype.userPublic = function() {
+      this.debug("Tweets::userPublic()");
+      return this.prompt.get([
+        {
+          "name": "last_id",
+          "description": "Enter last_id",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "user_id",
+          "description": "Enter user_id",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "user",
+          "description": "Enter user",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "type",
+          "description": "Enter type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "default_like_count",
+          "description": "Enter default_like_count",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.tweet.userPublic(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : getTweetLike
-     description  : 赞过的冒泡列表
-     args     	: tweet_id
-     params 		: page,pageSize,page,pageSize,
+     method            : get
+     summary         : detail
+     description    : 获取冒泡详情
+     path            : user,tweet_id
+     query            : default_like_count
      */
 
-    Tweets.prototype.getTweetLike = function(tweet_id) {
-      this.debug("getTweetLike()");
-      return this.coding.tweets.getTweetLike(tweet_id, params, function(data) {
-        return console.log(data);
-      });
+    Tweets.prototype.detail = function(user, tweet_id) {
+      this.debug("Tweets::detail()");
+      return this.prompt.get([
+        {
+          "name": "default_like_count",
+          "description": "Enter default_like_count",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.tweet.detail(user, tweet_id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : unlike_tweet
-     description  : 冒泡取消点赞
-     args     	: tweet_id
-     params 		:
+     method            : post
+     summary         : comment
+     description    : 冒泡评论
+     path            : id
+     query            : content,afterFilter
      */
 
-    Tweets.prototype.unlike_tweet = function(tweet_id) {
-      this.debug("unlike_tweet()");
-      return this.coding.tweets.unlike_tweet(tweet_id, params, function(data) {
-        return console.log(data);
-      });
+    Tweets.prototype.comment = function(id) {
+      this.debug("Tweets::comment()");
+      return this.prompt.get([
+        {
+          "name": "content",
+          "description": "Enter content",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "afterFilter",
+          "description": "Enter afterFilter",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.tweet.comment(id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : public_tweets
-     description  : 冒泡广场列表
-     args     	: 
-     params 		: sort,last_id,default_like_count,filter,sort,last_id,default_like_count,filter,
+     method            : delete
+     summary         : comment
+     description    : 删除冒泡评论
+     path            : id,comment_id
      */
 
-    Tweets.prototype.public_tweets = function() {
-      this.debug("public_tweets()");
-      return this.coding.tweets.public_tweets(params, function(data) {
-        return console.log(data);
-      });
+    Tweets.prototype.comment = function(id, comment_id) {
+      this.debug("Tweets::comment()");
+      return this.coding.tweet.comment(id, comment_id, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : get
+     summary         : comment
+     description    : 获取冒泡评论列表
+     path            : id
+     query            : page,pageSize
+     */
+
+    Tweets.prototype.comment = function(id) {
+      this.debug("Tweets::comment()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.tweet.comment(id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : delete
+     summary         : del
+     description    : 删除冒泡
+     path            : tweet_id
+     */
+
+    Tweets.prototype.del = function(tweet_id) {
+      this.debug("Tweets::del()");
+      return this.coding.tweet.del(tweet_id, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : post
+     summary         : like
+     description    : 冒泡点赞
+     path            : tweet_id
+     */
+
+    Tweets.prototype.like = function(tweet_id) {
+      this.debug("Tweets::like()");
+      return this.coding.tweet.like(tweet_id, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : get
+     summary         : likeTweetList
+     description    : 赞过的冒泡列表
+     path            : tweet_id
+     query            : page,pageSize
+     */
+
+    Tweets.prototype.likeTweetList = function(tweet_id) {
+      this.debug("Tweets::likeTweetList()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.tweet.likeTweetList(tweet_id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : post
+     summary         : unlike
+     description    : 冒泡取消点赞
+     path            : tweet_id
+     */
+
+    Tweets.prototype.unlike = function(tweet_id) {
+      this.debug("Tweets::unlike()");
+      return this.coding.tweet.unlike(tweet_id, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : get
+     summary         : publicTweets
+     description    : 冒泡广场列表
+     query            : sort,last_id,default_like_count,filter
+     */
+
+    Tweets.prototype.publicTweets = function() {
+      this.debug("Tweets::publicTweets()");
+      return this.prompt.get([
+        {
+          "name": "sort",
+          "description": "Enter sort",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "last_id",
+          "description": "Enter last_id",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "default_like_count",
+          "description": "Enter default_like_count",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "filter",
+          "description": "Enter filter",
+          "type": "boolean",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.tweet.publicTweets(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
     return Tweets;

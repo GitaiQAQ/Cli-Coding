@@ -33,12 +33,12 @@ class module.exports.CmdBase
     @branchs = require('./models/Branchs') @cmd
     @commits = require('./models/Commits') @cmd
     @historys = require('./models/Historys') @cmd
-    @repoFiles = require('./models/Repo_files') @cmd
-    @mergeRequests = require('./models/Merge_requests') @cmd
-    @pullRequests = require('./models/Pull_requests') @cmd
+    @repoFiles = require('./models/RepoFiles') @cmd
+    @mergeRequests = require('./models/MergeRequests') @cmd
+    @pullRequests = require('./models/PullRequests') @cmd
     @tags = require('./models/Tags') @cmd
     @trees = require('./models/Trees') @cmd
-    @projectTopics = require('./models/Project_topics') @cmd
+    @projectTopics = require('./models/ProjectTopics') @cmd
     @keys = require('./models/Keys') @cmd
 
     @program.parse process.argv

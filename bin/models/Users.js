@@ -14,78 +14,80 @@
       this.unreadCount = bind(this.unreadCount, this);
       this.unfollow = bind(this.unfollow, this);
       this.search = bind(this.search, this);
-      this.getRelationshipWithProjectMember = bind(this.getRelationshipWithProjectMember, this);
-      this.getRelationship = bind(this.getRelationship, this);
+      this.changeNoticeSetting = bind(this.changeNoticeSetting, this);
+      this.changeNoticeSetting = bind(this.changeNoticeSetting, this);
       this.relationship = bind(this.relationship, this);
       this.friends = bind(this.friends, this);
-      this.friends_1 = bind(this.friends_1, this);
-      this.followers = bind(this.followers, this);
-      this.followers_1 = bind(this.followers_1, this);
+      this.friends = bind(this.friends, this);
+      this.follower = bind(this.follower, this);
+      this.follower = bind(this.follower, this);
       this.follow = bind(this.follow, this);
-      this.updateAvatar = bind(this.updateAvatar, this);
-      this.updatePassword = bind(this.updatePassword, this);
-      this.updateInfo = bind(this.updateInfo, this);
-      this.doPhoneRegister = bind(this.doPhoneRegister, this);
+      this.avatar = bind(this.avatar, this);
+      this.updatePwd = bind(this.updatePwd, this);
+      this.avatar = bind(this.avatar, this);
+      this.phoneRegister = bind(this.phoneRegister, this);
       this.generateRegisterPhoneCode = bind(this.generateRegisterPhoneCode, this);
-      this.doRegister = bind(this.doRegister, this);
+      this.register = bind(this.register, this);
       this.getUserByName = bind(this.getUserByName, this);
-      this.doLogout = bind(this.doLogout, this);
-      this.doPhoneLogin = bind(this.doPhoneLogin, this);
+      this.logout = bind(this.logout, this);
+      this.loginByPhone = bind(this.loginByPhone, this);
       this.generateLoginPhoneCode = bind(this.generateLoginPhoneCode, this);
-      this.doLogin = bind(this.doLogin, this);
+      this.login = bind(this.login, this);
       this.getUserByGlobalKey = bind(this.getUserByGlobalKey, this);
-      this.getGravatar = bind(this.getGravatar, this);
-      this.getNotificationSettings = bind(this.getNotificationSettings, this);
-      this.userEmail = bind(this.userEmail, this);
+      this.gravatar = bind(this.gravatar, this);
+      this.changeNoticeSetting = bind(this.changeNoticeSetting, this);
+      this.email = bind(this.email, this);
       this.currentUser = bind(this.currentUser, this);
       this.checkTwoFactorAuthCode = bind(this.checkTwoFactorAuthCode, this);
       this.checkPhone = bind(this.checkPhone, this);
-      this.check = bind(this.check, this);
-      this.changeNotificationSetting = bind(this.changeNotificationSetting, this);
+      this.checkEmail = bind(this.checkEmail, this);
+      this.changeNoticeSetting = bind(this.changeNoticeSetting, this);
       this.captcha = bind(this.captcha, this);
-      this.getAvatar = bind(this.getAvatar, this);
+      this.avatar = bind(this.avatar, this);
+      this.avatar = bind(this.avatar, this);
       this.activatePhone = bind(this.activatePhone, this);
       this.generateActivatePhoneCode = bind(this.generateActivatePhoneCode, this);
-      this.doActivate = bind(this.doActivate, this);
+      this.activate = bind(this.activate, this);
       this.init = bind(this.init, this);
       return Users.__super__.constructor.apply(this, arguments);
     }
 
     Users.prototype.init = function() {
       this.debug("init()");
-      this.program.command("doActivate").description("账户激活").action(this.doActivate);
+      this.program.command("activate").description("账户激活").action(this.activate);
       this.program.command("generateActivatePhoneCode").description("获取激活账号的手机验证码").action(this.generateActivatePhoneCode);
       this.program.command("activatePhone").description("激活用手机注册的用户").action(this.activatePhone);
-      this.program.command("getAvatar").description("获取头像").action(this.getAvatar);
-      this.program.command("captcha").description("检查是否需要验证码")["arguments"]('<action>').action(this.captcha);
-      this.program.command("changeNotificationSetting").description("修改通知设置").action(this.changeNotificationSetting);
-      this.program.command("check").description("检查email是否没有被注册过").action(this.check);
+      this.program.command("avatar").description("获取头像").action(this.avatar);
+      this.program.command("avatar").description("上传设置头像").action(this.avatar);
+      this.program.command("captcha").description("检查是否需要验证码")["arguments"]("<action>").action(this.captcha);
+      this.program.command("changeNoticeSetting").description("修改通知设置").action(this.changeNoticeSetting);
+      this.program.command("checkEmail").description("检查email是否没有被注册过").action(this.checkEmail);
       this.program.command("checkPhone").description("检查手机是否没有被注册过").action(this.checkPhone);
       this.program.command("checkTwoFactorAuthCode").description("登录时的两步验证").action(this.checkTwoFactorAuthCode);
       this.program.command("currentUser").description("获取当前登录用户信息").action(this.currentUser);
-      this.program.command("userEmail").description("获取当前用户的email").action(this.userEmail);
-      this.program.command("getNotificationSettings").description("获取通知设置").action(this.getNotificationSettings);
-      this.program.command("getGravatar").description("获取Gravatar头像").action(this.getGravatar);
-      this.program.command("getUserByGlobalKey").description("通过个性后缀获取用户信息")["arguments"]('<global_key>').action(this.getUserByGlobalKey);
-      this.program.command("doLogin").description("登录").action(this.doLogin);
+      this.program.command("email").description("获取当前用户的email").action(this.email);
+      this.program.command("changeNoticeSetting").description("获取通知设置").action(this.changeNoticeSetting);
+      this.program.command("gravatar").description("获取Gravatar头像").action(this.gravatar);
+      this.program.command("getUserByGlobalKey").description("通过个性后缀获取用户信息")["arguments"]("<user>").action(this.getUserByGlobalKey);
+      this.program.command("login").description("登录").action(this.login);
       this.program.command("generateLoginPhoneCode").description("获取登录的手机验证码").action(this.generateLoginPhoneCode);
-      this.program.command("doPhoneLogin").description("使用绑定过的手机号码登录").action(this.doPhoneLogin);
-      this.program.command("doLogout").description("注销登录").action(this.doLogout);
-      this.program.command("getUserByName").description("通过昵称获取用户信息")["arguments"]('<name>').action(this.getUserByName);
-      this.program.command("doRegister").description("注册").action(this.doRegister);
+      this.program.command("loginByPhone").description("使用绑定过的手机号码登录").action(this.loginByPhone);
+      this.program.command("logout").description("注销登录").action(this.logout);
+      this.program.command("getUserByName").description("通过昵称获取用户信息")["arguments"]("<name>").action(this.getUserByName);
+      this.program.command("register").description("注册").action(this.register);
       this.program.command("generateRegisterPhoneCode").description("获取注册的手机验证码").action(this.generateRegisterPhoneCode);
-      this.program.command("doPhoneRegister").description("使用手机注册").action(this.doPhoneRegister);
-      this.program.command("updateInfo").description("更新用户信息").action(this.updateInfo);
-      this.program.command("updatePassword").description("修改用户密码").action(this.updatePassword);
-      this.program.command("updateAvatar").description("更新头像").action(this.updateAvatar);
+      this.program.command("phoneRegister").description("使用手机注册").action(this.phoneRegister);
+      this.program.command("avatar").description("更新用户信息").action(this.avatar);
+      this.program.command("updatePwd").description("修改用户密码").action(this.updatePwd);
+      this.program.command("avatar").description("更新头像").action(this.avatar);
       this.program.command("follow").description("关注用户").action(this.follow);
-      this.program.command("followers_1").description("关注我的用户").action(this.followers_1);
-      this.program.command("followers").description("获取关注默认的用户")["arguments"]('<global_key>').action(this.followers);
-      this.program.command("friends_1").description("我关注的用户列表").action(this.friends_1);
-      this.program.command("friends").description("指定用户的关注列表")["arguments"]('<global_key>').action(this.friends);
-      this.program.command("relationship").description("是否关注了该用户")["arguments"]('<global_key>').action(this.relationship);
-      this.program.command("getRelationship").description("获取我关注和关注我的用户列表").action(this.getRelationship);
-      this.program.command("getRelationshipWithProjectMember").description("获取我关注和关注我的用户列表包含成员列表").action(this.getRelationshipWithProjectMember);
+      this.program.command("follower").description("关注我的用户").action(this.follower);
+      this.program.command("follower").description("获取关注默认的用户")["arguments"]("<user>").action(this.follower);
+      this.program.command("friends").description("我关注的用户列表").action(this.friends);
+      this.program.command("friends").description("指定用户的关注列表")["arguments"]("<user>").action(this.friends);
+      this.program.command("relationship").description("是否关注了该用户")["arguments"]("<user>").action(this.relationship);
+      this.program.command("changeNoticeSetting").description("获取我关注和关注我的用户列表").action(this.changeNoticeSetting);
+      this.program.command("changeNoticeSetting").description("获取我关注和关注我的用户列表包含成员列表").action(this.changeNoticeSetting);
       this.program.command("search").description("搜索用户").action(this.search);
       this.program.command("unfollow").description("取消关注").action(this.unfollow);
       return this.program.command("unreadCount").description("未读消息通知").action(this.unreadCount);
@@ -94,577 +96,1233 @@
 
     /*
     
-     operationId  : doActivate
-     description  : 账户激活
-     args     	: 
-     params 		: email,key,password,confirm_password,email,key,password,confirm_password,
+     method            : post
+     summary         : activate
+     description    : 账户激活
+     query            : email,key,password,confirm_password
+     body            : sid
      */
 
-    Users.prototype.doActivate = function() {
-      this.debug("doActivate()");
-      return this.coding.users.doActivate(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.activate = function() {
+      this.debug("Users::activate()");
+      return this.prompt.get([
+        {
+          "name": "email",
+          "description": "Enter email",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "key",
+          "description": "Enter key",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "password",
+          "description": "Enter password",
+          "type": "string",
+          "required": false,
+          "hidden": true
+        }, {
+          "name": "confirm_password",
+          "description": "Enter confirm_password",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "sid",
+          "description": "Enter sid",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.activate(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : generateActivatePhoneCode
-     description  : 获取激活账号的手机验证码
-     args     	: 
-     params 		: phone,phone,
+     method            : post
+     summary         : generateActivatePhoneCode
+     description    : 获取激活账号的手机验证码
+     query            : phone
      */
 
     Users.prototype.generateActivatePhoneCode = function() {
-      this.debug("generateActivatePhoneCode()");
-      return this.coding.users.generateActivatePhoneCode(params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Users::generateActivatePhoneCode()");
+      return this.prompt.get([
+        {
+          "name": "phone",
+          "description": "Enter phone",
+          "type": "string",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.generateActivatePhoneCode(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : activatePhone
-     description  : 激活用手机注册的用户
-     args     	: 
-     params 		: phone,code,global_key,email,password,phone,code,global_key,email,password,
+     method            : post
+     summary         : activatePhone
+     description    : 激活用手机注册的用户
+     query            : phone,code,user,email,password
+     body            : sid
      */
 
     Users.prototype.activatePhone = function() {
-      this.debug("activatePhone()");
-      return this.coding.users.activatePhone(params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Users::activatePhone()");
+      return this.prompt.get([
+        {
+          "name": "phone",
+          "description": "Enter phone",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "code",
+          "description": "Enter code",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "user",
+          "description": "Enter user",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "email",
+          "description": "Enter email",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "password",
+          "description": "Enter password",
+          "type": "string",
+          "required": true,
+          "hidden": true
+        }, {
+          "name": "sid",
+          "description": "Enter sid",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.activatePhone(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : getAvatar
-     description  : 获取头像
-     args     	: 
-     params 		:
+     method            : get
+     summary         : avatar
+     description    : 获取头像
      */
 
-    Users.prototype.getAvatar = function() {
-      this.debug("getAvatar()");
-      return this.coding.users.getAvatar(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.avatar = function() {
+      this.debug("Users::avatar()");
+      return this.coding.user.avatar((function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : captcha
-     description  : 检查是否需要验证码
-     args     	: action
-     params 		:
+     method            : post
+     summary         : avatar
+     description    : 上传设置头像
+     body            : sid
+     */
+
+    Users.prototype.avatar = function() {
+      this.debug("Users::avatar()");
+      return this.prompt.get([
+        {
+          "name": "sid",
+          "description": "Enter sid",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.avatar(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : get
+     summary         : captcha
+     description    : 检查是否需要验证码
+     path            : action
+     body            : realRemoteAddress
      */
 
     Users.prototype.captcha = function(action) {
-      this.debug("captcha()");
-      return this.coding.users.captcha(action, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Users::captcha()");
+      return this.prompt.get([
+        {
+          "name": "realRemoteAddress",
+          "description": "Enter realRemoteAddress",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.captcha(action, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : changeNotificationSetting
-     description  : 修改通知设置
-     args     	: 
-     params 		: settingType,settingContent,settingType,settingContent,
+     method            : get
+     summary         : changeNoticeSetting
+     description    : 修改通知设置
+     query            : settingType,settingContent
      */
 
-    Users.prototype.changeNotificationSetting = function() {
-      this.debug("changeNotificationSetting()");
-      return this.coding.users.changeNotificationSetting(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.changeNoticeSetting = function() {
+      this.debug("Users::changeNoticeSetting()");
+      return this.prompt.get([
+        {
+          "name": "settingType",
+          "description": "Enter settingType",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "settingContent",
+          "description": "Enter settingContent",
+          "type": "string",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.changeNoticeSetting(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : check
-     description  : 检查email是否没有被注册过
-     args     	: 
-     params 		: key,key,
+     method            : get
+     summary         : checkEmail
+     description    : 检查email是否没有被注册过
+     query            : key
      */
 
-    Users.prototype.check = function() {
-      this.debug("check()");
-      return this.coding.users.check(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.checkEmail = function() {
+      this.debug("Users::checkEmail()");
+      return this.prompt.get([
+        {
+          "name": "key",
+          "description": "Enter key",
+          "type": "string",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.checkEmail(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : checkPhone
-     description  : 检查手机是否没有被注册过
-     args     	: 
-     params 		: phone,phone,
+     method            : get
+     summary         : checkPhone
+     description    : 检查手机是否没有被注册过
+     query            : phone
      */
 
     Users.prototype.checkPhone = function() {
-      this.debug("checkPhone()");
-      return this.coding.users.checkPhone(params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Users::checkPhone()");
+      return this.prompt.get([
+        {
+          "name": "phone",
+          "description": "Enter phone",
+          "type": "string",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.checkPhone(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : checkTwoFactorAuthCode
-     description  : 登录时的两步验证
-     args     	: 
-     params 		: code,code,
+     method            : post
+     summary         : checkTwoFactorAuthCode
+     description    : 登录时的两步验证
+     query            : code
+     body            : sid
      */
 
     Users.prototype.checkTwoFactorAuthCode = function() {
-      this.debug("checkTwoFactorAuthCode()");
-      return this.coding.users.checkTwoFactorAuthCode(params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Users::checkTwoFactorAuthCode()");
+      return this.prompt.get([
+        {
+          "name": "code",
+          "description": "Enter code",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "sid",
+          "description": "Enter sid",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.checkTwoFactorAuthCode(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : currentUser
-     description  : 获取当前登录用户信息
-     args     	: 
-     params 		:
+     method            : get
+     summary         : currentUser
+     description    : 获取当前登录用户信息
      */
 
     Users.prototype.currentUser = function() {
-      this.debug("currentUser()");
-      return this.coding.users.currentUser(params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Users::currentUser()");
+      return this.coding.user.currentUser((function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : userEmail
-     description  : 获取当前用户的email
-     args     	: 
-     params 		:
+     method            : get
+     summary         : email
+     description    : 获取当前用户的email
      */
 
-    Users.prototype.userEmail = function() {
-      this.debug("userEmail()");
-      return this.coding.users.userEmail(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.email = function() {
+      this.debug("Users::email()");
+      return this.coding.user.email((function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : getNotificationSettings
-     description  : 获取通知设置
-     args     	: 
-     params 		:
+     method            : get
+     summary         : changeNoticeSetting
+     description    : 获取通知设置
      */
 
-    Users.prototype.getNotificationSettings = function() {
-      this.debug("getNotificationSettings()");
-      return this.coding.users.getNotificationSettings(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.changeNoticeSetting = function() {
+      this.debug("Users::changeNoticeSetting()");
+      return this.coding.user.changeNoticeSetting((function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : getGravatar
-     description  : 获取Gravatar头像
-     args     	: 
-     params 		:
+     method            : get
+     summary         : gravatar
+     description    : 获取Gravatar头像
      */
 
-    Users.prototype.getGravatar = function() {
-      this.debug("getGravatar()");
-      return this.coding.users.getGravatar(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.gravatar = function() {
+      this.debug("Users::gravatar()");
+      return this.coding.user.gravatar((function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : getUserByGlobalKey
-     description  : 通过个性后缀获取用户信息
-     args     	: global_key
-     params 		:
+     method            : get
+     summary         : getUserByGlobalKey
+     description    : 通过个性后缀获取用户信息
+     path            : user
      */
 
-    Users.prototype.getUserByGlobalKey = function(global_key) {
-      this.debug("getUserByGlobalKey()");
-      return this.coding.users.getUserByGlobalKey(global_key, params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.getUserByGlobalKey = function(user) {
+      this.debug("Users::getUserByGlobalKey()");
+      return this.coding.user.getUserByGlobalKey(user, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : doLogin
-     description  : 登录
-     args     	: 
-     params 		: email,password,j_captcha,remember_me,email,password,j_captcha,remember_me,
+     method            : post
+     summary         : login
+     description    : 登录
+     query            : email,password,j_captcha,remember_me
+     body            : sid,realRemoteAddress
      */
 
-    Users.prototype.doLogin = function() {
-      this.debug("doLogin()");
-      return this.coding.users.doLogin(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.login = function() {
+      this.debug("Users::login()");
+      return this.prompt.get([
+        {
+          "name": "email",
+          "description": "Enter email",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "password",
+          "description": "Enter password",
+          "type": "string",
+          "required": false,
+          "hidden": true
+        }, {
+          "name": "j_captcha",
+          "description": "Enter j_captcha",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "remember_me",
+          "description": "Enter remember_me",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "sid",
+          "description": "Enter sid",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "realRemoteAddress",
+          "description": "Enter realRemoteAddress",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.login(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : generateLoginPhoneCode
-     description  : 获取登录的手机验证码
-     args     	: 
-     params 		: phone,phone,
+     method            : post
+     summary         : generateLoginPhoneCode
+     description    : 获取登录的手机验证码
+     query            : phone
      */
 
     Users.prototype.generateLoginPhoneCode = function() {
-      this.debug("generateLoginPhoneCode()");
-      return this.coding.users.generateLoginPhoneCode(params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Users::generateLoginPhoneCode()");
+      return this.prompt.get([
+        {
+          "name": "phone",
+          "description": "Enter phone",
+          "type": "string",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.generateLoginPhoneCode(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : doPhoneLogin
-     description  : 使用绑定过的手机号码登录
-     args     	: 
-     params 		: phone,code,j_captcha,remember_me,phone,code,j_captcha,remember_me,
+     method            : post
+     summary         : loginByPhone
+     description    : 使用绑定过的手机号码登录
+     query            : phone,code,j_captcha,remember_me
+     body            : realRemoteAddress
      */
 
-    Users.prototype.doPhoneLogin = function() {
-      this.debug("doPhoneLogin()");
-      return this.coding.users.doPhoneLogin(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.loginByPhone = function() {
+      this.debug("Users::loginByPhone()");
+      return this.prompt.get([
+        {
+          "name": "phone",
+          "description": "Enter phone",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "code",
+          "description": "Enter code",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "j_captcha",
+          "description": "Enter j_captcha",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "remember_me",
+          "description": "Enter remember_me",
+          "type": "boolean",
+          "required": false
+        }, {
+          "name": "realRemoteAddress",
+          "description": "Enter realRemoteAddress",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.loginByPhone(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : doLogout
-     description  : 注销登录
-     args     	: 
-     params 		:
+     method            : post
+     summary         : logout
+     description    : 注销登录
+     body            : sid
      */
 
-    Users.prototype.doLogout = function() {
-      this.debug("doLogout()");
-      return this.coding.users.doLogout(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.logout = function() {
+      this.debug("Users::logout()");
+      return this.prompt.get([
+        {
+          "name": "sid",
+          "description": "Enter sid",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.logout(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : getUserByName
-     description  : 通过昵称获取用户信息
-     args     	: name
-     params 		:
+     method            : get
+     summary         : getUserByName
+     description    : 通过昵称获取用户信息
+     path            : name
      */
 
     Users.prototype.getUserByName = function(name) {
-      this.debug("getUserByName()");
-      return this.coding.users.getUserByName(name, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Users::getUserByName()");
+      return this.coding.user.getUserByName(name, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : doRegister
-     description  : 注册
-     args     	: 
-     params 		: email,global_key,j_captcha,email,global_key,j_captcha,
+     method            : post
+     summary         : register
+     description    : 注册
+     query            : email,user,j_captcha
+     body            : realRemoteAddress
      */
 
-    Users.prototype.doRegister = function() {
-      this.debug("doRegister()");
-      return this.coding.users.doRegister(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.register = function() {
+      this.debug("Users::register()");
+      return this.prompt.get([
+        {
+          "name": "email",
+          "description": "Enter email",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "user",
+          "description": "Enter user",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "j_captcha",
+          "description": "Enter j_captcha",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "realRemoteAddress",
+          "description": "Enter realRemoteAddress",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.register(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : generateRegisterPhoneCode
-     description  : 获取注册的手机验证码
-     args     	: 
-     params 		: phone,phone,
+     method            : post
+     summary         : generateRegisterPhoneCode
+     description    : 获取注册的手机验证码
+     query            : phone
      */
 
     Users.prototype.generateRegisterPhoneCode = function() {
-      this.debug("generateRegisterPhoneCode()");
-      return this.coding.users.generateRegisterPhoneCode(params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Users::generateRegisterPhoneCode()");
+      return this.prompt.get([
+        {
+          "name": "phone",
+          "description": "Enter phone",
+          "type": "string",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.generateRegisterPhoneCode(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : doPhoneRegister
-     description  : 使用手机注册
-     args     	: 
-     params 		: phone,code,phone,code,
+     method            : post
+     summary         : phoneRegister
+     description    : 使用手机注册
+     query            : phone,code
+     body            : realRemoteAddress
      */
 
-    Users.prototype.doPhoneRegister = function() {
-      this.debug("doPhoneRegister()");
-      return this.coding.users.doPhoneRegister(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.phoneRegister = function() {
+      this.debug("Users::phoneRegister()");
+      return this.prompt.get([
+        {
+          "name": "phone",
+          "description": "Enter phone",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "code",
+          "description": "Enter code",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "realRemoteAddress",
+          "description": "Enter realRemoteAddress",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.phoneRegister(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : updateInfo
-     description  : 更新用户信息
-     args     	: 
-     params 		: tags,name,sex,phone,birthday,location,company,slogan,introduction,job,code,tags,name,sex,phone,birthday,location,company,slogan,introduction,job,code,
+     method            : post
+     summary         : avatar
+     description    : 更新用户信息
+     query            : tags,name,sex,phone,birthday,location,company,slogan,introduction,job,code
+     body            : sid
      */
 
-    Users.prototype.updateInfo = function() {
-      this.debug("updateInfo()");
-      return this.coding.users.updateInfo(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.avatar = function() {
+      this.debug("Users::avatar()");
+      return this.prompt.get([
+        {
+          "name": "tags",
+          "description": "Enter tags",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "name",
+          "description": "Enter name",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "sex",
+          "description": "Enter sex",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "phone",
+          "description": "Enter phone",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "birthday",
+          "description": "Enter birthday",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "location",
+          "description": "Enter location",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "company",
+          "description": "Enter company",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "slogan",
+          "description": "Enter slogan",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "introduction",
+          "description": "Enter introduction",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "job",
+          "description": "Enter job",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "code",
+          "description": "Enter code",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "sid",
+          "description": "Enter sid",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.avatar(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : updatePassword
-     description  : 修改用户密码
-     args     	: 
-     params 		: current_password,password,confirm_password,current_password,password,confirm_password,
+     method            : post
+     summary         : updatePwd
+     description    : 修改用户密码
+     query            : current_password,password,confirm_password
+     body            : sid
      */
 
-    Users.prototype.updatePassword = function() {
-      this.debug("updatePassword()");
-      return this.coding.users.updatePassword(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.updatePwd = function() {
+      this.debug("Users::updatePwd()");
+      return this.prompt.get([
+        {
+          "name": "current_password",
+          "description": "Enter current_password",
+          "type": "string",
+          "required": false,
+          "hidden": true
+        }, {
+          "name": "password",
+          "description": "Enter password",
+          "type": "string",
+          "required": false,
+          "hidden": true
+        }, {
+          "name": "confirm_password",
+          "description": "Enter confirm_password",
+          "type": "string",
+          "required": false,
+          "hidden": true
+        }, {
+          "name": "sid",
+          "description": "Enter sid",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.updatePwd(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : updateAvatar
-     description  : 更新头像
-     args     	: 
-     params 		: avatar,avatar,
+     method            : post
+     summary         : avatar
+     description    : 更新头像
+     query            : avatar
+     body            : sid
      */
 
-    Users.prototype.updateAvatar = function() {
-      this.debug("updateAvatar()");
-      return this.coding.users.updateAvatar(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.avatar = function() {
+      this.debug("Users::avatar()");
+      return this.prompt.get([
+        {
+          "name": "avatar",
+          "description": "Enter avatar",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "sid",
+          "description": "Enter sid",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.avatar(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : follow
-     description  : 关注用户
-     args     	: 
-     params 		: users,users,
+     method            : post
+     summary         : follow
+     description    : 关注用户
+     query            : users
      */
 
     Users.prototype.follow = function() {
-      this.debug("follow()");
-      return this.coding.users.follow(params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Users::follow()");
+      return this.prompt.get([
+        {
+          "name": "users",
+          "description": "Enter users",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.follow(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : followers_1
-     description  : 关注我的用户
-     args     	: 
-     params 		: page,pageSize,page,pageSize,
+     method            : get
+     summary         : follower
+     description    : 关注我的用户
+     query            : page,pageSize
      */
 
-    Users.prototype.followers_1 = function() {
-      this.debug("followers_1()");
-      return this.coding.users.followers_1(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.follower = function() {
+      this.debug("Users::follower()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.follower(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : followers
-     description  : 获取关注默认的用户
-     args     	: global_key
-     params 		: page,pageSize,page,pageSize,
+     method            : get
+     summary         : follower
+     description    : 获取关注默认的用户
+     path            : user
+     query            : page,pageSize
      */
 
-    Users.prototype.followers = function(global_key) {
-      this.debug("followers()");
-      return this.coding.users.followers(global_key, params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.follower = function(user) {
+      this.debug("Users::follower()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.follower(user, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : friends_1
-     description  : 我关注的用户列表
-     args     	: 
-     params 		: page,pageSize,page,pageSize,
+     method            : get
+     summary         : friends
+     description    : 我关注的用户列表
+     query            : page,pageSize
      */
 
-    Users.prototype.friends_1 = function() {
-      this.debug("friends_1()");
-      return this.coding.users.friends_1(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.friends = function() {
+      this.debug("Users::friends()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.friends(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : friends
-     description  : 指定用户的关注列表
-     args     	: global_key
-     params 		: page,pageSize,page,pageSize,
+     method            : get
+     summary         : friends
+     description    : 指定用户的关注列表
+     path            : user
+     query            : page,pageSize
      */
 
-    Users.prototype.friends = function(global_key) {
-      this.debug("friends()");
-      return this.coding.users.friends(global_key, params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.friends = function(user) {
+      this.debug("Users::friends()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.friends(user, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : relationship
-     description  : 是否关注了该用户
-     args     	: global_key
-     params 		:
+     method            : get
+     summary         : relationship
+     description    : 是否关注了该用户
+     path            : user
      */
 
-    Users.prototype.relationship = function(global_key) {
-      this.debug("relationship()");
-      return this.coding.users.relationship(global_key, params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.relationship = function(user) {
+      this.debug("Users::relationship()");
+      return this.coding.user.relationship(user, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : getRelationship
-     description  : 获取我关注和关注我的用户列表
-     args     	: 
-     params 		:
+     method            : get
+     summary         : changeNoticeSetting
+     description    : 获取我关注和关注我的用户列表
      */
 
-    Users.prototype.getRelationship = function() {
-      this.debug("getRelationship()");
-      return this.coding.users.getRelationship(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.changeNoticeSetting = function() {
+      this.debug("Users::changeNoticeSetting()");
+      return this.coding.user.changeNoticeSetting((function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : getRelationshipWithProjectMember
-     description  : 获取我关注和关注我的用户列表包含成员列表
-     args     	: 
-     params 		: project_id,project_id,
+     method            : get
+     summary         : changeNoticeSetting
+     description    : 获取我关注和关注我的用户列表包含成员列表
+     query            : project_id
      */
 
-    Users.prototype.getRelationshipWithProjectMember = function() {
-      this.debug("getRelationshipWithProjectMember()");
-      return this.coding.users.getRelationshipWithProjectMember(params, function(data) {
-        return console.log(data);
-      });
+    Users.prototype.changeNoticeSetting = function() {
+      this.debug("Users::changeNoticeSetting()");
+      return this.prompt.get([
+        {
+          "name": "project_id",
+          "description": "Enter project_id",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.changeNoticeSetting(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : search
-     description  : 搜索用户
-     args     	: 
-     params 		: key,page,pageSize,key,page,pageSize,
+     method            : get
+     summary         : search
+     description    : 搜索用户
+     query            : key,page,pageSize
      */
 
     Users.prototype.search = function() {
-      this.debug("search()");
-      return this.coding.users.search(params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Users::search()");
+      return this.prompt.get([
+        {
+          "name": "key",
+          "description": "Enter key",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.search(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : unfollow
-     description  : 取消关注
-     args     	: 
-     params 		: users,users,
+     method            : post
+     summary         : unfollow
+     description    : 取消关注
+     query            : users
      */
 
     Users.prototype.unfollow = function() {
-      this.debug("unfollow()");
-      return this.coding.users.unfollow(params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Users::unfollow()");
+      return this.prompt.get([
+        {
+          "name": "users",
+          "description": "Enter users",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.user.unfollow(params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : unreadCount
-     description  : 未读消息通知
-     args     	: 
-     params 		:
+     method            : get
+     summary         : unreadCount
+     description    : 未读消息通知
      */
 
     Users.prototype.unreadCount = function() {
-      this.debug("unreadCount()");
-      return this.coding.users.unreadCount(params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Users::unreadCount()");
+      return this.coding.user.unreadCount((function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
     return Users;

@@ -11,26 +11,27 @@
     extend(Files, superClass);
 
     function Files() {
-      this.allFolderFileCount = bind(this.allFolderFileCount, this);
-      this.listAllFolder = bind(this.listAllFolder, this);
-      this.listFolder = bind(this.listFolder, this);
-      this.listFile = bind(this.listFile, this);
+      this.count = bind(this.count, this);
+      this.folders = bind(this.folders, this);
+      this.folders = bind(this.folders, this);
+      this.files = bind(this.files, this);
       this.renameFolder = bind(this.renameFolder, this);
       this.move = bind(this.move, this);
       this.mkdir = bind(this.mkdir, this);
-      this.listFileHistory = bind(this.listFileHistory, this);
-      this.createFile = bind(this.createFile, this);
-      this.updateFileHistoryRemark = bind(this.updateFileHistoryRemark, this);
-      this.imagePreview = bind(this.imagePreview, this);
-      this.viewFile = bind(this.viewFile, this);
-      this.editFile = bind(this.editFile, this);
-      this.downloadURL = bind(this.downloadURL, this);
-      this.downloadFile = bind(this.downloadFile, this);
-      this.uploadFile = bind(this.uploadFile, this);
-      this.downloadHistory = bind(this.downloadHistory, this);
-      this.deleteFileHistory = bind(this.deleteFileHistory, this);
-      this.deleteFiles = bind(this.deleteFiles, this);
-      this.uploadFileHistory = bind(this.uploadFileHistory, this);
+      this.mkdir = bind(this.mkdir, this);
+      this.history = bind(this.history, this);
+      this.create = bind(this.create, this);
+      this.updateFileRemark = bind(this.updateFileRemark, this);
+      this.preview = bind(this.preview, this);
+      this.view = bind(this.view, this);
+      this.edit = bind(this.edit, this);
+      this.download = bind(this.download, this);
+      this.download = bind(this.download, this);
+      this.upload = bind(this.upload, this);
+      this.download = bind(this.download, this);
+      this.history = bind(this.history, this);
+      this.view = bind(this.view, this);
+      this.uploadNewVersion = bind(this.uploadNewVersion, this);
       this.checkExisted = bind(this.checkExisted, this);
       this.init = bind(this.init, this);
       return Files.__super__.constructor.apply(this, arguments);
@@ -38,363 +39,776 @@
 
     Files.prototype.init = function() {
       this.debug("init()");
-      this.program.command("checkExisted").description("检查目录下是否有同名的文件")["arguments"]('<user> <project> <dir>').action(this.checkExisted);
-      this.program.command("uploadFileHistory").description("上传文件新版本")["arguments"]('<user> <project>').action(this.uploadFileHistory);
-      this.program.command("deleteFiles").description("删除文件")["arguments"]('<user> <project>').action(this.deleteFiles);
-      this.program.command("deleteFileHistory").description("删除文件历史")["arguments"]('<user> <project> <id>').action(this.deleteFileHistory);
-      this.program.command("downloadHistory").description("下载历史文件版本")["arguments"]('<user> <project> <id>').action(this.downloadHistory);
-      this.program.command("uploadFile").description("上传私有项目的图片")["arguments"]('<user> <project>').action(this.uploadFile);
-      this.program.command("downloadFile").description("文件下载")["arguments"]('<user> <project> <fileId>').action(this.downloadFile);
-      this.program.command("downloadURL").description("文件下载URL")["arguments"]('<user> <project> <fileId>').action(this.downloadURL);
-      this.program.command("editFile").description("编辑文件")["arguments"]('<user> <project> <fileId>').action(this.editFile);
-      this.program.command("viewFile").description("查看文件")["arguments"]('<user> <project> <fileId>').action(this.viewFile);
-      this.program.command("imagePreview").description("图片预览")["arguments"]('<user> <project> <fileId>').action(this.imagePreview);
-      this.program.command("updateFileHistoryRemark").description("修改历史版本备注")["arguments"]('<user> <project> <file_id> <history_id>').action(this.updateFileHistoryRemark);
-      this.program.command("createFile").description("创建文件")["arguments"]('<user> <project> <folderId>').action(this.createFile);
-      this.program.command("listFileHistory").description("文件历史")["arguments"]('<user> <project> <id>').action(this.listFileHistory);
-      this.program.command("mkdir").description("创建文件夹")["arguments"]('<user> <project>').action(this.mkdir);
-      this.program.command("move").description("移动文件")["arguments"]('<user> <project> <dirId>').action(this.move);
-      this.program.command("renameFolder").description("重命名文件夹")["arguments"]('<user> <project> <dir>').action(this.renameFolder);
-      this.program.command("listFile").description("列出某目录下的文件")["arguments"]('<user> <project> <dir>').action(this.listFile);
-      this.program.command("listFolder").description("列出所有一级目录")["arguments"]('<user> <project>').action(this.listFolder);
-      this.program.command("listAllFolder").description("列出所有目录")["arguments"]('<user> <project>').action(this.listAllFolder);
-      return this.program.command("allFolderFileCount").description("获取文件夹的文件数")["arguments"]('<user> <project>').action(this.allFolderFileCount);
+      this.program.command("checkExisted").description("检查目录下是否有同名的文件")["arguments"]("<user> <project> <dir>").action(this.checkExisted);
+      this.program.command("uploadNewVersion").description("上传文件新版本")["arguments"]("<user> <project>").action(this.uploadNewVersion);
+      this.program.command("view").description("删除文件")["arguments"]("<user> <project>").action(this.view);
+      this.program.command("history").description("删除文件历史")["arguments"]("<user> <project> <id>").action(this.history);
+      this.program.command("download").description("下载历史文件版本")["arguments"]("<user> <project> <id>").action(this.download);
+      this.program.command("upload").description("上传私有项目的图片")["arguments"]("<user> <project>").action(this.upload);
+      this.program.command("download").description("文件下载")["arguments"]("<user> <project> <fileId>").action(this.download);
+      this.program.command("download").description("文件下载URL")["arguments"]("<user> <project> <fileId>").action(this.download);
+      this.program.command("edit").description("编辑文件")["arguments"]("<user> <project> <fileId>").action(this.edit);
+      this.program.command("view").description("查看文件")["arguments"]("<user> <project> <fileId>").action(this.view);
+      this.program.command("preview").description("图片预览")["arguments"]("<user> <project> <fileId>").action(this.preview);
+      this.program.command("updateFileRemark").description("修改历史版本备注")["arguments"]("<user> <project> <file_id> <history_id>").action(this.updateFileRemark);
+      this.program.command("create").description("创建文件")["arguments"]("<user> <project> <folderId>").action(this.create);
+      this.program.command("history").description("文件历史")["arguments"]("<user> <project> <id>").action(this.history);
+      this.program.command("mkdir").description("创建文件夹")["arguments"]("<user> <project>").action(this.mkdir);
+      this.program.command("mkdir").description("删除文件夹")["arguments"]("<user> <project>").action(this.mkdir);
+      this.program.command("move").description("移动文件")["arguments"]("<user> <project> <dirId>").action(this.move);
+      this.program.command("renameFolder").description("重命名文件夹")["arguments"]("<user> <project> <dir>").action(this.renameFolder);
+      this.program.command("files").description("列出某目录下的文件")["arguments"]("<user> <project> <dir>").action(this.files);
+      this.program.command("folders").description("列出所有一级目录")["arguments"]("<user> <project>").action(this.folders);
+      this.program.command("folders").description("列出所有目录")["arguments"]("<user> <project>").action(this.folders);
+      return this.program.command("count").description("获取文件夹的文件数")["arguments"]("<user> <project>").action(this.count);
     };
 
 
     /*
     
-     operationId  : checkExisted
-     description  : 检查目录下是否有同名的文件
-     args     	: user,project,dir
-     params 		:
+     method            : get
+     summary         : checkExisted
+     description    : 检查目录下是否有同名的文件
+     path            : user,project,dir
+     body            : names
      */
 
     Files.prototype.checkExisted = function(user, project, dir) {
-      this.debug("checkExisted()");
-      return this.coding.files.checkExisted(user, project, dir, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Files::checkExisted()");
+      return this.prompt.get([
+        {
+          "name": "names",
+          "description": "Enter names",
+          "type": "array",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.file.checkExisted(user, project, dir, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : uploadFileHistory
-     description  : 上传文件新版本
-     args     	: user,project
-     params 		:
+     method            : post
+     summary         : uploadNewVersion
+     description    : 上传文件新版本
+     path            : user,project
      */
 
-    Files.prototype.uploadFileHistory = function(user, project) {
-      this.debug("uploadFileHistory()");
-      return this.coding.files.uploadFileHistory(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.uploadNewVersion = function(user, project) {
+      this.debug("Files::uploadNewVersion()");
+      return this.coding.file.uploadNewVersion(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : deleteFiles
-     description  : 删除文件
-     args     	: user,project
-     params 		:
+     method            : delete
+     summary         : view
+     description    : 删除文件
+     path            : user,project
+     body            : fileIds
      */
 
-    Files.prototype.deleteFiles = function(user, project) {
-      this.debug("deleteFiles()");
-      return this.coding.files.deleteFiles(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.view = function(user, project) {
+      this.debug("Files::view()");
+      return this.prompt.get([
+        {
+          "name": "fileIds",
+          "description": "Enter fileIds",
+          "type": "array",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.file.view(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : deleteFileHistory
-     description  : 删除文件历史
-     args     	: user,project,id
-     params 		:
+     method            : delete
+     summary         : history
+     description    : 删除文件历史
+     path            : user,project,id
      */
 
-    Files.prototype.deleteFileHistory = function(user, project, id) {
-      this.debug("deleteFileHistory()");
-      return this.coding.files.deleteFileHistory(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.history = function(user, project, id) {
+      this.debug("Files::history()");
+      return this.coding.file.history(user, project, id, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : downloadHistory
-     description  : 下载历史文件版本
-     args     	: user,project,id
-     params 		:
+     method            : get
+     summary         : download
+     description    : 下载历史文件版本
+     path            : user,project,id
      */
 
-    Files.prototype.downloadHistory = function(user, project, id) {
-      this.debug("downloadHistory()");
-      return this.coding.files.downloadHistory(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.download = function(user, project, id) {
+      this.debug("Files::download()");
+      return this.coding.file.download(user, project, id, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : uploadFile
-     description  : 上传私有项目的图片
-     args     	: user,project
-     params 		:
+     method            : post
+     summary         : upload
+     description    : 上传私有项目的图片
+     path            : user,project
      */
 
-    Files.prototype.uploadFile = function(user, project) {
-      this.debug("uploadFile()");
-      return this.coding.files.uploadFile(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.upload = function(user, project) {
+      this.debug("Files::upload()");
+      return this.coding.file.upload(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : downloadFile
-     description  : 文件下载
-     args     	: user,project,fileId
-     params 		:
+     method            : get
+     summary         : download
+     description    : 文件下载
+     path            : user,project,fileId
      */
 
-    Files.prototype.downloadFile = function(user, project, fileId) {
-      this.debug("downloadFile()");
-      return this.coding.files.downloadFile(user, project, fileId, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.download = function(user, project, fileId) {
+      this.debug("Files::download()");
+      return this.coding.file.download(user, project, fileId, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : downloadURL
-     description  : 文件下载URL
-     args     	: user,project,fileId
-     params 		:
+     method            : get
+     summary         : download
+     description    : 文件下载URL
+     path            : user,project,fileId
      */
 
-    Files.prototype.downloadURL = function(user, project, fileId) {
-      this.debug("downloadURL()");
-      return this.coding.files.downloadURL(user, project, fileId, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.download = function(user, project, fileId) {
+      this.debug("Files::download()");
+      return this.coding.file.download(user, project, fileId, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : editFile
-     description  : 编辑文件
-     args     	: user,project,fileId
-     params 		: name,content,fileId,name,content,fileId,
+     method            : post
+     summary         : edit
+     description    : 编辑文件
+     path            : user,project,fileId
+     query            : name,content,fileId
      */
 
-    Files.prototype.editFile = function(user, project, fileId) {
-      this.debug("editFile()");
-      return this.coding.files.editFile(user, project, fileId, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.edit = function(user, project, fileId) {
+      this.debug("Files::edit()");
+      return this.prompt.get([
+        {
+          "name": "name",
+          "description": "Enter name",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "content",
+          "description": "Enter content",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "fileId",
+          "description": "Enter fileId",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.file.edit(user, project, fileId, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : viewFile
-     description  : 查看文件
-     args     	: user,project,fileId
-     params 		: type,width,height,flag,type,width,height,flag,
+     method            : get
+     summary         : view
+     description    : 查看文件
+     path            : user,project,fileId
+     query            : type,width,height,flag
      */
 
-    Files.prototype.viewFile = function(user, project, fileId) {
-      this.debug("viewFile()");
-      return this.coding.files.viewFile(user, project, fileId, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.view = function(user, project, fileId) {
+      this.debug("Files::view()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "width",
+          "description": "Enter width",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "height",
+          "description": "Enter height",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "flag",
+          "description": "Enter flag",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.file.view(user, project, fileId, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : imagePreview
-     description  : 图片预览
-     args     	: user,project,fileId
-     params 		: type,width,height,type,width,height,
+     method            : get
+     summary         : preview
+     description    : 图片预览
+     path            : user,project,fileId
+     query            : type,width,height
      */
 
-    Files.prototype.imagePreview = function(user, project, fileId) {
-      this.debug("imagePreview()");
-      return this.coding.files.imagePreview(user, project, fileId, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.preview = function(user, project, fileId) {
+      this.debug("Files::preview()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "width",
+          "description": "Enter width",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "height",
+          "description": "Enter height",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.file.preview(user, project, fileId, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : updateFileHistoryRemark
-     description  : 修改历史版本备注
-     args     	: user,project,file_id,history_id
-     params 		: remark,remark,
+     method            : post
+     summary         : updateFileRemark
+     description    : 修改历史版本备注
+     path            : user,project,file_id,history_id
+     query            : remark
      */
 
-    Files.prototype.updateFileHistoryRemark = function(user, project, file_id, history_id) {
-      this.debug("updateFileHistoryRemark()");
-      return this.coding.files.updateFileHistoryRemark(user, project, file_id, history_id, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.updateFileRemark = function(user, project, file_id, history_id) {
+      this.debug("Files::updateFileRemark()");
+      return this.prompt.get([
+        {
+          "name": "remark",
+          "description": "Enter remark",
+          "type": "string",
+          "required": true
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.file.updateFileRemark(user, project, file_id, history_id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : createFile
-     description  : 创建文件
-     args     	: user,project,folderId
-     params 		: projectFile.deleted_at,projectFile.projects_id,projectFile.files_id,projectFile.comments,projectFile.id,folder.owner_id,folder.parent_id,folder.created_at,folder.updated_at,folder.type,folder.size,folder.name,folder.storage_type,folder.storage_key,folder.history_id,folder.id,name,content,folderId,projectFile.deleted_at,projectFile.projects_id,projectFile.files_id,projectFile.comments,projectFile.id,folder.owner_id,folder.parent_id,folder.created_at,folder.updated_at,folder.type,folder.size,folder.name,folder.storage_type,folder.storage_key,folder.history_id,folder.id,name,content,folderId,
+     method            : post
+     summary         : create
+     description    : 创建文件
+     path            : user,project,folderId
+     query            : projectFile.deleted_at,projectFile.projects_id,projectFile.files_id,projectFile.comments,projectFile.id,folder.owner_id,folder.parent_id,folder.created_at,folder.updated_at,folder.type,folder.size,folder.name,folder.storage_type,folder.storage_key,folder.history_id,folder.id,name,content,folderId
      */
 
-    Files.prototype.createFile = function(user, project, folderId) {
-      this.debug("createFile()");
-      return this.coding.files.createFile(user, project, folderId, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.create = function(user, project, folderId) {
+      this.debug("Files::create()");
+      return this.prompt.get([
+        {
+          "name": "projectFile.deleted_at",
+          "description": "Enter projectFile.deleted_at",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "projectFile.projects_id",
+          "description": "Enter projectFile.projects_id",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "projectFile.files_id",
+          "description": "Enter projectFile.files_id",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "projectFile.comments",
+          "description": "Enter projectFile.comments",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "projectFile.id",
+          "description": "Enter projectFile.id",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "folder.owner_id",
+          "description": "Enter folder.owner_id",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "folder.parent_id",
+          "description": "Enter folder.parent_id",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "folder.created_at",
+          "description": "Enter folder.created_at",
+          "type": "ref",
+          "required": false
+        }, {
+          "name": "folder.updated_at",
+          "description": "Enter folder.updated_at",
+          "type": "ref",
+          "required": false
+        }, {
+          "name": "folder.type",
+          "description": "Enter folder.type",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "folder.size",
+          "description": "Enter folder.size",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "folder.name",
+          "description": "Enter folder.name",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "folder.storage_type",
+          "description": "Enter folder.storage_type",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "folder.storage_key",
+          "description": "Enter folder.storage_key",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "folder.history_id",
+          "description": "Enter folder.history_id",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "folder.id",
+          "description": "Enter folder.id",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "name",
+          "description": "Enter name",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "content",
+          "description": "Enter content",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "folderId",
+          "description": "Enter folderId",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.file.create(user, project, folderId, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : listFileHistory
-     description  : 文件历史
-     args     	: user,project,id
-     params 		: type,width,height,type,width,height,
+     method            : get
+     summary         : history
+     description    : 文件历史
+     path            : user,project,id
+     query            : type,width,height
      */
 
-    Files.prototype.listFileHistory = function(user, project, id) {
-      this.debug("listFileHistory()");
-      return this.coding.files.listFileHistory(user, project, id, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.history = function(user, project, id) {
+      this.debug("Files::history()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "width",
+          "description": "Enter width",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "height",
+          "description": "Enter height",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.file.history(user, project, id, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : mkdir
-     description  : 创建文件夹
-     args     	: user,project
-     params 		: name,parentId,name,parentId,
+     method            : post
+     summary         : mkdir
+     description    : 创建文件夹
+     path            : user,project
+     query            : name,parentId
      */
 
     Files.prototype.mkdir = function(user, project) {
-      this.debug("mkdir()");
-      return this.coding.files.mkdir(user, project, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Files::mkdir()");
+      return this.prompt.get([
+        {
+          "name": "name",
+          "description": "Enter name",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "parentId",
+          "description": "Enter parentId",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.file.mkdir(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : move
-     description  : 移动文件
-     args     	: user,project,dirId
-     params 		: fileId,fileId,
+     method            : delete
+     summary         : mkdir
+     description    : 删除文件夹
+     path            : user,project
+     */
+
+    Files.prototype.mkdir = function(user, project) {
+      this.debug("Files::mkdir()");
+      return this.coding.file.mkdir(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
+    };
+
+
+    /*
+    
+     method            : put
+     summary         : move
+     description    : 移动文件
+     path            : user,project,dirId
+     query            : fileId
      */
 
     Files.prototype.move = function(user, project, dirId) {
-      this.debug("move()");
-      return this.coding.files.move(user, project, dirId, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Files::move()");
+      return this.prompt.get([
+        {
+          "name": "fileId",
+          "description": "Enter fileId",
+          "type": "ref",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.file.move(user, project, dirId, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : renameFolder
-     description  : 重命名文件夹
-     args     	: user,project,dir
-     params 		: name,name,
+     method            : put
+     summary         : renameFolder
+     description    : 重命名文件夹
+     path            : user,project,dir
+     query            : name
      */
 
     Files.prototype.renameFolder = function(user, project, dir) {
-      this.debug("renameFolder()");
-      return this.coding.files.renameFolder(user, project, dir, params, function(data) {
-        return console.log(data);
-      });
+      this.debug("Files::renameFolder()");
+      return this.prompt.get([
+        {
+          "name": "name",
+          "description": "Enter name",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.file.renameFolder(user, project, dir, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : listFile
-     description  : 列出某目录下的文件
-     args     	: user,project,dir
-     params 		: type,width,height,page,pageSize,type,width,height,page,pageSize,
+     method            : get
+     summary         : files
+     description    : 列出某目录下的文件
+     path            : user,project,dir
+     query            : type,width,height,page,pageSize
      */
 
-    Files.prototype.listFile = function(user, project, dir) {
-      this.debug("listFile()");
-      return this.coding.files.listFile(user, project, dir, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.files = function(user, project, dir) {
+      this.debug("Files::files()");
+      return this.prompt.get([
+        {
+          "name": "type",
+          "description": "Enter type",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "width",
+          "description": "Enter width",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "height",
+          "description": "Enter height",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.file.files(user, project, dir, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : listFolder
-     description  : 列出所有一级目录
-     args     	: user,project
-     params 		: page,pageSize,page,pageSize,
+     method            : get
+     summary         : folders
+     description    : 列出所有一级目录
+     path            : user,project
+     query            : page,pageSize
      */
 
-    Files.prototype.listFolder = function(user, project) {
-      this.debug("listFolder()");
-      return this.coding.files.listFolder(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.folders = function(user, project) {
+      this.debug("Files::folders()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.file.folders(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : listAllFolder
-     description  : 列出所有目录
-     args     	: user,project
-     params 		: page,pageSize,page,pageSize,
+     method            : get
+     summary         : folders
+     description    : 列出所有目录
+     path            : user,project
+     query            : page,pageSize
      */
 
-    Files.prototype.listAllFolder = function(user, project) {
-      this.debug("listAllFolder()");
-      return this.coding.files.listAllFolder(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.folders = function(user, project) {
+      this.debug("Files::folders()");
+      return this.prompt.get([
+        {
+          "name": "page",
+          "description": "Enter page",
+          "type": "integer",
+          "required": false
+        }, {
+          "name": "pageSize",
+          "description": "Enter pageSize",
+          "type": "integer",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.file.folders(user, project, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
 
     /*
     
-     operationId  : allFolderFileCount
-     description  : 获取文件夹的文件数
-     args     	: user,project
-     params 		:
+     method            : get
+     summary         : count
+     description    : 获取文件夹的文件数
+     path            : user,project
      */
 
-    Files.prototype.allFolderFileCount = function(user, project) {
-      this.debug("allFolderFileCount()");
-      return this.coding.files.allFolderFileCount(user, project, params, function(data) {
-        return console.log(data);
-      });
+    Files.prototype.count = function(user, project) {
+      this.debug("Files::count()");
+      return this.coding.file.count(user, project, (function(_this) {
+        return function(data) {
+          return _this.showData(data);
+        };
+      })(this));
     };
 
     return Files;

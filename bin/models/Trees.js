@@ -11,30 +11,56 @@
     extend(Trees, superClass);
 
     function Trees() {
-      this.tree = bind(this.tree, this);
+      this.webhook = bind(this.webhook, this);
       this.init = bind(this.init, this);
       return Trees.__super__.constructor.apply(this, arguments);
     }
 
     Trees.prototype.init = function() {
       this.debug("init()");
-      return this.program.command("tree").description("目录")["arguments"]('<user> <project> <tree>').action(this.tree);
+      return this.program.command("webhook").description("目录")["arguments"]("<user> <project> <tree>").action(this.webhook);
     };
 
 
     /*
     
-     operationId  : tree
-     description  : 目录
-     args     	: user,project,tree
-     params 		:
+     method            : get
+     summary         : webhook
+     description    : 目录
+     header         : userAgent,accept
+     path            : user,project,tree
+     body            : currentApp,ref,path
      */
 
-    Trees.prototype.tree = function(user, project, tree) {
-      this.debug("tree()");
-      return this.coding.trees.tree(user, project, tree, params, function(data) {
-        return console.log(data);
-      });
+    Trees.prototype.webhook = function(user, project, tree) {
+      this.debug("Trees::webhook()");
+      return this.prompt.get([
+        {
+          "name": "currentApp",
+          "description": "Enter currentApp",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "ref",
+          "description": "Enter ref",
+          "type": "string",
+          "required": false
+        }, {
+          "name": "path",
+          "description": "Enter path",
+          "type": "string",
+          "required": false
+        }
+      ], (function(_this) {
+        return function(err, params) {
+          if (err) {
+            return err;
+          }
+          return _this.coding.tree.webhook(user, project, tree, params, function(data) {
+            return _this.showData(data);
+          });
+        };
+      })(this));
     };
 
     return Trees;

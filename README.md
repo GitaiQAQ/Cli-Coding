@@ -198,7 +198,7 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 ## Projects
 
 ```
-gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
+gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Projects bin/coding
 
   Usage: coding [options] [command]
 
@@ -248,7 +248,7 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 ## ProjectTopics
 
 ```
-gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
+gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=ProjectTopics bin/coding
 
   Usage: coding [options] [command]
 
@@ -284,7 +284,7 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 ## Branchs
 
 ```
-gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
+gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Branchs bin/coding
 
   Usage: coding [options] [command]
 
@@ -313,7 +313,7 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 ## MergeRequests
 
 ```
-gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
+gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=MergeRequests bin/coding
 
   Usage: coding [options] [command]
 
@@ -340,7 +340,7 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 ## PullRequests
 
 ```
-gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
+gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=PullRequests bin/coding
 
   Usage: coding [options] [command]
 
@@ -369,7 +369,7 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 ## Tags
 
 ```
-gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
+gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Tags bin/coding
 
   Usage: coding [options] [command]
 
@@ -393,7 +393,7 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 ## Trees
 
 ```
-gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
+gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Trees bin/coding
 
   Usage: coding [options] [command]
 
@@ -414,7 +414,7 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 ## Historys
 
 ```
-gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
+gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Historys bin/coding
 
   Usage: coding [options] [command]
 
@@ -435,7 +435,7 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 ## Blobs
 
 ```
-gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
+gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Blobs bin/coding
 
   Usage: coding [options] [command]
 
@@ -457,7 +457,7 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 ## Depots
 
 ```
-gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
+gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Depots bin/coding
 
   Usage: coding [options] [command]
 
@@ -488,7 +488,7 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 ## RepoFiles
 
 ```
-gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
+gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=RepoFiles bin/coding
 
   Usage: coding [options] [command]
 
@@ -512,7 +512,7 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 ## Commits
 
 ```
-gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
+gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Commits bin/coding
 
   Usage: coding [options] [command]
 
@@ -534,7 +534,7 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 ## Tasks
 
 ```
-gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
+gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Tasks bin/coding
 
   Usage: coding [options] [command]
 
@@ -584,7 +584,7 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 ## Tweets
 
 ```
-gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
+gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Tweets bin/coding
 
   Usage: coding [options] [command]
 
@@ -621,7 +621,7 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 ## Files
 
 ```
-gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
+gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Files bin/coding
 
   Usage: coding [options] [command]
 
@@ -664,7 +664,7 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 ## Keys
 
 ```
-gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
+gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Keys bin/coding
 
   Usage: coding [options] [command]
 
@@ -690,5 +690,3 @@ gitai@debian:~/workspace/Coding/Cli-Coding$ MOD=Users bin/coding
 
 
 ```
-
-参照 [`cli-gitlab`](https://github.com/mdsb100/cli-gitlab) 开发

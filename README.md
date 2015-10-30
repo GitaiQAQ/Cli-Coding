@@ -4,6 +4,28 @@
 
 A simple command-line tool for coding.net by nodejs
 
+## Use
+
+```
+bin/coding [options] [command]
+
+OR
+
+npm start [options] [command]
+
+OR
+
+MOD=[MODs] bin/coding [options] [command]
+
+OR
+
+MOD=[MODs] npm start [options] [command]
+```
+
+## MODs
+
+`Blobs`,`Branchs`,`Commits`,`Depots`,`Files`,`Historys`,`Keys`,`MergeRequests`,`OAuth`,`Projects`,`ProjectTopics`,`PullRequests`,`RepoFiles`,`Tags`,`Tasks`,`Trees`,`Tweets`,`Users`
+
 ## Login
 
 ```

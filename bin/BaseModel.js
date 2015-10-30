@@ -51,25 +51,7 @@
       this.opts = this.cmd.opts;
       this.prompt = prompt;
       this.transport = this.cmd.opts.transport || this.transport;
-      this.table = new Table({
-        chars: {
-          'top': '═',
-          'top-mid': '╤',
-          'top-left': '╔',
-          'top-right': '╗',
-          'bottom': '═',
-          'bottom-mid': '╧',
-          'bottom-left': '╚',
-          'bottom-right': '╝',
-          'left': '║',
-          'left-mid': '╟',
-          'mid': '─',
-          'mid-mid': '┼',
-          'right': '║',
-          'right-mid': '╢',
-          'middle': '│'
-        }
-      });
+      this.table = new Table;
       if (this.init != null) {
         return this.init();
       }
